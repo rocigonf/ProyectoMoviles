@@ -57,7 +57,7 @@ fun MainPage() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             EstablecerTexto(
-                text = context.getString(R.string.help),
+                text = context.getString(R.string.about),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 style = AppTypography.displayLarge

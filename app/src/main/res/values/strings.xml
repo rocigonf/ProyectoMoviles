@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Moguishio</string>
-    <string name="help">Ayuda</string>
+    <string name="about">Acerca De</string>
     <string name="description">Esta aplicación te permitirá saber las películas que se verán en el próximo festival, las cuales incluyen: Doctor Strange, Cinco Noches con Alfredo, Blue Lobster 2: Ahora es personal, MONDONGO: La película, Y MUCHAS MÁS :D </string>
     <string name="changeview">Cambiar vista</string>
     <string name="license">Este proyecto se distribuye bajo la Licencia GNU GPL 3.0, ya que creemos firmemente en los proyectos libres y de código abierto.</string>
