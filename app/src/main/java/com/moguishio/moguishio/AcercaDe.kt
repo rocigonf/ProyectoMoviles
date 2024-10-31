@@ -44,7 +44,7 @@ fun EstablecerTexto(modifier: Modifier = Modifier, text: String, textAlign: Text
 @Composable
 fun MainPage() {
     val context = LocalContext.current
-    val image = painterResource(R.drawable.scale)
+    val image = painterResource(R.drawable.foto)
 
     Box(
         modifier = Modifier
