@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Moguishio</string>
+    <string name="about">About</string>
+    <string name="changeview">Change view</string>
+    <string name="license">This project is distributed under the GNU GPL 3.0 License, as we firmly believe in free and open-source projects.</string>
+    <string name="description">This app will let you know the films that will be seen in the festival, including Doctor Strange, Five Nights at Rocio\'s, Blue Lobster 2: Ahora es personal, AND MANY MORE :D</string>
+</resources>
