@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,7 +46,6 @@ fun MainPage() {
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
             .background(MaterialTheme.colorScheme.inversePrimary)
             .padding(30.dp)
     ) {
@@ -74,22 +71,6 @@ fun MainPage() {
                 textAlign = TextAlign.Justify,
                 color = MaterialTheme.colorScheme.inverseSurface
             )
-            Spacer(modifier = Modifier.height(20.dp))
-            Button(
-                onClick = {
-                    // Aquí cambiaríamos de vista. ¿Cómo? ª
-
-                },
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.primary
-                )
-            ) {
-                Text(
-                    text = context.getString(R.string.changeView),
-                    style = AppTypography.headlineSmall)
-            }
         }
 
         // El texto para las licencias (lo pongo abajo rollo footer)

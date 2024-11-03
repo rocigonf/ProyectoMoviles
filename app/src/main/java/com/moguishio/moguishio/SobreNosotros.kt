@@ -33,7 +33,6 @@ import com.moguishio.moguishio.ui.theme.AppTypography
 //@Preview(showBackground = true)
 @Composable
 fun SobreNosotros() {
-
     val context = LocalContext.current
 
     // Imágenes
@@ -46,7 +45,6 @@ fun SobreNosotros() {
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
             .background(MaterialTheme.colorScheme.inversePrimary)
             .padding(30.dp)
     ){
@@ -144,25 +142,7 @@ fun SobreNosotros() {
                     )
                 }
             }
-
             Spacer(modifier = Modifier.height(30.dp))
-
-            Button(
-                onClick = {
-                    // Aquí hay que volver a la otra vista :(
-
-                },
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.primary
-                )
-            ) {
-                Text(
-                    text = context.getString(R.string.changeView),
-                    style = AppTypography.headlineSmall
-                )
-            }
         }
 
         // Esto está comentado xq se ve feo ○|￣|_
