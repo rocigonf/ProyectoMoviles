@@ -57,7 +57,7 @@ fun MainPage() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             EstablecerTexto(
-                text = context.getString(R.string.about),
+                text = context.getString(R.string.overview),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 style = AppTypography.displayLarge
@@ -70,7 +70,7 @@ fun MainPage() {
             )
             Spacer(modifier = Modifier.height(20.dp))
             EstablecerTexto(
-                text = context.getString(R.string.description),
+                text = context.getString(R.string.overviewDesc),
                 textAlign = TextAlign.Justify,
                 color = MaterialTheme.colorScheme.inverseSurface
             )
@@ -78,6 +78,7 @@ fun MainPage() {
             Button(
                 onClick = {
                     // Aquí cambiaríamos de vista. ¿Cómo? ª
+
                 },
                 shape = MaterialTheme.shapes.medium,
                 colors = ButtonDefaults.buttonColors(
@@ -85,7 +86,9 @@ fun MainPage() {
                     contentColor = MaterialTheme.colorScheme.primary
                 )
             ) {
-                Text(text = context.getString(R.string.changeview))
+                Text(
+                    text = context.getString(R.string.changeView),
+                    style = AppTypography.headlineSmall)
             }
         }
 

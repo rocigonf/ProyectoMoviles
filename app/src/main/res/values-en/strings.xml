@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Moguishio</string>
-    <string name="about">About</string>
-    <string name="changeview">Change view</string>
-    <string name="license">This project is distributed under the GNU GPL 3.0 License, as we firmly believe in free and open-source projects.</string>
-    <string name="description">This app will let you know the films that will be seen in the festival, including Doctor Strange, Five Nights at Rocio\'s, Blue Lobster 2: Ahora es personal, AND MANY MORE :D</string>
+    <string name="overview">Overview</string>
+    <string name="overviewDesc">"This app will let you know the films that will be seen in the festival, including Doctor Strange, Five Nights at Rocio's, Blue Lobster 2: Ahora es personal, AND MANY MORE :D "</string>
+    <string name="changeView">Change view</string>
+    <string name="license">"This project is distributed under the GNU GPL 3.0 License, as we firmly believe in free and open-source projects. "</string>
+    <string name="aboutUs">About Us</string>
+    <string name="aboutUsDesc">Our company consists of a small film festival where you can watch the best movies of the decade. The mobile app dev team is made up of two students who work for us completely legally. :D Below you can find information about them.</string>
+    <string name="team">Our team</string>
+    <string name="mauricioDesc">\"I study to become a programmer and publish an independent video game in the not-so-distant future.\"</string>
+    <string name="rocioDesc">\"I love programming; I am hardworking and a perfectionist. In the future, I would like to work in game development.\"</string>
 </resources>
