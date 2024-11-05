@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.moguishio.moguishio.data.MakeCheckBox
-import com.moguishio.moguishio.ui.theme.AppTypography
+import com.moguishio.moguishio.data.RadioButtonListExample
 
 @Composable
 fun ConfigPage() {
@@ -37,6 +37,7 @@ fun ConfigPage() {
                     text = "Guarda, mamahuevo"
                 )
             }
+            RadioButtonListExample()
         }
     }
 }
