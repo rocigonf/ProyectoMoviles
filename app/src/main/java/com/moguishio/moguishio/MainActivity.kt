@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
+                    Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         onClick =
                         {
@@ -110,3 +111,4 @@ fun SobreNosotrosPreview(){
     }
 }
 
+//hey sorry about you just got in my way i promise honey i can feel your pain maybe i enjoy it just a little bit does that make me INSANE PAPA PA PAPA PA PAPA PA PAPA
