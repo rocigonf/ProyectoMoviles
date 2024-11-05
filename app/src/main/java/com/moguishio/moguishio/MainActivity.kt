@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         if (change) {
-                            MainPage()
+                            ConfigPage()
                         } else {
                             SobreNosotros()
                         }
