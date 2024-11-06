@@ -1,7 +1,7 @@
 package com.moguishio.moguishio
 
 import android.content.res.Configuration
-import android.media.MediaPlayer
+//import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,7 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.platform.LocalContext
+//import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.moguishio.moguishio.ui.theme.AppTheme
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                val mediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.sound)
+                //val mediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.sound)
                 var change by remember { mutableStateOf(true) }
                 Column(
                     modifier = Modifier
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         onClick =
                         {
                             //change = !change
-                            mediaPlayer.start()
+                            //mediaPlayer.start()
                         },
                         modifier = Modifier.alpha(0f)
                     ) {

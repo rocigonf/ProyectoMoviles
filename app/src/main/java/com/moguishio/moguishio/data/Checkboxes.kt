@@ -13,20 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MakeCheckBox(text: String) {
+fun MakeCheckBox(
+    text: String,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
     Row(
         modifier = Modifier.height(48.dp),
         verticalAlignment = Alignment.CenterVertically
-    )
-    {
-        val checked = remember { mutableStateOf(true) }
+    ) {
         Checkbox(
-            checked = checked.value,
-            onCheckedChange = { checked.value = it }
+            checked = isChecked,
+            onCheckedChange = onCheckedChange
         )
         Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = text
-        )
+        Text(text = text)
     }
 }
