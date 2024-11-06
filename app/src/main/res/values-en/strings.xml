@@ -10,4 +10,11 @@
     <string name="team">Our team</string>
     <string name="mauricioDesc">\"I study to become a programmer and publish an independent video game in the not-so-distant future.\"</string>
     <string name="rocioDesc">\"I love programming; I am hardworking and a perfectionist. In the future, I would like to work in game development.\"</string>
+    <string name="show_if_subtitles">Show if there are subtitles</string>
+    <string name="show_not_available">Films yet to be available</string>
+    <string name="show_originals">Only show original films</string>
+    <string name="films_with_translation">Only films with translation</string>
+    <string name="language_doesnt_mind">Language isn\'t a problem</string>
+    <string name="save_button">Save information</string>
+    <string name="configuration">Configuration</string>
 </resources>
