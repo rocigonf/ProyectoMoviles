@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.alpha
 //import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.theme.AppTypography
 
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
+                val navController = rememberNavController()
                 //val mediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.sound)
                 var change by remember { mutableStateOf(true) }
                 Column(
