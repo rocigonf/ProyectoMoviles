@@ -37,15 +37,14 @@ class ConfigurationDataStore(private val context: Context) {
             }
     }
 
-    // El "suspend" es lo que quiero yo que haga la Junta con alguna que otra asignatura...
-    // Ah, aquí es para indicar que es una corrutina
+    // Aquí "suspend" es para indicar que es una corrutina
     suspend fun <T> savePreference(key: Preferences.Key<T>, value: T) {
         context.dataStore.edit { preferences ->
             preferences[key] = value
         }
     }
 
-    // TÉCNICAMENTE JUANMA LO MOSTRÓ ASÍ, PERO ME PARECE UNA TONTERÍA TENER QUE REPETIR PRÁCTICAMENTE LA TOTALIDAD DEL CÓDIGO
+
     /*val getShowSubtitles: Flow<Boolean> = context.dataStore.data
         .map { preferences ->
             preferences[SHOW_SUBTITLES] ?: false
