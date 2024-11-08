@@ -22,6 +22,7 @@ fun MakeCheckBox(
         modifier = Modifier.height(48.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // "Checkbox" automáticamente sabe que debe cambiar al valor contrario
         Checkbox(
             checked = isChecked,
             onCheckedChange = onCheckedChange
