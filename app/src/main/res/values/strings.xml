@@ -14,4 +14,20 @@
     <string name="team">El equipo</string>
     <string name="mauricioDesc">\"Estudio para ser programador, y publicar un videojuego independiente en un futuro no muy lejano.\"</string>
     <string name="rocioDesc">\"Me encanta la programación; soy trabajadora y perfeccionista. En el futuro me gustaría dedicarme al desarrollo de videojuegos.\</string>
+
+    <!-- Checkboxes -->
+    <string name="show_if_subtitles">Mostrar si hay subtítulos</string>
+    <string name="show_not_available">Películas pendientes de estrenar</string>
+    <string name="show_originals">Mostrar solo películas originales</string>
+
+    <!-- Radio buttons -->
+    <string name="films_with_translation">Películas con traducción únicamente</string>
+    <string name="language_doesnt_mind">Da igual el idioma</string>
+
+    <string name="configuration">Configuración</string>
+    <string name="save_button">Guardar información</string>
+
+    <!-- Switches -->
+    <string name="show_reviews">Mostrar reseñas</string>
+    <string name="show_price">Mostrar el precio de asistencia</string>
 </resources>
