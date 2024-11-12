@@ -17,4 +17,7 @@
     <string name="language_doesnt_mind">Language isn\'t a problem</string>
     <string name="save_button">Save information</string>
     <string name="configuration">Configuration</string>
+    <string name="show_reviews">Show reviews</string>
+    <string name="show_price">Show assistance prices</string>
+    <string name="number_per_page">Number of films per page</string>
 </resources>

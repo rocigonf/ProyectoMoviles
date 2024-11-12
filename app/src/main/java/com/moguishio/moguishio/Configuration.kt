@@ -28,7 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.moguishio.moguishio.data.ConfigurationDataStore
+import com.moguishio.moguishio.data.DropDownMenu
 import com.moguishio.moguishio.data.MakeCheckBox
+import com.moguishio.moguishio.data.MakeSwitch
 import com.moguishio.moguishio.data.RadioButtonGroup
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlinx.coroutines.launch
@@ -51,18 +53,27 @@ fun ConfigPage() {
     val showNotAvailableFilms = configDataStore.getPreference(ConfigurationDataStore.SHOW_NOT_AVAILABLE_FILMS, false).collectAsState(initial = false)
     val showOriginalFilms = configDataStore.getPreference(ConfigurationDataStore.SHOW_ONLY_ORIGINAL_FILMS, false).collectAsState(initial = false)
     val selectedLanguageIndex = configDataStore.getPreference(ConfigurationDataStore.LANGUAGE_OPTIONS, 1).collectAsState(initial = 1)
+    val showPrices = configDataStore.getPreference(ConfigurationDataStore.SHOW_PRICES, true).collectAsState(initial = true)
+    val showReviews = configDataStore.getPreference(ConfigurationDataStore.SHOW_REVIEWS, true).collectAsState(initial = true)
+    val selectedOptionIndex = configDataStore.getPreference(ConfigurationDataStore.DROPDOWN_OPTIONS, 0).collectAsState(initial = 0)
 
     val isSubtitlesChecked = remember { mutableStateOf(showSubtitles.value) }
     val isAvailableFilms = remember { mutableStateOf(showNotAvailableFilms.value) }
     val isOriginalOnly = remember { mutableStateOf(showOriginalFilms.value) }
     val selectedRadioButtonIndex = remember { mutableIntStateOf(selectedLanguageIndex.value) }
+    val isPriceShown = remember { mutableStateOf(showPrices.value) }
+    val isReviewSeen = remember { mutableStateOf(showReviews.value) }
+    val selectedDropdownIndex = remember { mutableIntStateOf(selectedOptionIndex.value) }
 
     // En teoría esto es necesario para monitorizar los cambios de la variable (ya que no sirve "remember" y "mutableStateOf")
-    LaunchedEffect(showSubtitles.value, showNotAvailableFilms.value, selectedLanguageIndex.value, showOriginalFilms.value) {
+    LaunchedEffect(showSubtitles.value, showNotAvailableFilms.value, selectedLanguageIndex.value, showOriginalFilms.value, showPrices.value, showReviews.value, selectedOptionIndex.value) {
         isSubtitlesChecked.value = showSubtitles.value
         isAvailableFilms.value = showNotAvailableFilms.value
         isOriginalOnly.value = showOriginalFilms.value
         selectedRadioButtonIndex.intValue = selectedLanguageIndex.value
+        isPriceShown.value = showPrices.value
+        isReviewSeen.value = showReviews.value
+        selectedDropdownIndex.intValue = selectedOptionIndex.value
     }
 
     Box(
@@ -119,6 +130,30 @@ fun ConfigPage() {
 
             Spacer(Modifier.height(16.dp))
 
+            MakeSwitch(
+                text = context.getString(R.string.show_price),
+                isChecked = isPriceShown.value,
+                onCheckedChange = { isPriceShown.value = it}
+            )
+
+            MakeSwitch(
+                text = context.getString(R.string.show_reviews),
+                isChecked = isReviewSeen.value,
+                onCheckedChange = { isReviewSeen.value = it}
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            val dropDownItems = listOf("4", "8", "16", "32")
+            DropDownMenu(
+                text = context.getString(R.string.number_per_page),
+                options = dropDownItems,
+                selectedOptionIndex = selectedDropdownIndex.intValue,
+                onOptionChange = { selectedDropdownIndex.intValue = it }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
             // Botón para guardar el nuevo valor
             Button(
                 onClick = {
@@ -127,6 +162,9 @@ fun ConfigPage() {
                         configDataStore.savePreference(ConfigurationDataStore.SHOW_NOT_AVAILABLE_FILMS, isAvailableFilms.value)
                         configDataStore.savePreference(ConfigurationDataStore.SHOW_ONLY_ORIGINAL_FILMS, isOriginalOnly.value)
                         configDataStore.savePreference(ConfigurationDataStore.LANGUAGE_OPTIONS, selectedRadioButtonIndex.intValue)
+                        configDataStore.savePreference(ConfigurationDataStore.SHOW_PRICES, isPriceShown.value)
+                        configDataStore.savePreference(ConfigurationDataStore.SHOW_REVIEWS, isReviewSeen.value)
+                        configDataStore.savePreference(ConfigurationDataStore.DROPDOWN_OPTIONS, selectedDropdownIndex.intValue)
                     }
                 }
             ){

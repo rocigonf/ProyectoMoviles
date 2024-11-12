@@ -25,6 +25,13 @@ class ConfigurationDataStore(private val context: Context) {
 
         // Radio button (Alastor, is that you?)
         val LANGUAGE_OPTIONS = intPreferencesKey("language_options")
+
+        // Switches
+        val SHOW_PRICES = booleanPreferencesKey("show_price")
+        val SHOW_REVIEWS = booleanPreferencesKey("show_reviews")
+
+        // Dropdown Menú
+        val DROPDOWN_OPTIONS = intPreferencesKey("dropdown_options")
     }
 
     // El "?:" aquí sirve para que, si no existe la propiedad, devuelva un valor por defecto

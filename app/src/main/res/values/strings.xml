@@ -24,6 +24,13 @@
     <string name="films_with_translation">Películas con traducción únicamente</string>
     <string name="language_doesnt_mind">Da igual el idioma</string>
 
+    <!-- Switches -->
+    <string name="show_reviews">Mostrar reseñas</string>
+    <string name="show_price">Mostrar el precio de asistencia</string>
+
+    <!-- Dropdown -->
+    <string name="number_per_page">Núm de películas por página </string>
+
     <string name="configuration">Configuración</string>
     <string name="save_button">Guardar información</string>
 </resources>

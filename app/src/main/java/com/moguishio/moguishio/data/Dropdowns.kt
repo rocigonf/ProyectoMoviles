@@ -1,0 +1,80 @@
+package com.moguishio.moguishio.data
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.ExposedDropdownMenuDefaults.TrailingIcon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.moguishio.moguishio.EstablecerTexto
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropDownMenu(
+    text: String,
+    options: List<String>,
+    selectedOptionIndex: Int,
+    onOptionChange: (Int) -> Unit
+) {
+    var isExpanded by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = Modifier.padding(6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        ExposedDropdownMenuBox(
+            modifier = Modifier
+                .width(100.dp),
+            expanded = isExpanded,
+            onExpandedChange = { isExpanded = !isExpanded }
+        ) {
+            TextField(
+                modifier = Modifier.menuAnchor(),
+                // Obtiene el valor de options en el índice seleccionado. Si recibe un índice inválido, devuelve el primero por defecto.
+                value = options.getOrElse(selectedOptionIndex) { options[0] },
+                onValueChange = {},
+                readOnly = true,
+                // Muestra la flechita del menú en la derecha y cambia según el estado del menú (apunta arriba o abajo)
+                trailingIcon = { TrailingIcon(expanded = isExpanded) }
+            )
+
+            // Opciones del menú
+            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false}) {
+
+                options.forEachIndexed{ index, text ->
+                    DropdownMenuItem(
+                        text = { EstablecerTexto(text = text, textAlign = TextAlign.Center)
+                        },
+                        onClick = {
+                            onOptionChange(index)
+                            isExpanded = false // El menú se pliega al seleccionar una opción
+                        },
+                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                    )
+
+
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        EstablecerTexto(text = text, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.inverseSurface)
+    }
+}
+
+
+//dios santo que asco de dropdown feo
