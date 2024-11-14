@@ -14,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -166,17 +165,20 @@ fun ConfigPage(navController: NavHostController, context: Context) {
                     }
                 }
             ){
-                Text(
-                    text = context.getString(R.string.save_button)
+                EstablecerTexto(
+                    text = context.getString(R.string.save_button),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.surface
                 )
             }
-
+            Spacer(Modifier.height(16.dp))
             Button(onClick = {navController.navigateUp()}) {
-                Text(
+                EstablecerTexto(
                     text = context.getString(R.string.go_back),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.surface
                 )
             }
-
         }
     }
 }
