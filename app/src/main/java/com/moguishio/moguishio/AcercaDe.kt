@@ -55,6 +55,8 @@ fun MainPage(navController: NavHostController, context: Context) {
                 color = MaterialTheme.colorScheme.inverseSurface
             )
             Spacer(modifier = Modifier.height(20.dp))
+
+            // No estoy muy convencido de qué tan cool se ve así, pero bueno
             Button(onClick = {navController.navigateUp()}) {
                 EstablecerTexto(
                     text = context.getString(R.string.go_back),

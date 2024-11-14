@@ -36,8 +36,6 @@ import com.moguishio.moguishio.data.RadioButtonGroup
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlinx.coroutines.launch
 
-// TODO: No tengo muy claro lo del state hoisting, preguntar a Juanma
-
 @Composable
 fun ConfigPage(navController: NavHostController, context: Context) {
     //val meme = painterResource(R.drawable.meme)
@@ -170,6 +168,12 @@ fun ConfigPage(navController: NavHostController, context: Context) {
             ){
                 Text(
                     text = context.getString(R.string.save_button)
+                )
+            }
+
+            Button(onClick = {navController.navigateUp()}) {
+                Text(
+                    text = context.getString(R.string.go_back),
                 )
             }
 

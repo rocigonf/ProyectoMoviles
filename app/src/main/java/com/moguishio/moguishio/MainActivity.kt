@@ -1,6 +1,5 @@
 package com.moguishio.moguishio
 
-//import androidx.compose.ui.platform.LocalContext
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -41,54 +40,12 @@ class MainActivity : ComponentActivity() {
                     Spacer(modifier = Modifier.height(10.dp))
 
                     // Aquí se definen todas las rutas...
-                    // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts")
+                    // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts"
                     NavHost(navController = navController, startDestination = Navigation.Principal.route) {
                         composable(Navigation.Principal.route) { Principal(navController, context) }
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
                         composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
                     }
-                    /*Button(
-                        onClick =
-                        {
-                            //change = !change
-                            //mediaPlayer.start()
-                        },
-                        modifier = Modifier.alpha(0f)
-                    ) {
-                        Text(
-                            text = "buton",
-                            style = AppTypography.headlineSmall
-                        )
-                    }*/
-                    /*Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.inversePrimary)
-                    ) {
-
-                        Spacer(modifier = Modifier.height(20.dp))
-                        Button(
-                            onClick = {
-                                change = !change
-                            },
-                            shape = MaterialTheme.shapes.medium,
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.primary
-                            )
-                        ) {
-                            Text(
-                                text = getString(R.string.changeView),
-                                style = AppTypography.headlineSmall
-                            )
-                        }
-                        if (change) {
-                            ConfigPage()
-                        } else {
-                            SobreNosotros()
-                        }
-                    }*/
                 }
             }
         }
