@@ -1,7 +1,6 @@
 package com.moguishio.moguishio
 
-import android.content.res.Configuration
-//import android.media.MediaPlayer
+//import androidx.compose.ui.platform.LocalContext
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,24 +10,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-//import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.moguishio.moguishio.navigation.Navigation
 import com.moguishio.moguishio.ui.theme.AppTheme
-import com.moguishio.moguishio.ui.theme.AppTypography
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +27,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
+                // Esto es como el router de Angular
                 val navController = rememberNavController()
-                //val mediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.sound)
-                var change by remember { mutableStateOf(true) }
+                val context = LocalContext.current
+
                 Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
+                        .fillMaxSize()
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
                     Spacer(modifier = Modifier.height(10.dp))
-                    Button(
+
+                    // Aquí se definen todas las rutas...
+                    // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts")
+                    NavHost(navController = navController, startDestination = Navigation.Principal.route) {
+                        composable(Navigation.Principal.route) { Principal(navController, context) }
+                        composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
+                        composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
+                    }
+                    /*Button(
                         onClick =
                         {
                             //change = !change
@@ -57,8 +59,8 @@ class MainActivity : ComponentActivity() {
                             text = "buton",
                             style = AppTypography.headlineSmall
                         )
-                    }
-                    Column(
+                    }*/
+                    /*Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
                             .fillMaxSize()
@@ -86,13 +88,16 @@ class MainActivity : ComponentActivity() {
                         } else {
                             SobreNosotros()
                         }
-                    }
+                    }*/
                 }
             }
         }
     }
 }
 
+// COMENTO LOS PREVIEW POR AHORA PORQUE JUANMA NO LOS PIDE (y pueden ser un grano en el culo)
+
+/*
 // Preview Acerca De
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
@@ -112,5 +117,6 @@ fun SobreNosotrosPreview(){
         SobreNosotros()
     }
 }
+*/
 
 //hey sorry about you just got in my way i promise honey i can feel your pain maybe i enjoy it just a little bit does that make me INSANE PAPA PA PAPA PA PAPA PA PAPA

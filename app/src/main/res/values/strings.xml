@@ -33,4 +33,10 @@
 
     <string name="configuration">Configuración</string>
     <string name="save_button">Guardar información</string>
+
+    <!-- Para navegación -->
+    <string name="go_back">Volver a la pantalla principal</string>
+    <string name="go_to_overview">Ir a Acerca De</string>
+    <string name="go_to_about_us">Ir a Sobre Nosotros</string>
+    <string name="go_to_config">Ir a Configuración</string>
 </resources>

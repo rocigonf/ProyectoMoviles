@@ -1,6 +1,8 @@
 package com.moguishio.moguishio
 
 //import androidx.compose.foundation.Image
+//import androidx.compose.ui.res.painterResource
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,11 +24,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.moguishio.moguishio.data.ConfigurationDataStore
 import com.moguishio.moguishio.data.DropDownMenu
 import com.moguishio.moguishio.data.MakeCheckBox
@@ -38,9 +39,8 @@ import kotlinx.coroutines.launch
 // TODO: No tengo muy claro lo del state hoisting, preguntar a Juanma
 
 @Composable
-fun ConfigPage() {
+fun ConfigPage(navController: NavHostController, context: Context) {
     //val meme = painterResource(R.drawable.meme)
-    val context = LocalContext.current
     val scrollState = rememberScrollState()
 
     // Para cargar y guardar los valores, respectivamente

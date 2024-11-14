@@ -1,5 +1,6 @@
 package com.moguishio.moguishio
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,21 +10,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.moguishio.moguishio.ui.theme.AppTypography
 
 @Composable
-fun MainPage() {
-    val context = LocalContext.current
+fun MainPage(navController: NavHostController, context: Context) {
     val image = painterResource(R.drawable.foto)
 
     Box(
@@ -53,6 +54,14 @@ fun MainPage() {
                 textAlign = TextAlign.Justify,
                 color = MaterialTheme.colorScheme.inverseSurface
             )
+            Spacer(modifier = Modifier.height(20.dp))
+            Button(onClick = {navController.navigateUp()}) {
+                EstablecerTexto(
+                    text = context.getString(R.string.go_back),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.inverseSurface
+                )
+            }
         }
 
         // El texto para las licencias (lo pongo abajo rollo footer)
