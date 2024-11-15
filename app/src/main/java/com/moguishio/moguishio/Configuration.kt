@@ -65,13 +65,25 @@ fun ConfigPage(navController: NavHostController, context: Context) {
     val selectedDropdownIndex = remember { mutableIntStateOf(selectedOptionIndex.value) }
 
     // En teoría esto es necesario para monitorizar los cambios de la variable (ya que no sirve "remember" y "mutableStateOf")
-    LaunchedEffect(showSubtitles.value, showNotAvailableFilms.value, selectedLanguageIndex.value, showOriginalFilms.value, showPrices.value, showReviews.value, selectedOptionIndex.value) {
+    LaunchedEffect(showSubtitles.value) {
         isSubtitlesChecked.value = showSubtitles.value
+    }
+    LaunchedEffect(showNotAvailableFilms.value) {
         isAvailableFilms.value = showNotAvailableFilms.value
+    }
+    LaunchedEffect(showOriginalFilms.value) {
         isOriginalOnly.value = showOriginalFilms.value
+    }
+    LaunchedEffect(selectedLanguageIndex.value) {
         selectedRadioButtonIndex.intValue = selectedLanguageIndex.value
+    }
+    LaunchedEffect(showPrices.value) {
         isPriceShown.value = showPrices.value
+    }
+    LaunchedEffect(showReviews.value) {
         isReviewSeen.value = showReviews.value
+    }
+    LaunchedEffect(selectedOptionIndex.value) {
         selectedDropdownIndex.intValue = selectedOptionIndex.value
     }
 
