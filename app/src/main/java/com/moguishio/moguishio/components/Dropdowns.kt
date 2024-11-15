@@ -1,5 +1,6 @@
 package com.moguishio.moguishio.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -11,6 +12,8 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults.TrailingIcon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,53 +35,70 @@ fun DropDownMenu(
     onOptionChange: (Int) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
+    val si = isSystemInDarkTheme()
+    val dark by remember { mutableStateOf(si) }
 
-    Row(
-        modifier = Modifier.padding(6.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        ExposedDropdownMenuBox(
-            modifier = Modifier
-                .width(200.dp),
-            expanded = isExpanded,
-            onExpandedChange = { isExpanded = !isExpanded }
+    // TODO: Cambiar
+    MaterialTheme(colorScheme = if(dark) lightColorScheme() else darkColorScheme()) {
+        Row(
+            modifier = Modifier.padding(6.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            TextField(
-                modifier = Modifier.menuAnchor(),
-                // Obtiene el valor de options en el índice seleccionado. Si recibe un índice inválido, devuelve el primero por defecto.
-                value = options.getOrElse(selectedOptionIndex) { options[0] },
-                onValueChange = {},
-                readOnly = true,
-                // Muestra la flechita del menú en la derecha y cambia según el estado del menú (apunta arriba o abajo)
-                trailingIcon = { TrailingIcon(expanded = isExpanded) },
-                textStyle = TextStyle(color = MaterialTheme.colorScheme.inverseSurface, fontWeight = FontWeight.Bold),
-                label = { Text(
-                    text = text,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.inverseSurface) },
-            )
+            ExposedDropdownMenuBox(
+                modifier = Modifier
+                    .width(200.dp),
+                expanded = isExpanded,
+                onExpandedChange = { isExpanded = !isExpanded }
+            ) {
+                TextField(
+                    modifier = Modifier.menuAnchor(),
+                    // Obtiene el valor de options en el índice seleccionado. Si recibe un índice inválido, devuelve el primero por defecto.
+                    value = options.getOrElse(selectedOptionIndex) { options[0] },
+                    onValueChange = {},
+                    readOnly = true,
+                    // Muestra la flechita del menú en la derecha y cambia según el estado del menú (apunta arriba o abajo)
+                    trailingIcon = { TrailingIcon(expanded = isExpanded) },
+                    textStyle = TextStyle(
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    label = {
+                        Text(
+                            text = text,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.inverseSurface
+                        )
+                    },
+                )
 
-            // Opciones del menú
-            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false}) {
+                // Opciones del menú
+                ExposedDropdownMenu(
+                    expanded = isExpanded,
+                    onDismissRequest = { isExpanded = false }) {
 
-                options.forEachIndexed{ index, text ->
-                    DropdownMenuItem(
-                        text = { EstablecerTexto(text = text, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.inverseSurface)
-                        },
-                        onClick = {
-                            onOptionChange(index)
-                            isExpanded = false // El menú se pliega al seleccionar una opción
-                        },
-                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
-                    )
+                    options.forEachIndexed { index, text ->
+                        DropdownMenuItem(
+                            text = {
+                                EstablecerTexto(
+                                    text = text,
+                                    textAlign = TextAlign.Center,
+                                    color = MaterialTheme.colorScheme.inverseSurface
+                                )
+                            },
+                            onClick = {
+                                onOptionChange(index)
+                                isExpanded = false // El menú se pliega al seleccionar una opción
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        )
 
 
+                    }
                 }
             }
         }
     }
 }
-
 
 //dios santo que asco de dropdown feo
