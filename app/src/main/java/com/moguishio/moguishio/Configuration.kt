@@ -27,11 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.moguishio.moguishio.components.BotonVolver
 import com.moguishio.moguishio.data.ConfigurationDataStore
-import com.moguishio.moguishio.data.DropDownMenu
-import com.moguishio.moguishio.data.MakeCheckBox
-import com.moguishio.moguishio.data.MakeSwitch
-import com.moguishio.moguishio.data.RadioButtonGroup
+import com.moguishio.moguishio.components.DropDownMenu
+import com.moguishio.moguishio.components.EstablecerTexto
+import com.moguishio.moguishio.components.MakeCheckBox
+import com.moguishio.moguishio.components.MakeSwitch
+import com.moguishio.moguishio.components.RadioButtonGroup
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlinx.coroutines.launch
 
@@ -172,13 +174,7 @@ fun ConfigPage(navController: NavHostController, context: Context) {
                 )
             }
             Spacer(Modifier.height(16.dp))
-            Button(onClick = {navController.navigateUp()}) {
-                EstablecerTexto(
-                    text = context.getString(R.string.go_back),
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.surface
-                )
-            }
+            BotonVolver(navController, context)
         }
     }
 }

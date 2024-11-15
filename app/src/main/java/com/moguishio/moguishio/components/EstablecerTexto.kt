@@ -1,4 +1,4 @@
-package com.moguishio.moguishio
+package com.moguishio.moguishio.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme

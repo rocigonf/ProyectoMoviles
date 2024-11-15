@@ -1,5 +1,6 @@
 package com.moguishio.moguishio
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,17 +21,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.moguishio.moguishio.components.BotonVolver
+import com.moguishio.moguishio.components.EstablecerTexto
 import com.moguishio.moguishio.ui.theme.AppTypography
 
 //@Preview(showBackground = true)
 @Composable
-fun SobreNosotros() {
-    val context = LocalContext.current
+fun SobreNosotros(navController: NavHostController, context: Context) {
 
     // Imágenes
     val logo = painterResource(R.drawable.logo)
@@ -139,7 +141,8 @@ fun SobreNosotros() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(20.dp))
+            BotonVolver(navController, context)
         }
 
         // Esto está comentado xq se ve feo ○|￣|_

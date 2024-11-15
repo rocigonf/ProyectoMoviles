@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.moguishio.moguishio.components.CustomCard
+import com.moguishio.moguishio.components.EstablecerTexto
 import com.moguishio.moguishio.navigation.Navigation
 import com.moguishio.moguishio.ui.theme.AppTypography
 
@@ -55,6 +57,10 @@ fun Principal(navController: NavHostController, context: Context) {
             CustomCard(
                 onClick = { navController.navigate(Navigation.AcercaDe.route) },
                 text = context.getString(R.string.go_to_overview)
+            )
+            CustomCard(
+                onClick = { navController.navigate(Navigation.SobreNosotros.route) },
+                text = context.getString(R.string.go_to_about_us)
             )
             CustomCard(
                 onClick = { navController.navigate(Navigation.Configuracion.route) },

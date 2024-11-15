@@ -44,6 +44,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = Navigation.Principal.route) {
                         composable(Navigation.Principal.route) { Principal(navController, context) }
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
+                        composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
                         composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
                     }
                 }
@@ -53,6 +54,7 @@ class MainActivity : ComponentActivity() {
 }
 
 // COMENTO LOS PREVIEW POR AHORA PORQUE JUANMA NO LOS PIDE (y pueden ser un grano en el culo)
+// joe macho :(
 
 /*
 // Preview Acerca De
