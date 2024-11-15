@@ -19,7 +19,7 @@
     <string name="configuration">Configuration</string>
     <string name="show_reviews">Show reviews</string>
     <string name="show_price">Show assistance prices</string>
-    <string name="number_per_page">Number of films per page</string>
+    <string name="number_per_page">Number of films</string>
     <string name="go_back">Return to main page</string>
     <string name="go_to_overview">Go to Overview</string>
     <string name="go_to_about_us">Go to About Us</string>
