@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -35,11 +36,15 @@ fun DropDownMenu(
     onOptionChange: (Int) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
-    val si = isSystemInDarkTheme()
-    val dark by remember { mutableStateOf(si) }
+    val hellIsForever = isSystemInDarkTheme()
+    val dark by remember { mutableStateOf(hellIsForever) }
 
-    // TODO: Cambiar
-    MaterialTheme(colorScheme = if(dark) lightColorScheme() else darkColorScheme()) {
+    val darkScheme = darkColorScheme(
+        surfaceVariant = Color(0xFF182C64),
+        surface = Color(0xFF182C64)
+    )
+
+    MaterialTheme(colorScheme = if (dark) darkScheme else lightColorScheme()) {
         Row(
             modifier = Modifier.padding(6.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -48,6 +53,7 @@ fun DropDownMenu(
                 modifier = Modifier
                     .width(200.dp),
                 expanded = isExpanded,
+
                 onExpandedChange = { isExpanded = !isExpanded }
             ) {
                 TextField(
@@ -76,7 +82,6 @@ fun DropDownMenu(
                 ExposedDropdownMenu(
                     expanded = isExpanded,
                     onDismissRequest = { isExpanded = false }) {
-
                     options.forEachIndexed { index, text ->
                         DropdownMenuItem(
                             text = {
@@ -102,3 +107,4 @@ fun DropDownMenu(
 }
 
 //dios santo que asco de dropdown feo
+// ya no 😎 BUM
