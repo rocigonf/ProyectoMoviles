@@ -1,6 +1,6 @@
 <resources>
     <!--Texto "acerca de"-->
-    <string name="app_name">Film Festival</string>
+    <string name="app_name">Film Festiival</string>
     <string name="overview">Acerca De</string>
     <string name="overviewDesc">Esta aplicación te permitirá saber las películas que se verán en el próximo festival, las cuales incluyen: Doctor Strange, Cinco Noches con Alfredo, Blue Lobster 2: Ahora es personal, MONDONGO: La película, Y MUCHAS MÁS :D </string>
     <string name="changeView">Cambiar vista</string>

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,7 +35,7 @@ import kotlin.system.exitProcess
 fun Principal(navController: NavHostController, context: Context) {
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
-    val meme = painterResource(R.drawable.alastor_funny_1)
+    val meme = painterResource(R.drawable.foto)
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
     if (openAlertDialog.value){
@@ -66,7 +68,8 @@ fun Principal(navController: NavHostController, context: Context) {
             Spacer(modifier = Modifier.height(20.dp))
             Image(
                 painter = meme,
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.clip(RoundedCornerShape(10.dp))
             )
             Spacer(modifier = Modifier.height(20.dp))
 

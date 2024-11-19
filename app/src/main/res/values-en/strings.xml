@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Film Festival</string>
+    <string name="app_name">Film Festiival</string>
     <string name="overview">Overview</string>
     <string name="overviewDesc">"This app will let you know the films that will be seen in the festival, including Doctor Strange, Five Nights at Rocio's, Blue Lobster 2: Ahora es personal, AND MANY MORE :D "</string>
     <string name="changeView">Change view</string>
