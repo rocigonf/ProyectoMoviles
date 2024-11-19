@@ -29,13 +29,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.moguishio.moguishio.components.BotonVolver
-import com.moguishio.moguishio.data.ConfigurationDataStore
 import com.moguishio.moguishio.components.DropDownMenu
 import com.moguishio.moguishio.components.EstablecerTexto
 import com.moguishio.moguishio.components.MakeCheckBox
 import com.moguishio.moguishio.components.MakeSwitch
-import com.moguishio.moguishio.components.MakeToast
 import com.moguishio.moguishio.components.RadioButtonGroup
+import com.moguishio.moguishio.data.ConfigurationDataStore
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlinx.coroutines.launch
 
@@ -88,14 +87,6 @@ fun ConfigPage(navController: NavHostController, context: Context) {
     LaunchedEffect(selectedOptionIndex.value) {
         selectedDropdownIndex.intValue = selectedOptionIndex.value
     }
-
-    // no se q poner de comprobación :c
-    /*val guardado = false
-    if (guardado){
-        MakeToast(context = context, text = context.getString(R.string.save_toast), duration = Toast.LENGTH_LONG)
-    } else {
-        MakeToast(context = context, text = context.getString(R.string.error_toast), duration = Toast.LENGTH_SHORT)
-    }*/
 
     Box(
         modifier = Modifier
@@ -187,8 +178,15 @@ fun ConfigPage(navController: NavHostController, context: Context) {
                         configDataStore.savePreference(ConfigurationDataStore.SHOW_REVIEWS, isReviewSeen.value)
                         configDataStore.savePreference(ConfigurationDataStore.DROPDOWN_OPTIONS, selectedDropdownIndex.intValue)
                     }
+                    // no se q poner de comprobación :c
+                    if (isAvailableFilms.value){
+                        Toast.makeText(context, context.getString(R.string.long_toast), Toast.LENGTH_LONG).show()
+                    } else{
+                        Toast.makeText(context, context.getString(R.string.short_toast), Toast.LENGTH_SHORT).show()
+                    }
                 }
             ){
+
                 EstablecerTexto(
                     text = context.getString(R.string.save_button),
                     textAlign = TextAlign.Center,

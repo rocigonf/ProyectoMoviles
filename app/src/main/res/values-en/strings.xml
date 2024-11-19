@@ -28,6 +28,6 @@
     <string name="exit_dialog">Do you want to close the app?</string>
     <string name="accept_dialog">Accept</string>
     <string name="cancel_dialog">Cancel</string>
-    <string name="save_toast">Config saved</string>
-    <string name="error_toast">Error saving</string>
+    <string name="long_toast">There are films that are currently not available</string>
+    <string name="short_toast">All films are available</string>
 </resources>

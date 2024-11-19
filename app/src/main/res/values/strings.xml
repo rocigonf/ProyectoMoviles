@@ -40,8 +40,8 @@
     <string name="cancel_dialog">Cancelar</string>
 
     <!-- Toast -->
-    <string name="save_toast">Configuración guardada</string>
-    <string name="error_toast">Error de guardado</string>
+    <string name="long_toast">Hay películas que no están disponibles actualmente</string>
+    <string name="short_toast">Todas las películas están disponibles</string>
 
     <!-- Para navegación -->
     <string name="go_back">Volver a la pantalla principal</string>
