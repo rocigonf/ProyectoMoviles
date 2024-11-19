@@ -39,6 +39,10 @@
     <string name="accept_dialog">Aceptar</string>
     <string name="cancel_dialog">Cancelar</string>
 
+    <!-- Toast -->
+    <string name="save_toast">Configuración guardada</string>
+    <string name="error_toast">Error de guardado</string>
+
     <!-- Para navegación -->
     <string name="go_back">Volver a la pantalla principal</string>
     <string name="go_to_overview">Ir a Acerca De</string>
