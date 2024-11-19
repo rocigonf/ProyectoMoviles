@@ -183,6 +183,7 @@ fun ConfigPage(navController: NavHostController, context: Context) {
                         Toast.makeText(context, context.getString(R.string.long_toast), Toast.LENGTH_LONG).show()
                     } else{
                         Toast.makeText(context, context.getString(R.string.short_toast), Toast.LENGTH_SHORT).show()
+                        navController.navigateUp()
                     }
                 }
             ){
