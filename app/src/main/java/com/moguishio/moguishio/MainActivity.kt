@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.moguishio.moguishio.navigation.Navigation
+import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {

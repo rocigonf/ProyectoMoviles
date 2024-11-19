@@ -1,4 +1,4 @@
-package com.moguishio.moguishio.navigation
+package com.moguishio.moguishio.model
 
 sealed class Navigation(val route: String)
 {

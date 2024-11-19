@@ -24,4 +24,8 @@
     <string name="go_to_overview">Go to Overview</string>
     <string name="go_to_about_us">Go to About Us</string>
     <string name="go_to_config">Go to Configuration</string>
+    <string name="exit_app">Exit</string>
+    <string name="exit_dialog">Do you want to close the app?</string>
+    <string name="accept_dialog">Accept</string>
+    <string name="cancel_dialog">Cancel</string>
 </resources>
