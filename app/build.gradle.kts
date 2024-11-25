@@ -50,6 +50,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.navigation.compose)
     implementation (libs.androidx.datastore.preferences)
     implementation(libs.androidx.core.ktx)

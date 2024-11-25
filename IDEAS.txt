@@ -1,3 +1,5 @@
+* Podríamos poner todas las tags en una lista, y luego obtener X gatos con una tag aleatoria y mostrar cuál es la tag, como en la pokedex
+
 CHECK BOX
 - Mostrar si hay subtítulos
 - Películas pendientes de estrenar 

@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.moguishio.moguishio.ui.theme.misFormas
 
 @Composable
 fun CustomCard(onClick: () -> Unit, text: String)
@@ -27,7 +26,7 @@ fun CustomCard(onClick: () -> Unit, text: String)
             contentColor = MaterialTheme.colorScheme.onSurface
         ),
         elevation = CardDefaults.cardElevation(6.dp),
-        shape = misFormas.medium
+        shape = MaterialTheme.shapes.medium
     ) {
         Box(
             modifier = Modifier.padding(16.dp),
