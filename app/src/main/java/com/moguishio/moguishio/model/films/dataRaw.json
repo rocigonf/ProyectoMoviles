@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "title": "Doctor Strange",
+    "year": 2016,
+    "score": 10,
+    "image": "https://lumiere-a.akamaihd.net/v1/images/p_doctorstrange_19918_516f94d3.jpeg?region=0%2C0%2C540%2C810"
+  },
+  {
+    "id": 2,
+    "title": "Undertale",
+    "year": 2015,
+    "score": 10,
+    "image": "https://i.blogs.es/2e7b35/undertale/1366_2000.png"
+  },
+  {
+    "id": 3,
+    "title": "Hazbin Hotel",
+    "year": 2024,
+    "score": 10,
+    "image": "https://m.media-amazon.com/images/M/MV5BNmMyM2RkNDEtYzI0MS00ZGM3LWI1YzYtY2Y0YzEzMGY3NTlmXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,190,281_.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Five Nights at Rocio's ",
+    "year": 2023,
+    "score": 10,
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/d6/Five_Nights_At_Freddy%27s_poster.jpeg"
+  },
+  {
+    "id": 5,
+    "title": "Arcane",
+    "year": 2024,
+    "score": 10,
+    "image": "https://areajugones.sport.es/wp-content/uploads/2024/11/arcane-1560x880.jpg.webp"
+  },
+  {
+    "id": 6,
+    "title": "The Batman",
+    "year": 2022,
+    "score": 10,
+    "image": "https://pics.filmaffinity.com/The_Batman-449856406-large.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Spider-Man: No Way Home",
+    "year": 2021,
+    "score": 10,
+    "image": "https://hips.hearstapps.com/hmg-prod/images/no-way-home-spider-man-poster-version-extendida-1663918516.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Fallout",
+    "year": 2024,
+    "score": 10,
+    "image": "https://es.web.img3.acsta.net/pictures/24/03/08/10/09/2380565.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Helluva Boss",
+    "year": 2014,
+    "score": 9,
+    "image": "https://static.wikia.nocookie.net/hazbinhotel/images/0/01/Helluva_Boss_-_Portada.png/revision/latest?cb=20191224023210&path-prefix=es"
+  },
+  {
+    "id": 11,
+    "title": "DELTARUNE",
+    "year": 2025,
+    "score": 10,
+    "image": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/01/deltarune-2204209.jpg?tf=3840x"
+  },
+  {
+    "id": 12,
+    "title": "Better Call Saul",
+    "year": 2022,
+    "score": 10,
+    "image": "https://pics.filmaffinity.com/Better_Call_Saul_Serie_de_TV-187388662-large.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Bohemian Rhapsody",
+    "year": 2018,
+    "score": 10,
+    "image": "https://pics.filmaffinity.com/Bohemian_Rhapsody-821911511-large.jpg"
+  },
+  {
+    "id": 14,
+    "title": "The Imitation Game",
+    "year": 2014,
+    "score": 9,
+    "image": "https://es.web.img3.acsta.net/pictures/14/12/30/13/20/432349.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Team Fortress 2",
+    "year": 2033,
+    "score": 10,
+    "image": "https://i.imgflip.com/82xeoe.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Team Fortress 2",
+    "year": 2033,
+    "score": 10,
+    "image": "https://i.imgflip.com/82xeoe.jpg"
+  },
+  {
+    "id": 16,
+    "title": "The Last of Us",
+    "year": 2023,
+    "score": 8,
+    "image": "https://pics.filmaffinity.com/The_Last_of_Us_Serie_de_TV-722385305-large.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Bitelchús Bitelchús",
+    "year": 2024,
+    "score": 8,
+    "image": "https://i0.wp.com/elgeneracionalpost.com/wp-content/uploads/2024/09/Captura-de-Pantalla-2024-09-05-a-las-20.24.22.png?fit=1014%2C764&ssl=1"
+  },
+  {
+    "id": 18,
+    "title": "Joker 2",
+    "year": 2024,
+    "score": 11,
+    "image": "https://pics.filmaffinity.com/Joker_Folie_aa_Deux-920647444-large.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Minecraft",
+    "year": 2026,
+    "score": 11,
+    "image": "https://www.minecraft.net/content/dam/minecraftnet/community/events/cy2024/minecraft-movie/Landing-Page_Trailer_Full-Bleed-A_SS_768x768.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Monstruos, S.A.",
+    "year": 2001,
+    "score": 10,
+    "image": "https://static.wikia.nocookie.net/wiki-doblaje-espana/images/5/50/Monstruos_SA_portada.png/revision/latest?cb=20221014125546&path-prefix=es"
+  }
+]

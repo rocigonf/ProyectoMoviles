@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.views.ConfigPage
+import com.moguishio.moguishio.ui.views.Films
 import com.moguishio.moguishio.ui.views.MainPage
 import com.moguishio.moguishio.ui.views.Principal
 import com.moguishio.moguishio.ui.views.SobreNosotros
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
                         composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
                         composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
+                        composable(Navigation.Films.route) { Films(navController, context) }
                     }
                 }
             }

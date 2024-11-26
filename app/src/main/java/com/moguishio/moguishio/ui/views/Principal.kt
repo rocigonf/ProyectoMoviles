@@ -87,6 +87,10 @@ fun Principal(navController: NavHostController, context: Context) {
                 onClick = { navController.navigate(Navigation.Configuracion.route) },
                 text = context.getString(R.string.go_to_config)
             )
+            CustomCard(
+                onClick = { navController.navigate(Navigation.Films.route) },
+                text = context.getString(R.string.go_to_films)
+            )
             CustomCard( // Botón que cierra la app
                 onClick = {openAlertDialog.value = true}, // Al pulsarlo se muestra el AlertDialog
                 text = context.getString(R.string.exit_app)

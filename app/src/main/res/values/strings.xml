@@ -48,5 +48,9 @@
     <string name="go_to_overview">Ir a Acerca De</string>
     <string name="go_to_about_us">Ir a Sobre Nosotros</string>
     <string name="go_to_config">Ir a Configuración</string>
+    <string name="go_to_films">Mostrar películas</string>
     <string name="exit_app">Salir</string>
+
+    <!-- Para la API -->
+    <string name="loading">Cargando…</string>
 </resources>

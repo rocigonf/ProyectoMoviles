@@ -30,4 +30,6 @@
     <string name="cancel_dialog">Cancel</string>
     <string name="long_toast">There are films that are currently not available</string>
     <string name="short_toast">All films are available</string>
+    <string name="go_to_films">Show films</string>
+    <string name="loading">Loading…</string>
 </resources>
