@@ -1,4 +1,4 @@
-package com.moguishio.moguishio
+package com.moguishio.moguishio.ui.views
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -26,8 +26,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.moguishio.moguishio.components.BotonVolver
-import com.moguishio.moguishio.components.EstablecerTexto
+import com.moguishio.moguishio.R
+import com.moguishio.moguishio.ui.components.BotonVolver
+import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.theme.AppTypography
 
 //@Preview(showBackground = true)

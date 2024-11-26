@@ -1,4 +1,4 @@
-package com.moguishio.moguishio.components
+package com.moguishio.moguishio.ui.components
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton

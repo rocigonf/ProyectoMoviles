@@ -1,4 +1,4 @@
-package com.moguishio.moguishio.data
+package com.moguishio.moguishio.model
 
 import android.content.Context
 import androidx.datastore.core.DataStore

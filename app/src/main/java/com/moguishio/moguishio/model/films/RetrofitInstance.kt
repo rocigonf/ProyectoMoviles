@@ -1,4 +1,4 @@
-package com.moguishio.moguishio.model.cats
+package com.moguishio.moguishio.model.films
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,7 +13,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val catService: CatService by lazy {
-        retrofit.create(CatService::class.java)
+    val clientePelicula: ClientePelicula by lazy {
+        retrofit.create(ClientePelicula::class.java)
     }
 }

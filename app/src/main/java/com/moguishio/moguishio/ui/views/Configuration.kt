@@ -1,4 +1,4 @@
-package com.moguishio.moguishio
+package com.moguishio.moguishio.ui.views
 
 //import androidx.compose.foundation.Image
 //import androidx.compose.ui.res.painterResource
@@ -28,13 +28,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.moguishio.moguishio.components.BotonVolver
-import com.moguishio.moguishio.components.DropDownMenu
-import com.moguishio.moguishio.components.EstablecerTexto
-import com.moguishio.moguishio.components.MakeCheckBox
-import com.moguishio.moguishio.components.MakeSwitch
-import com.moguishio.moguishio.components.RadioButtonGroup
-import com.moguishio.moguishio.data.ConfigurationDataStore
+import com.moguishio.moguishio.R
+import com.moguishio.moguishio.ui.components.BotonVolver
+import com.moguishio.moguishio.ui.components.DropDownMenu
+import com.moguishio.moguishio.ui.components.EstablecerTexto
+import com.moguishio.moguishio.ui.components.MakeCheckBox
+import com.moguishio.moguishio.ui.components.MakeSwitch
+import com.moguishio.moguishio.ui.components.RadioButtonGroup
+import com.moguishio.moguishio.model.ConfigurationDataStore
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlinx.coroutines.launch
 
@@ -133,7 +134,9 @@ fun ConfigPage(navController: NavHostController, context: Context) {
 
             Spacer(Modifier.height(16.dp))
 
-            val radioButtons = listOf(context.getString(R.string.films_with_translation), context.getString(R.string.language_doesnt_mind))
+            val radioButtons = listOf(context.getString(R.string.films_with_translation), context.getString(
+                R.string.language_doesnt_mind
+            ))
             RadioButtonGroup(
                 options = radioButtons,
                 selectedLanguageIndex = selectedRadioButtonIndex.intValue,

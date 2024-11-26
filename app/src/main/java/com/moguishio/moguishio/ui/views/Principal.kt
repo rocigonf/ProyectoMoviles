@@ -1,4 +1,4 @@
-package com.moguishio.moguishio
+package com.moguishio.moguishio.ui.views
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -24,9 +24,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.moguishio.moguishio.components.AlertDialogMenu
-import com.moguishio.moguishio.components.CustomCard
-import com.moguishio.moguishio.components.EstablecerTexto
+import com.moguishio.moguishio.R
+import com.moguishio.moguishio.ui.components.AlertDialogMenu
+import com.moguishio.moguishio.ui.components.CustomCard
+import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlin.system.exitProcess

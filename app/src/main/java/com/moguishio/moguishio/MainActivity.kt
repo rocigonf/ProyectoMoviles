@@ -19,6 +19,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTheme
+import com.moguishio.moguishio.ui.views.ConfigPage
+import com.moguishio.moguishio.ui.views.MainPage
+import com.moguishio.moguishio.ui.views.Principal
+import com.moguishio.moguishio.ui.views.SobreNosotros
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
