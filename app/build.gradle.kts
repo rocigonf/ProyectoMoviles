@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.auth)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
