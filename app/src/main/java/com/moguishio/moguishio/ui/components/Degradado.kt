@@ -9,10 +9,21 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun LinearGradient() {
+fun LinearGradientLight() {
     val gradient = Brush.linearGradient(
         0.0f to Color.hsl(181F, 76F, 61F),
         500.0f to Color.hsl(242F, 88F, 38F),
+        start = Offset.Zero,
+        end = Offset.Infinite
+    )
+    Box(modifier = Modifier.background(gradient))
+}
+
+@Composable
+fun LinearGradientDark() {
+    val gradient = Brush.linearGradient(
+        0.0f to Color.hsl(242F, 88F, 38F),
+        500.0f to Color.hsl(209F, 100F, 9F),
         start = Offset.Zero,
         end = Offset.Infinite
     )
