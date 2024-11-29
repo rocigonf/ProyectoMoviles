@@ -60,4 +60,7 @@
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
     <string name="new_account">Regístrate si no tienes cuenta</string>
+    <string name="error">Ha ocurrido un error :(</string>
+    <string name="no_empty_fields">No puede haber campos vacíos</string>
+    <string name="log_out">Cerrar sesión</string>
 </resources>

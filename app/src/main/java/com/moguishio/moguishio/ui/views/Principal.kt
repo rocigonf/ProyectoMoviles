@@ -1,6 +1,7 @@
 package com.moguishio.moguishio.ui.views
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -30,6 +33,7 @@ import com.moguishio.moguishio.ui.components.CustomCard
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTypography
+import com.moguishio.moguishio.viewmodel.AuthState
 import com.moguishio.moguishio.viewmodel.AuthViewModel
 import kotlin.system.exitProcess
 
@@ -38,6 +42,19 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val meme = painterResource(R.drawable.foto)
+
+    val authState = authViewModel.authState.observeAsState()
+    val isLogged = remember { mutableStateOf(false) }
+
+    // De nuevo, en el vídeo no es así, pero meh
+    LaunchedEffect(authState.value) {
+        when(authState.value)
+        {
+            is AuthState.Authenticated -> isLogged.value = true
+            is AuthState.Unauthenticated -> isLogged.value = false
+            else -> Unit
+        }
+    }
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
     if (openAlertDialog.value){
@@ -77,6 +94,10 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
 
             // Esto es una función custom porque no soy el dev de Yandere :( (la de copiar y pegar código repetido no va conmigo)
             CustomCard(
+                onClick = { navController.navigate(Navigation.Films.route) },
+                text = context.getString(R.string.go_to_films)
+            )
+            CustomCard(
                 onClick = { navController.navigate(Navigation.AcercaDe.route) },
                 text = context.getString(R.string.go_to_overview)
             )
@@ -88,14 +109,24 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
                 onClick = { navController.navigate(Navigation.Configuracion.route) },
                 text = context.getString(R.string.go_to_config)
             )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.InicioSesion.route) },
-                text = context.getString(R.string.go_to_login)
-            )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.Films.route) },
-                text = context.getString(R.string.go_to_films)
-            )
+
+            // Creo que se podría usar el authState directamente
+            if(isLogged.value)
+            {
+                CustomCard(
+                    onClick = { authViewModel.signOut() },
+                    text = context.getString(R.string.log_out)
+                )
+            }
+            else
+            {
+                CustomCard(
+                    onClick = { navController.navigate(Navigation.InicioSesion.route) },
+                    text = context.getString(R.string.go_to_login)
+                )
+            }
+
+
             CustomCard( // Botón que cierra la app
                 onClick = {openAlertDialog.value = true}, // Al pulsarlo se muestra el AlertDialog
                 text = context.getString(R.string.exit_app)

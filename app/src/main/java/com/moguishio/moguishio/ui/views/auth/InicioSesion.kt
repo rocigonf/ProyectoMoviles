@@ -1,19 +1,20 @@
 package com.moguishio.moguishio.ui.views.auth
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,6 +27,7 @@ import com.moguishio.moguishio.R
 import com.moguishio.moguishio.ui.components.BotonVolver
 import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.EstablecerTexto
+import com.moguishio.moguishio.viewmodel.AuthState
 import com.moguishio.moguishio.viewmodel.AuthViewModel
 
 @Composable
@@ -33,6 +35,17 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
 {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val authState = authViewModel.authState.observeAsState()
+
+    // En función de lo que pase, te manda a un sitio u a otro
+    LaunchedEffect(authState.value) {
+        when(authState.value)
+        {
+            is AuthState.Authenticated -> navController.navigate("Principal")
+            is AuthState.Error -> Toast.makeText(context, (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT).show()
+            else -> Unit
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -57,7 +70,9 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
         )
         Spacer(modifier = Modifier.height(32.dp))
 
-        CustomButton({}, text = context.getString(R.string.login_page))
+        CustomButton(onClick = {
+            authViewModel.loginOrSignUp(email, password, true)
+        }, text = context.getString(R.string.login_page))
         //CustomButton({}, text = context.getString(R.string.new_account))
 
         // Texto botón Texto botón Bottom Text
