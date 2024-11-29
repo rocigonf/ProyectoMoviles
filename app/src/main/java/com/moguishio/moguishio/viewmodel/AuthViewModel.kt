@@ -1,12 +1,11 @@
 package com.moguishio.moguishio.viewmodel
 
-import android.provider.Settings.Global.getString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.moguishio.moguishio.R.string.no_empty_fields
 import com.moguishio.moguishio.R.string.error
+import com.moguishio.moguishio.R.string.no_empty_fields
 
 class AuthViewModel : ViewModel()
 {

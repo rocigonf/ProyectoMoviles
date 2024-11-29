@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -65,14 +66,17 @@ fun FilmItem(film: DatosPelicula) {
                         .fillMaxHeight()
                         .weight(0.8f)
                 ) {
-                    Text(
+                    EstablecerTexto(
                         text = film.title,
-                        style = MaterialTheme.typography.displayLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
                     )
-                    Text(
+                    EstablecerTexto(
                         text = film.year.toString(),
-                        style = MaterialTheme.typography.displayMedium,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
                         modifier = Modifier
                             .background(
                                 Color.LightGray
@@ -80,8 +84,8 @@ fun FilmItem(film: DatosPelicula) {
                             .padding(4.dp)
                     )
                     Text(
-                        text = film.score.toString(),
-                        style = MaterialTheme.typography.displayMedium,
+                        text = "Nota: " + film.score.toString(),
+                        style = MaterialTheme.typography.titleMedium,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )

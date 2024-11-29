@@ -2,12 +2,15 @@ package com.moguishio.moguishio.ui.views
 
 import android.content.Context
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import com.moguishio.moguishio.model.films.DatosPelicula
@@ -24,7 +27,8 @@ fun Films(navController: NavHostController, context: Context, viewModel: ViewMod
         viewModel.fetchFilms()
     }
 
-    Column {
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        BotonVolver(navController, context)
         if (films.isEmpty()) {
             // Muestra el indicador de cargando
             EstablecerTexto(text = "Loading...", textAlign = TextAlign.Center)
@@ -33,14 +37,12 @@ fun Films(navController: NavHostController, context: Context, viewModel: ViewMod
             FilmList(films)
         }
     }
-
-    BotonVolver(navController, context)
 }
 
 @Composable
 fun FilmList(filmList: List<DatosPelicula>) {
     LazyColumn {
-        itemsIndexed(items = filmList) { index, item ->
+        itemsIndexed(items = filmList) { _, item ->
             FilmItem(film = item)
         }
     }

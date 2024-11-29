@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val context = LocalContext.current
                 val filmsViewModel: ViewModelPelicula by viewModels()
-                val authViewModel : AuthViewModel by viewModels()
+                //val authViewModel : AuthViewModel by viewModels()
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -53,12 +53,12 @@ class MainActivity : ComponentActivity() {
                     // Aquí se definen todas las rutas...
                     // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts"
                     NavHost(navController = navController, startDestination = Navigation.Principal.route) {
-                        composable(Navigation.Principal.route) { Principal(navController, context, authViewModel) }
+                        composable(Navigation.Principal.route) { Principal(navController, context) }
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
                         composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
                         composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
                         composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-                        composable(Navigation.InicioSesion.route) { InicioSesion(navController, context, authViewModel) }
+                        //composable(Navigation.InicioSesion.route) { InicioSesion(navController, context, authViewModel) }
                     }
                 }
             }

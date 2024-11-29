@@ -38,12 +38,14 @@ import com.moguishio.moguishio.viewmodel.AuthViewModel
 import kotlin.system.exitProcess
 
 @Composable
-fun Principal(navController: NavHostController, context: Context, authViewModel: AuthViewModel) {
+fun Principal(navController: NavHostController, context: Context,
+//authViewModel: AuthViewModel
+) {
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val meme = painterResource(R.drawable.foto)
 
-    val authState = authViewModel.authState.observeAsState()
+    /*val authState = authViewModel.authState.observeAsState()
     val isLogged = remember { mutableStateOf(false) }
 
     // De nuevo, en el vídeo no es así, pero meh
@@ -54,7 +56,7 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
             is AuthState.Unauthenticated -> isLogged.value = false
             else -> Unit
         }
-    }
+    }*/
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
     if (openAlertDialog.value){
@@ -111,7 +113,7 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
             )
 
             // Creo que se podría usar el authState directamente
-            if(isLogged.value)
+            /*if(isLogged.value)
             {
                 CustomCard(
                     onClick = { authViewModel.signOut() },
@@ -124,8 +126,7 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
                     onClick = { navController.navigate(Navigation.InicioSesion.route) },
                     text = context.getString(R.string.go_to_login)
                 )
-            }
-
+            }*/
 
             CustomCard( // Botón que cierra la app
                 onClick = {openAlertDialog.value = true}, // Al pulsarlo se muestra el AlertDialog
