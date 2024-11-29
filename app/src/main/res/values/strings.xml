@@ -55,6 +55,7 @@
     <!-- Para la API -->
     <string name="loading">Cargando…</string>
     <string name="films">Películas</string>
+    <string name="score">Puntuación: </string>
 
     <!-- Login y registro -->
     <string name="login_page">Iniciar Sesión</string>

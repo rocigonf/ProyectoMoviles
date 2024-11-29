@@ -41,4 +41,5 @@
     <string name="no_empty_fields">There must not be empty fields</string>
     <string name="log_out">Log out</string>
     <string name="films">Films</string>
+    <string name="score">"Score: "</string>
 </resources>

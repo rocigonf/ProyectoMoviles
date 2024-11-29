@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -54,8 +53,6 @@ fun FilmItem(film: DatosPelicula) {
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
                         .weight(0.3f)
-                        /*.height(100.dp)
-                        .width(50.dp)*/
                 )
 
                 Column(
@@ -63,7 +60,7 @@ fun FilmItem(film: DatosPelicula) {
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxHeight()
-                        .weight(0.8f)
+                        .weight(0.7f)
                 ) {
                     EstablecerTexto(
                         text = film.title,
