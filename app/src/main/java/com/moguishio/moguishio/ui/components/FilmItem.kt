@@ -68,7 +68,7 @@ fun FilmItem(film: DatosPelicula) {
                 ) {
                     EstablecerTexto(
                         text = film.title,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     )
@@ -76,20 +76,13 @@ fun FilmItem(film: DatosPelicula) {
                         text = film.year.toString(),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .background(
-                                Color.LightGray
-                            )
-                            .padding(4.dp)
+                        textAlign = TextAlign.Center
                     )
-                    Text(
-                        text = "Nota: " + film.score.toString(),
+                    EstablecerTexto(
+                        text = "Puntuación: " + film.score.toString(),
                         style = MaterialTheme.typography.titleMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
+                        textAlign = TextAlign.Center
                     )
-
                 }
             }
         }
