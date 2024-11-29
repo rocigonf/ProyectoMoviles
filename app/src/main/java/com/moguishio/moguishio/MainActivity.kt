@@ -27,6 +27,7 @@ import com.moguishio.moguishio.ui.views.Principal
 import com.moguishio.moguishio.ui.views.SobreNosotros
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
                 // Esto es como el router de Angular
                 val navController = rememberNavController()
                 val context = LocalContext.current
+                val filmsViewModel: ViewModelPelicula by viewModels()
                 val authViewModel : AuthViewModel by viewModels()
 
                 Column(
@@ -55,7 +57,7 @@ class MainActivity : ComponentActivity() {
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
                         composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
                         composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
-                        composable(Navigation.Films.route) { Films(navController, context) }
+                        composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
                         composable(Navigation.InicioSesion.route) { InicioSesion(navController, context, authViewModel) }
                     }
                 }

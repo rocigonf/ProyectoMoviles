@@ -94,7 +94,7 @@ fun Principal(navController: NavHostController, context: Context, authViewModel:
 
             // Esto es una función custom porque no soy el dev de Yandere :( (la de copiar y pegar código repetido no va conmigo)
             CustomCard(
-                onClick = { navController.navigate(Navigation.Films.route) },
+                onClick = { navController.navigate(Navigation.Peliculas.route) },
                 text = context.getString(R.string.go_to_films)
             )
             CustomCard(
