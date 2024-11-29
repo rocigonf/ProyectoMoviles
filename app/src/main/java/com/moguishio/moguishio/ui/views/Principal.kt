@@ -30,10 +30,11 @@ import com.moguishio.moguishio.ui.components.CustomCard
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTypography
+import com.moguishio.moguishio.viewmodel.AuthViewModel
 import kotlin.system.exitProcess
 
 @Composable
-fun Principal(navController: NavHostController, context: Context) {
+fun Principal(navController: NavHostController, context: Context, authViewModel: AuthViewModel) {
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val meme = painterResource(R.drawable.foto)
@@ -86,6 +87,10 @@ fun Principal(navController: NavHostController, context: Context) {
             CustomCard(
                 onClick = { navController.navigate(Navigation.Configuracion.route) },
                 text = context.getString(R.string.go_to_config)
+            )
+            CustomCard(
+                onClick = { navController.navigate(Navigation.InicioSesion.route) },
+                text = context.getString(R.string.go_to_login)
             )
             CustomCard(
                 onClick = { navController.navigate(Navigation.Films.route) },

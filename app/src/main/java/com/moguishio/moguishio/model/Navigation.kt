@@ -7,4 +7,6 @@ sealed class Navigation(val route: String)
     data object SobreNosotros : Navigation("SobreNosotros")
     data object Configuracion : Navigation("Configuration")
     data object Films : Navigation("Films")
+    data object InicioSesion : Navigation("InicioSesion")
+    data object Registro : Navigation("Registro")
 }

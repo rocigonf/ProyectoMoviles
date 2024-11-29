@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,13 +28,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.moguishio.moguishio.R
+import com.moguishio.moguishio.model.ConfigurationDataStore
 import com.moguishio.moguishio.ui.components.BotonVolver
+import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.DropDownMenu
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.components.MakeCheckBox
 import com.moguishio.moguishio.ui.components.MakeSwitch
 import com.moguishio.moguishio.ui.components.RadioButtonGroup
-import com.moguishio.moguishio.model.ConfigurationDataStore
 import com.moguishio.moguishio.ui.theme.AppTypography
 import kotlinx.coroutines.launch
 
@@ -170,34 +170,25 @@ fun ConfigPage(navController: NavHostController, context: Context) {
             Spacer(Modifier.height(16.dp))
 
             // Botón para guardar el nuevo valor
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        configDataStore.savePreference(ConfigurationDataStore.SHOW_SUBTITLES, isSubtitlesChecked.value)
-                        configDataStore.savePreference(ConfigurationDataStore.SHOW_NOT_AVAILABLE_FILMS, isAvailableFilms.value)
-                        configDataStore.savePreference(ConfigurationDataStore.SHOW_ONLY_ORIGINAL_FILMS, isOriginalOnly.value)
-                        configDataStore.savePreference(ConfigurationDataStore.LANGUAGE_OPTIONS, selectedRadioButtonIndex.intValue)
-                        configDataStore.savePreference(ConfigurationDataStore.SHOW_PRICES, isPriceShown.value)
-                        configDataStore.savePreference(ConfigurationDataStore.SHOW_REVIEWS, isReviewSeen.value)
-                        configDataStore.savePreference(ConfigurationDataStore.DROPDOWN_OPTIONS, selectedDropdownIndex.intValue)
-                    }
-                    // no se q poner de comprobación :c
-                    if (isAvailableFilms.value){
-                        Toast.makeText(context, context.getString(R.string.long_toast), Toast.LENGTH_LONG).show()
-                    } else{
-                        Toast.makeText(context, context.getString(R.string.short_toast), Toast.LENGTH_SHORT).show()
-                        navController.navigateUp()
-                    }
+            CustomButton({
+                coroutineScope.launch {
+                    configDataStore.savePreference(ConfigurationDataStore.SHOW_SUBTITLES, isSubtitlesChecked.value)
+                    configDataStore.savePreference(ConfigurationDataStore.SHOW_NOT_AVAILABLE_FILMS, isAvailableFilms.value)
+                    configDataStore.savePreference(ConfigurationDataStore.SHOW_ONLY_ORIGINAL_FILMS, isOriginalOnly.value)
+                    configDataStore.savePreference(ConfigurationDataStore.LANGUAGE_OPTIONS, selectedRadioButtonIndex.intValue)
+                    configDataStore.savePreference(ConfigurationDataStore.SHOW_PRICES, isPriceShown.value)
+                    configDataStore.savePreference(ConfigurationDataStore.SHOW_REVIEWS, isReviewSeen.value)
+                    configDataStore.savePreference(ConfigurationDataStore.DROPDOWN_OPTIONS, selectedDropdownIndex.intValue)
                 }
-            ){
+                // no se q poner de comprobación :c
+                if (isAvailableFilms.value){
+                    Toast.makeText(context, context.getString(R.string.long_toast), Toast.LENGTH_LONG).show()
+                } else{
+                    Toast.makeText(context, context.getString(R.string.short_toast), Toast.LENGTH_SHORT).show()
+                    navController.navigateUp()
+                }
+            }, text = context.getString(R.string.save_button))
 
-                EstablecerTexto(
-                    text = context.getString(R.string.save_button),
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.surface
-                )
-            }
-            Spacer(Modifier.height(16.dp))
             BotonVolver(navController, context)
         }
     }

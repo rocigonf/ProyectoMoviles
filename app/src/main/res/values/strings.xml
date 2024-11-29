@@ -48,9 +48,16 @@
     <string name="go_to_overview">Ir a Acerca De</string>
     <string name="go_to_about_us">Ir a Sobre Nosotros</string>
     <string name="go_to_config">Ir a Configuración</string>
+    <string name="go_to_login">Ir a Inicio de Sesión</string>
     <string name="go_to_films">Mostrar películas</string>
     <string name="exit_app">Salir</string>
 
     <!-- Para la API -->
     <string name="loading">Cargando…</string>
+
+    <!-- Login y registro -->
+    <string name="login_page">Iniciar Sesión</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="new_account">Regístrate si no tienes cuenta</string>
 </resources>

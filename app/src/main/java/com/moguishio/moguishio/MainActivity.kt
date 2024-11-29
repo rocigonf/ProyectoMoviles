@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,8 @@ import com.moguishio.moguishio.ui.views.Films
 import com.moguishio.moguishio.ui.views.MainPage
 import com.moguishio.moguishio.ui.views.Principal
 import com.moguishio.moguishio.ui.views.SobreNosotros
+import com.moguishio.moguishio.ui.views.auth.InicioSesion
+import com.moguishio.moguishio.viewmodel.AuthViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
                 // Esto es como el router de Angular
                 val navController = rememberNavController()
                 val context = LocalContext.current
+                val authViewModel : AuthViewModel by viewModels()
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,11 +51,12 @@ class MainActivity : ComponentActivity() {
                     // Aquí se definen todas las rutas...
                     // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts"
                     NavHost(navController = navController, startDestination = Navigation.Principal.route) {
-                        composable(Navigation.Principal.route) { Principal(navController, context) }
+                        composable(Navigation.Principal.route) { Principal(navController, context, authViewModel) }
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
                         composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
                         composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
                         composable(Navigation.Films.route) { Films(navController, context) }
+                        composable(Navigation.InicioSesion.route) { InicioSesion(navController, context, authViewModel) }
                     }
                 }
             }
