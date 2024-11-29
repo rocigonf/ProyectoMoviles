@@ -1,5 +1,6 @@
 package com.moguishio.moguishio.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +28,7 @@ import com.moguishio.moguishio.R
 import com.moguishio.moguishio.model.films.DatosPelicula
 
 @Composable
-fun FilmItem(film: DatosPelicula) {
+fun FilmItem(film: DatosPelicula, context: Context) {
     Card(
         modifier = Modifier
             .padding(8.dp, 4.dp)
@@ -75,7 +76,7 @@ fun FilmItem(film: DatosPelicula) {
                         textAlign = TextAlign.Center
                     )
                     EstablecerTexto(
-                        text = "Puntuación: " + film.score.toString(),
+                        text = context.getString(R.string.score) + film.score.toString(),
                         style = MaterialTheme.typography.titleMedium,
                         textAlign = TextAlign.Center
                     )

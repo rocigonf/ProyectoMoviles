@@ -62,7 +62,7 @@ fun Films(navController: NavHostController, context: Context, viewModel: ViewMod
 fun FilmList(filmList: List<DatosPelicula>, navController: NavHostController, context: Context) {
     LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
         itemsIndexed(items = filmList) { index, item ->
-            FilmItem(film = item)
+            FilmItem(film = item, context = context)
             if(index == filmList.size - 1)
             {
                 BotonVolver(navController, context)
