@@ -1,0 +1,20 @@
+* Podríamos poner todas las tags en una lista, y luego obtener X gatos con una tag aleatoria y mostrar cuál es la tag, como en la pokedex
+
+CHECK BOX
+- Mostrar si hay subtítulos
+- Películas pendientes de estrenar 
+- Mostrar solo películas originales
+
+RADIO BUTTON
+- Películas con traducción únicamente
+- Da igual el idioma
+
+SWITCHES
+- Mostrar reseñas
+- Mostrar el precio de asistencia 
+
+DROPDOWN
+- Películas por página 
+
+Mauricio: Checkbox y RadioButton
+Rocío: Switches y Drowdown

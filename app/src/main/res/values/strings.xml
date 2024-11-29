@@ -1,6 +1,6 @@
 <resources>
     <!--Texto "acerca de"-->
-    <string name="app_name">Moguishio</string>
+    <string name="app_name">Film Festiival</string>
     <string name="overview">Acerca De</string>
     <string name="overviewDesc">Esta aplicación te permitirá saber las películas que se verán en el próximo festival, las cuales incluyen: Doctor Strange, Cinco Noches con Alfredo, Blue Lobster 2: Ahora es personal, MONDONGO: La película, Y MUCHAS MÁS :D </string>
     <string name="changeView">Cambiar vista</string>
@@ -24,10 +24,43 @@
     <string name="films_with_translation">Películas con traducción únicamente</string>
     <string name="language_doesnt_mind">Da igual el idioma</string>
 
-    <string name="configuration">Configuración</string>
-    <string name="save_button">Guardar información</string>
-
     <!-- Switches -->
     <string name="show_reviews">Mostrar reseñas</string>
     <string name="show_price">Mostrar el precio de asistencia</string>
+
+    <!-- Dropdown -->
+    <string name="number_per_page">Núm. películas</string>
+
+    <string name="configuration">Configuración</string>
+    <string name="save_button">Guardar información</string>
+
+    <!-- Dialog -->
+    <string name="exit_dialog">¿Desea salir de la aplicación?</string>
+    <string name="accept_dialog">Aceptar</string>
+    <string name="cancel_dialog">Cancelar</string>
+
+    <!-- Toast -->
+    <string name="long_toast">Hay películas que no están disponibles actualmente</string>
+    <string name="short_toast">Todas las películas están disponibles</string>
+
+    <!-- Para navegación -->
+    <string name="go_back">Volver a la pantalla principal</string>
+    <string name="go_to_overview">Ir a Acerca De</string>
+    <string name="go_to_about_us">Ir a Sobre Nosotros</string>
+    <string name="go_to_config">Ir a Configuración</string>
+    <string name="go_to_login">Ir a Inicio de Sesión</string>
+    <string name="go_to_films">Mostrar películas</string>
+    <string name="exit_app">Salir</string>
+
+    <!-- Para la API -->
+    <string name="loading">Cargando…</string>
+
+    <!-- Login y registro -->
+    <string name="login_page">Iniciar Sesión</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="new_account">Regístrate si no tienes cuenta</string>
+    <string name="error">Ha ocurrido un error :(</string>
+    <string name="no_empty_fields">No puede haber campos vacíos</string>
+    <string name="log_out">Cerrar sesión</string>
 </resources>

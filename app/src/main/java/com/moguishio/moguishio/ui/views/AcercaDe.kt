@@ -1,54 +1,36 @@
-package com.moguishio.moguishio
+package com.moguishio.moguishio.ui.views
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.moguishio.moguishio.R
+import com.moguishio.moguishio.ui.components.BotonVolver
+import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.theme.AppTypography
 
 @Composable
-fun EstablecerTexto(modifier: Modifier = Modifier, text: String, textAlign: TextAlign, style: TextStyle = MaterialTheme.typography.titleLarge, fontWeight: FontWeight = FontWeight.Normal, color: Color = MaterialTheme.colorScheme.primary)
-{
-    Text(
-        text = text,
-        softWrap = true,
-        textAlign = textAlign,
-        fontWeight = fontWeight,
-        color = color,
-        style = style,
-        modifier = modifier.fillMaxWidth() // El "fillMaxWidth" está porque es bobolón y si no lo tiene, no centra el texto
-    )
-}
-
-@Composable
-fun MainPage() {
-    val context = LocalContext.current
+fun MainPage(navController: NavHostController, context: Context) {
     val image = painterResource(R.drawable.foto)
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
             .background(MaterialTheme.colorScheme.inversePrimary)
             .padding(30.dp)
     ) {
@@ -75,21 +57,7 @@ fun MainPage() {
                 color = MaterialTheme.colorScheme.inverseSurface
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Button(
-                onClick = {
-                    // Aquí cambiaríamos de vista. ¿Cómo? ª
-
-                },
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.primary
-                )
-            ) {
-                Text(
-                    text = context.getString(R.string.changeView),
-                    style = AppTypography.headlineSmall)
-            }
+            BotonVolver(navController, context)
         }
 
         // El texto para las licencias (lo pongo abajo rollo footer)

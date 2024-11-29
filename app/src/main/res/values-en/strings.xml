@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Moguishio</string>
+    <string name="app_name">Film Festiival</string>
     <string name="overview">Overview</string>
     <string name="overviewDesc">"This app will let you know the films that will be seen in the festival, including Doctor Strange, Five Nights at Rocio's, Blue Lobster 2: Ahora es personal, AND MANY MORE :D "</string>
     <string name="changeView">Change view</string>
@@ -18,5 +18,26 @@
     <string name="save_button">Save information</string>
     <string name="configuration">Configuration</string>
     <string name="show_reviews">Show reviews</string>
-    <string name="show_price">Show assistance price</string>
+    <string name="show_price">Show assistance prices</string>
+    <string name="number_per_page">Number of films</string>
+    <string name="go_back">Return to main page</string>
+    <string name="go_to_overview">Go to Overview</string>
+    <string name="go_to_about_us">Go to About Us</string>
+    <string name="go_to_config">Go to Configuration</string>
+    <string name="exit_app">Exit</string>
+    <string name="exit_dialog">Do you want to close the app?</string>
+    <string name="accept_dialog">Accept</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="long_toast">There are films that are currently not available</string>
+    <string name="short_toast">All films are available</string>
+    <string name="go_to_films">Show films</string>
+    <string name="loading">Loading…</string>
+    <string name="login_page">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="go_to_login">Go to Login</string>
+    <string name="new_account">Register if you don\'t have an account</string>
+    <string name="error">Something went wrong :(</string>
+    <string name="no_empty_fields">There must not be empty fields</string>
+    <string name="log_out">Log out</string>
 </resources>
