@@ -3,6 +3,6 @@ package com.moguishio.moguishio.model.films
 import retrofit2.http.GET
 
 interface ClientePelicula {
-    @GET("/v3/41951a99-43aa-453f-b382-60eb72063c02")
+    @GET("/v3/731a11c6-ae32-4b77-adcb-b5eabb4cc652")
     suspend fun getFilms(): List<DatosPelicula>
 }
