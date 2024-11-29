@@ -54,6 +54,7 @@
 
     <!-- Para la API -->
     <string name="loading">Cargando…</string>
+    <string name="films">Películas</string>
 
     <!-- Login y registro -->
     <string name="login_page">Iniciar Sesión</string>

@@ -4,28 +4,28 @@
     "title": "Doctor Strange",
     "year": 2016,
     "score": 10,
-    "image": "https://pics.filmaffinity.com/Dr_Strange_Doctor_Extraano-672413094-large.jpg"
+    "image": "https://media.gq.com.mx/photos/5f81f38042587331b04fdb03/1:1/w_1688,h_1688,c_limit/doctor-strange-2-avengers-marvel.jpg"
   },
   {
     "id": 2,
     "title": "Undertale",
     "year": 2015,
     "score": 10,
-    "image": "https://i.blogs.es/2e7b35/undertale/1366_2000.png"
+    "image": "https://image.api.playstation.com/cdn/EP3746/CUSA09415_00/iOZJVz9HyD3V5UBwKA0HJg14znS8jRXa.png"
   },
   {
     "id": 3,
     "title": "Hazbin Hotel",
     "year": 2024,
     "score": 10,
-    "image": "https://m.media-amazon.com/images/M/MV5BNmMyM2RkNDEtYzI0MS00ZGM3LWI1YzYtY2Y0YzEzMGY3NTlmXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,190,281_.jpg"
+    "image": "https://m.media-amazon.com/images/I/914v19noNFL._UF894,1000_QL80_.jpg"
   },
   {
     "id": 4,
-    "title": "Five Nights at Rocio's ",
+    "title": "Five Nights at Rosio's ",
     "year": 2023,
     "score": 10,
-    "image": "https://pics.filmaffinity.com/Five_Nights_at_Freddy_s-397761188-large.jpg"
+    "image": "https://m.media-amazon.com/images/I/81+P6YZOiBL.png"
   },
   {
     "id": 5,
@@ -39,7 +39,7 @@
     "title": "The Batman",
     "year": 2022,
     "score": 10,
-    "image": "https://pics.filmaffinity.com/The_Batman-449856406-large.jpg"
+    "image": "https://www.melomanodigital.com/wp-content/uploads/2022/05/CINE-284-BATMAN.jpg"
   },
   {
     "id": 7,
@@ -53,13 +53,13 @@
     "title": "Fallout",
     "year": 2024,
     "score": 10,
-    "image": "https://es.web.img3.acsta.net/pictures/24/03/08/10/09/2380565.jpg"
+    "image": "https://preview.redd.it/crnn1cjyxwtc1.jpeg?auto=webp&s=cb2ed8e8e4ca0fac6b1d27bbec7b7bbf66b77bc0"
   },
   {
     "id": 10,
     "title": "Helluva Boss",
-    "year": 2014,
-    "score": 9,
+    "year": 2020,
+    "score": 10,
     "image": "https://lastfm.freetls.fastly.net/i/u/ar0/4fafe47d41ffdb352e9a605b83e674cc.jpg"
   },
   {
@@ -67,14 +67,14 @@
     "title": "DELTARUNE",
     "year": 2025,
     "score": 10,
-    "image": "https://media.vandal.net/m/7-2024/202471610463335_1.jpg"
+    "image": "https://fontmeme.com/images/deltarune-game-font.jpg"
   },
   {
     "id": 12,
     "title": "Better Call Saul",
     "year": 2022,
     "score": 10,
-    "image": "https://pics.filmaffinity.com/Better_Call_Saul_Serie_de_TV-187388662-large.jpg"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAVHwCb7TwzamcLbw2-0ju6KyKRJIaFFO9kQ&s"
   },
   {
     "id": 13,
@@ -88,35 +88,35 @@
     "title": "The Imitation Game",
     "year": 2014,
     "score": 9,
-    "image": "https://es.web.img3.acsta.net/pictures/14/12/30/13/20/432349.jpg"
+    "image": "https://asturscore.com/wp-content/uploads/2014/10/The-Imitation-Game.jpg"
   },
   {
     "id": 15,
     "title": "Team Fortress 2",
     "year": 2033,
     "score": 10,
-    "image": "https://i.imgflip.com/82xeoe.jpg"
+    "image": "https://i.blogs.es/4a4e1b/team-fortress-2/375_375.jpeg"
   },
   {
     "id": 16,
     "title": "The Last of Us",
     "year": 2023,
     "score": 8,
-    "image": "https://pics.filmaffinity.com/The_Last_of_Us_Serie_de_TV-722385305-large.jpg"
+    "image": "https://c.files.bbci.co.uk/EF04/production/_128288116_ka_334_tlou_s01.jpg"
   },
   {
     "id": 17,
     "title": "Bitelchús Bitelchús",
     "year": 2024,
     "score": 8,
-    "image": "https://www.aceprensa.com/wp-content/uploads/2024/09/bitelchus-bitelchus-691x1024.jpg"
+    "image": "https://i.blogs.es/b242b6/beetlejuice2/375_375.jpeg"
   },
   {
     "id": 18,
     "title": "Joker 2",
     "year": 2024,
     "score": 11,
-    "image": "https://pics.filmaffinity.com/Joker_Folie_aa_Deux-920647444-large.jpg"
+    "image": "https://elavancemedia.com/wp-content/uploads/2024/10/image-28.png"
   },
   {
     "id": 19,
@@ -130,6 +130,6 @@
     "title": "Monstruos, S.A.",
     "year": 2001,
     "score": 10,
-    "image": "https://cdn.sincroguia.tv/uploads/programs/m/o/n/xmonstruos-sa-41072_SPA-28.jpg.pagespeed.ic.jwNYMvfih9.jpg"
+    "image": "https://www.mundobso.com/uploads/bsos/1793/img.jpg"
   }
 ]
