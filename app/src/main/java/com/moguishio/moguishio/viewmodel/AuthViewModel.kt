@@ -56,9 +56,9 @@ class AuthViewModel : ViewModel()
         _authState.value = AuthState.Loading // Para decirle que está procesando la petición
 
         val task = if (isLogin) {
-            auth.createUserWithEmailAndPassword(email, password)
-        } else {
             auth.signInWithEmailAndPassword(email, password)
+        } else {
+            auth.createUserWithEmailAndPassword(email, password)
         }
 
         // El "taskResult" es como el "result" de Angular
@@ -74,7 +74,7 @@ class AuthViewModel : ViewModel()
         }
     }
 
-    fun logIn(email: String, password: String, isLogin: Boolean) // no se usan los boolean 😭
+    /*fun logIn(email: String, password: String, isLogin: Boolean) // no se usan los boolean 😭
     {
         if(email.isEmpty() || password.isEmpty())
         {
@@ -122,7 +122,7 @@ class AuthViewModel : ViewModel()
                     _authState.value = AuthState.Error(task.exception?.message?: error.toString())
                 }
             }
-    }
+    }*/
 
     fun signOut()
     {

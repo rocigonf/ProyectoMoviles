@@ -27,6 +27,7 @@ import com.moguishio.moguishio.R
 import com.moguishio.moguishio.ui.components.BotonVolver
 import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.EstablecerTexto
+import com.moguishio.moguishio.ui.components.PasswordInput
 import com.moguishio.moguishio.viewmodel.AuthState
 import com.moguishio.moguishio.viewmodel.AuthViewModel
 
@@ -63,15 +64,15 @@ fun Registro(navController: NavHostController, context: Context, authViewModel: 
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        OutlinedTextField(
+        PasswordInput(
             value = password,
             onValueChange = { password = it },
-            label = { Text(text = context.getString(R.string.password)) }
+            text = context.getString(R.string.password)
         )
         Spacer(modifier = Modifier.height(32.dp))
 
         CustomButton(onClick = {
-            authViewModel.signUp(email, password, true)
+            authViewModel.loginOrSignUp(email, password, false)
         }, text = context.getString(R.string.signup_page))
         //CustomButton({}, text = context.getString(R.string.new_account))
 

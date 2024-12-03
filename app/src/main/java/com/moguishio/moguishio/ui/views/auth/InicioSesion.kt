@@ -27,6 +27,7 @@ import com.moguishio.moguishio.R
 import com.moguishio.moguishio.ui.components.BotonVolver
 import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.EstablecerTexto
+import com.moguishio.moguishio.ui.components.PasswordInput
 import com.moguishio.moguishio.viewmodel.AuthState
 import com.moguishio.moguishio.viewmodel.AuthViewModel
 
@@ -63,15 +64,15 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        OutlinedTextField(
+        PasswordInput(
             value = password,
             onValueChange = { password = it },
-            label = { Text(text = context.getString(R.string.password)) }
+            text = context.getString(R.string.password)
         )
         Spacer(modifier = Modifier.height(32.dp))
 
         CustomButton(onClick = {
-            authViewModel.logIn(email.trim(), password, true)
+            authViewModel.loginOrSignUp(email.trim(), password, true)
         }, text = context.getString(R.string.login_page))
         //CustomButton({}, text = context.getString(R.string.new_account))
 
