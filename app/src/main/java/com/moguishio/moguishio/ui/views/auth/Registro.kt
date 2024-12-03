@@ -31,7 +31,7 @@ import com.moguishio.moguishio.viewmodel.AuthState
 import com.moguishio.moguishio.viewmodel.AuthViewModel
 
 @Composable
-fun InicioSesion(navController: NavHostController, context: Context, authViewModel: AuthViewModel)
+fun Registro(navController: NavHostController, context: Context, authViewModel: AuthViewModel)
 {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -53,7 +53,7 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        EstablecerTexto(text = context.getString(R.string.login_page), style = MaterialTheme.typography.displayLarge, textAlign = TextAlign.Center)
+        EstablecerTexto(text = context.getString(R.string.signup_page), style = MaterialTheme.typography.displayLarge, textAlign = TextAlign.Center)
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
@@ -71,14 +71,14 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
         Spacer(modifier = Modifier.height(32.dp))
 
         CustomButton(onClick = {
-            authViewModel.logIn(email.trim(), password, true)
-        }, text = context.getString(R.string.login_page))
+            authViewModel.signUp(email, password, true)
+        }, text = context.getString(R.string.signup_page))
         //CustomButton({}, text = context.getString(R.string.new_account))
 
         // Texto botón Texto botón Bottom Text
         // El onClick ahora mismo peta bastísimo porque no existe la ruta
-        TextButton(onClick = { navController.navigate("Registro")}) {
-            Text(text = context.getString(R.string.new_account))
+        TextButton(onClick = { navController.navigate("InicioSesion")}) {
+            Text(text = context.getString(R.string.already_signup))
         }
 
         Spacer(modifier = Modifier.height(64.dp))

@@ -1,10 +1,12 @@
 package com.moguishio.moguishio.viewmodel
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.moguishio.moguishio.R.string.error
+import com.moguishio.moguishio.R.string.invalid_email
 import com.moguishio.moguishio.R.string.no_empty_fields
 
 class AuthViewModel : ViewModel()
@@ -22,13 +24,18 @@ class AuthViewModel : ViewModel()
         checkAuthStatus()
     }
 
-    fun checkAuthStatus() {
+    private fun checkAuthStatus() {
         // Ojalá en ASP fuese tan fácil xD
         if (auth.currentUser == null) {
             _authState.value = AuthState.Unauthenticated
         } else {
             _authState.value = AuthState.Authenticated
         }
+    }
+
+    // Validar el email a ver si deja de dar por culo 😫
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     // El vídeo no lo hace así, pero me da tock :)
@@ -38,6 +45,11 @@ class AuthViewModel : ViewModel()
         if(email.isEmpty() || password.isEmpty())
         {
             _authState.value = AuthState.Error(no_empty_fields.toString())
+            return
+        }
+
+        if (!isValidEmail(email)) {
+            _authState.value = AuthState.Error(invalid_email.toString())
             return
         }
 
@@ -60,6 +72,56 @@ class AuthViewModel : ViewModel()
                 _authState.value = AuthState.Error(task.exception?.message?: error.toString())
             }
         }
+    }
+
+    fun logIn(email: String, password: String, isLogin: Boolean) // no se usan los boolean 😭
+    {
+        if(email.isEmpty() || password.isEmpty())
+        {
+            _authState.value = AuthState.Error(no_empty_fields.toString())
+            return
+        }
+
+        if (!isValidEmail(email)) {
+            _authState.value = AuthState.Error(invalid_email.toString())
+            return
+        }
+
+        _authState.value = AuthState.Loading
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener{task ->
+                if(task.isSuccessful)
+                {
+                    _authState.value = AuthState.Authenticated
+                }
+                else
+                {
+                    _authState.value = AuthState.Error(task.exception?.message?: error.toString())
+                }
+            }
+    }
+
+    fun signUp(email: String, password: String, isLogin: Boolean)
+    {
+        if(email.isEmpty() || password.isEmpty())
+        {
+            _authState.value = AuthState.Error(no_empty_fields.toString())
+            return
+        }
+
+        _authState.value = AuthState.Loading
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener{task ->
+                if(task.isSuccessful)
+                {
+                    _authState.value = AuthState.Authenticated
+                }
+                else
+                {
+                    _authState.value = AuthState.Error(task.exception?.message?: error.toString())
+                }
+            }
     }
 
     fun signOut()

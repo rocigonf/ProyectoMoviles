@@ -1,7 +1,6 @@
 package com.moguishio.moguishio.ui.views
 
 import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -28,10 +27,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.moguishio.moguishio.R
+import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.components.AlertDialogMenu
 import com.moguishio.moguishio.ui.components.CustomCard
 import com.moguishio.moguishio.ui.components.EstablecerTexto
-import com.moguishio.moguishio.model.Navigation
 import com.moguishio.moguishio.ui.theme.AppTypography
 import com.moguishio.moguishio.viewmodel.AuthState
 import com.moguishio.moguishio.viewmodel.AuthViewModel
@@ -39,13 +38,13 @@ import kotlin.system.exitProcess
 
 @Composable
 fun Principal(navController: NavHostController, context: Context,
-//authViewModel: AuthViewModel
+authViewModel: AuthViewModel
 ) {
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val meme = painterResource(R.drawable.foto)
 
-    /*val authState = authViewModel.authState.observeAsState()
+    val authState = authViewModel.authState.observeAsState()
     val isLogged = remember { mutableStateOf(false) }
 
     // De nuevo, en el vídeo no es así, pero meh
@@ -56,7 +55,7 @@ fun Principal(navController: NavHostController, context: Context,
             is AuthState.Unauthenticated -> isLogged.value = false
             else -> Unit
         }
-    }*/
+    }
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
     if (openAlertDialog.value){
@@ -113,7 +112,7 @@ fun Principal(navController: NavHostController, context: Context,
             )
 
             // Creo que se podría usar el authState directamente
-            /*if(isLogged.value)
+            if(isLogged.value)
             {
                 CustomCard(
                     onClick = { authViewModel.signOut() },
@@ -126,7 +125,7 @@ fun Principal(navController: NavHostController, context: Context,
                     onClick = { navController.navigate(Navigation.InicioSesion.route) },
                     text = context.getString(R.string.go_to_login)
                 )
-            }*/
+            }
 
             CustomCard( // Botón que cierra la app
                 onClick = {openAlertDialog.value = true}, // Al pulsarlo se muestra el AlertDialog

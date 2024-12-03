@@ -42,4 +42,7 @@
     <string name="log_out">Log out</string>
     <string name="films">Films</string>
     <string name="score">"Score: "</string>
+    <string name="signup_page">Sign up</string>
+    <string name="already_signup">Sign in if you already have an account</string>
+    <string name="invalid_email">Invalid email format :(</string>
 </resources>
