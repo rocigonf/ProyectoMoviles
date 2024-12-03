@@ -56,7 +56,7 @@ fun Films(navController: NavHostController, context: Context, viewModel: ViewMod
         }
 
     }
-}
+} //de aquí a última hora deja de funcionar
 
 @Composable
 fun FilmList(filmList: List<DatosPelicula>, navController: NavHostController, context: Context) {
