@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "361332017609",
+    "project_id": "moguishiofirebase",
+    "storage_bucket": "moguishiofirebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361332017609:android:e7a3ff89ed5534e40d8018",
+        "android_client_info": {
+          "package_name": "com.moguishio.moguishio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXr2qJpn2RwZLSYSAHjv2w_DEuCX_F5kQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
