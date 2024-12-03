@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -79,7 +80,7 @@ fun Registro(navController: NavHostController, context: Context, authViewModel: 
         // Texto botón Texto botón Bottom Text
         // El onClick ahora mismo peta bastísimo porque no existe la ruta
         TextButton(onClick = { navController.navigate("InicioSesion")}) {
-            Text(text = context.getString(R.string.already_signup))
+            EstablecerTexto(text = context.getString(R.string.already_signup), textAlign = TextAlign.Center, fontWeight = FontWeight.Thin)
         }
 
         Spacer(modifier = Modifier.height(64.dp))

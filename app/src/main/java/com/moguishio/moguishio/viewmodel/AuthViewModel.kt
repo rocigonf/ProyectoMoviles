@@ -140,3 +140,6 @@ sealed class AuthState
     data object Loading : AuthState()
     data class Error(val message: String) : AuthState() // Tiene que ser una clase para que pueda mostrar un mensaje de error
 }
+
+
+//de aquí a última hora deja de funcionar
