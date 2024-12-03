@@ -45,4 +45,5 @@
     <string name="signup_page">Sign up</string>
     <string name="already_signup">Sign in if you already have an account</string>
     <string name="invalid_email">Invalid email format :(</string>
+    <string name="hello">Hi, </string>
 </resources>

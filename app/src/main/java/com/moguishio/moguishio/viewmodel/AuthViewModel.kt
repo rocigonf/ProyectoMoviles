@@ -17,6 +17,7 @@ class AuthViewModel : ViewModel()
     // ...La segunda únicamente es de lectura para que ninguna vista tocapelotas pueda modificar el valor
     private val _authState = MutableLiveData<AuthState>()
     val authState : LiveData<AuthState> = _authState
+    var username = ""
 
 
     // El ngOnInit de Angular básicamente
@@ -30,6 +31,7 @@ class AuthViewModel : ViewModel()
             _authState.value = AuthState.Unauthenticated
         } else {
             _authState.value = AuthState.Authenticated
+            username = auth.currentUser!!.email.toString()
         }
     }
 
@@ -128,6 +130,7 @@ class AuthViewModel : ViewModel()
     {
         auth.signOut()
         _authState.value = AuthState.Unauthenticated
+        username = ""
     }
 }
 

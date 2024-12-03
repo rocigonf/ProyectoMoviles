@@ -68,4 +68,5 @@
     <string name="no_empty_fields">No puede haber campos vacíos</string>
     <string name="invalid_email">Formato de email inválido :(</string>
     <string name="log_out">Cerrar sesión</string>
+    <string name="hello">Hola, </string>
 </resources>

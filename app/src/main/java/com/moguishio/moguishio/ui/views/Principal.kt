@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
@@ -45,8 +46,10 @@ authViewModel: AuthViewModel
     val meme = painterResource(R.drawable.foto)
 
     val authState = authViewModel.authState.observeAsState()
+    val email = remember { mutableStateOf(authViewModel.username) }
     val isLogged = remember { mutableStateOf(false) }
 
+    var emailValorant = email.value
     // De nuevo, en el vídeo no es así, pero meh
     LaunchedEffect(authState.value) {
         when(authState.value)
@@ -55,6 +58,10 @@ authViewModel: AuthViewModel
             is AuthState.Unauthenticated -> isLogged.value = false
             else -> Unit
         }
+    }
+
+    LaunchedEffect(email.value) {
+        emailValorant = email.value
     }
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
@@ -92,6 +99,16 @@ authViewModel: AuthViewModel
                 modifier = Modifier.clip(RoundedCornerShape(10.dp))
             )
             Spacer(modifier = Modifier.height(20.dp))
+
+            if(emailValorant != "")
+            {
+                EstablecerTexto(
+                    text = context.getString(R.string.hello) + " " + email.value,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+            }
 
             // Esto es una función custom porque no soy el dev de Yandere :( (la de copiar y pegar código repetido no va conmigo)
             CustomCard(
