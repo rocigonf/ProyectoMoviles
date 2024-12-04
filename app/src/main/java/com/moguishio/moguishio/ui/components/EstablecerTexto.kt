@@ -20,6 +20,6 @@ fun EstablecerTexto(modifier: Modifier = Modifier, text: String, textAlign: Text
         fontWeight = fontWeight,
         color = color,
         style = style,
-        modifier = modifier.fillMaxWidth() // El "fillMaxWidth" está porque es bobolón y si no lo tiene, no centra el texto
+        modifier = modifier.fillMaxWidth()
     )
 }

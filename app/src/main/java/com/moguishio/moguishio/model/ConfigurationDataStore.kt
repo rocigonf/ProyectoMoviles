@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.map
 
 class ConfigurationDataStore(private val context: Context) {
 
-    // Al igual que el Companion Cube en Portal, sólo hay uno :( (para eso sirve companion)
     companion object {
         // Básicamente como el localStorage de JS o un diccionario...
         // ... El diccionario es "userPreferences", y cada variable es un par clave valor (y "userPreferences" se guarda como en el localStorage)
@@ -23,7 +22,7 @@ class ConfigurationDataStore(private val context: Context) {
         val SHOW_NOT_AVAILABLE_FILMS = booleanPreferencesKey("show_not_available_films")
         val SHOW_ONLY_ORIGINAL_FILMS = booleanPreferencesKey("show_only_original_films")
 
-        // Radio button (Alastor, is that you?)
+        // Radio button
         val LANGUAGE_OPTIONS = intPreferencesKey("language_options")
 
         // Switches

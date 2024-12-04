@@ -26,7 +26,6 @@ class AuthViewModel : ViewModel()
     }
 
     private fun checkAuthStatus() {
-        // Ojalá en ASP fuese tan fácil xD
         if (auth.currentUser == null) {
             _authState.value = AuthState.Unauthenticated
         } else {
@@ -35,12 +34,10 @@ class AuthViewModel : ViewModel()
         }
     }
 
-    // Validar el email a ver si deja de dar por culo 😫
     private fun isValidEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    // El vídeo no lo hace así, pero me da tock :)
     fun loginOrSignUp(email: String, password: String, isLogin: Boolean)
     {
 
@@ -137,7 +134,6 @@ class AuthViewModel : ViewModel()
 // Para definir los posibles estados que puede tener el usuario (autenticado, sin autenticar, etc.)
 sealed class AuthState
 {
-    // En el vídeo sale sin "data", pero me da tock tener advertencias😭
     data object Authenticated : AuthState()
     data object Unauthenticated : AuthState()
     data object Loading : AuthState()

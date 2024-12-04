@@ -106,14 +106,6 @@ fun ConfigPage(navController: NavHostController, context: Context) {
             )
             Spacer(modifier = Modifier.height(50.dp))
 
-            /*EstablecerTexto(text = "Escoge tu configuración o acabarás como este man:", textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.inverseSurface)
-            Image(
-                painter = meme,
-                contentDescription = null
-            )
-
-            Spacer(modifier = Modifier.height(50.dp))*/
-
             MakeCheckBox(
                 text = context.getString(R.string.show_if_subtitles),
                 isChecked = isSubtitlesChecked.value,

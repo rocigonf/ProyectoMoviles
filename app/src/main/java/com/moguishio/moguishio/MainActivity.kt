@@ -51,8 +51,7 @@ class MainActivity : ComponentActivity() {
                 {
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    // Aquí se definen todas las rutas...
-                    // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts"
+                    // Aquí se definen todas las rutas (es como el "app.routes.ts")
                     NavHost(navController = navController, startDestination = Navigation.Principal.route) {
                         composable(Navigation.Principal.route) { Principal(navController, context, authViewModel) }
                         composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
@@ -67,30 +66,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-// COMENTO LOS PREVIEW POR AHORA PORQUE JUANMA NO LOS PIDE (y pueden ser un grano en el culo)
-// joe macho :(
-
-/*
-// Preview Acerca De
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun AcercaDePreview(){
-    AppTheme {
-        MainPage()
-    }
-}
-
-// Preview Sobre Nosotros
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun SobreNosotrosPreview(){
-    AppTheme {
-        SobreNosotros()
-    }
-}
-*/
-
-//hey sorry about you just got in my way i promise honey i can feel your pain maybe i enjoy it just a little bit does that make me INSANE PAPA PA PAPA PA PAPA PA PAPA

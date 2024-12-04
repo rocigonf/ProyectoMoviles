@@ -145,15 +145,5 @@ fun SobreNosotros(navController: NavHostController, context: Context) {
             Spacer(modifier = Modifier.height(20.dp))
             BotonVolver(navController, context)
         }
-
-        // Esto está comentado xq se ve feo ○|￣|_
-        /*
-        EstablecerTexto(
-            text = context.getString(R.string.license),
-            textAlign = TextAlign.Justify,
-            style = AppTypography.labelLarge,
-            color = MaterialTheme.colorScheme.tertiary,
-            modifier = Modifier.align(Alignment.BottomCenter).padding(16.dp)
-        )*/
     }
 }

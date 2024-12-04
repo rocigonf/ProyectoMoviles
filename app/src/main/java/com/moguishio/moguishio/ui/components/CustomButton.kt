@@ -13,8 +13,6 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 
-// Quizás me matas por crear un nuevo componente, pero es que me da tock *sticker parpadeando*
-// El SuppressLint es porque me da por culo con no sé qué advertencia :(
 fun CustomButton(onClick : () -> Unit, text: String, @SuppressLint("ModifierParameter") modifier: Modifier = Modifier.width(300.dp))
 {
     Button(onClick = onClick, modifier = modifier)

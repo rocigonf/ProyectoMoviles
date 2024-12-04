@@ -77,8 +77,6 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
         }, text = context.getString(R.string.login_page))
         //CustomButton({}, text = context.getString(R.string.new_account))
 
-        // Texto botón Texto botón Bottom Text
-        // El onClick ahora mismo peta bastísimo porque no existe la ruta
         TextButton(onClick = { navController.navigate("Registro")}) {
             EstablecerTexto(text = context.getString(R.string.new_account), textAlign = TextAlign.Center, fontWeight = FontWeight.Thin)
         }
