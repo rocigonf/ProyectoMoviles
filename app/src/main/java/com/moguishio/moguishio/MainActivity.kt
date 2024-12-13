@@ -7,14 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,6 +24,7 @@ import com.moguishio.moguishio.ui.views.Principal
 import com.moguishio.moguishio.ui.views.SobreNosotros
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
+import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
 import com.moguishio.moguishio.viewmodel.AuthViewModel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 
@@ -49,7 +47,8 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
-                    Spacer(modifier = Modifier.height(10.dp))
+                    //Spacer(modifier = Modifier.height(10.dp))
+                    NavigationDrawer(navController, context)
 
                     // Aquí se definen todas las rutas...
                     // ... Tantas referencias a Angular me van a volver INSANE, pero es como el "app.routes.ts"
