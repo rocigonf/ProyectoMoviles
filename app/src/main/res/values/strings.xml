@@ -8,6 +8,8 @@
 
     <string name="loremIpsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 
+    <string name="main">Página principal</string>
+
     <!--Texto "sobre nosotros"-->
     <string name="aboutUs">Sobre Nosotros</string>
     <string name="aboutUsDesc">Nuestra empresa consiste en un pequeño festival de cine donde podrás ver las mejores películas de la década. El equipo de desarrolladores de la aplicación móvil está formado por dos estudiantes que trabajan para nosotros de forma completamente legal. :D A continuación puedes encontrar información sobre ellos.</string>
