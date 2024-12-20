@@ -158,7 +158,7 @@ fun NavigationDrawer(
             composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
             composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
             composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-            composable(Navigation.Tareas.route) { Tareas() }
+            composable(Navigation.Tareas.route) { Tareas(context) }
             composable(Navigation.InicioSesion.route) {
                 InicioSesion(
                     navController,

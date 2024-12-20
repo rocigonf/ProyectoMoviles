@@ -47,4 +47,7 @@
     <string name="invalid_email">Invalid email format :(</string>
     <string name="hello">Hi, </string>
     <string name="main">Main page</string>
+    <string name="save">Save</string>
+    <string name="delete_all">Delete all</string>
+    <string name="fav_title">Favourite films</string>
 </resources>

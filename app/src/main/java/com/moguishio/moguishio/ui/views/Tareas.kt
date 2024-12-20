@@ -1,5 +1,6 @@
 package com.moguishio.moguishio.ui.views
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,15 +24,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.moguishio.moguishio.R
+import com.moguishio.moguishio.ui.components.EstablecerTexto
+import com.moguishio.moguishio.ui.theme.AppTypography
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun Tareas() {
+fun Tareas(context: Context) {
     val viewModel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
     val filmList by viewModel.getAll().collectAsState(initial = emptyList())
     var filmNameInput by remember { mutableStateOf("") }
@@ -41,8 +47,17 @@ fun Tareas() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(75.dp))
-        // Muestra la lista de películas
+        Spacer(modifier = Modifier.height(95.dp))
+
+        EstablecerTexto(
+            text = context.getString(R.string.fav_title),
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            style = AppTypography.displayMedium
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // Muestra la lista de películas favoritas
         LazyColumn(
             modifier = Modifier.weight(.7F),
             verticalArrangement = Arrangement.Center
@@ -58,8 +73,9 @@ fun Tareas() {
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
+                        EstablecerTexto(
                             text = film.nombre,
+                            textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.displaySmall
                         )
                     }
@@ -67,7 +83,9 @@ fun Tareas() {
             }
         }
 
-        // Input field and buttons
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // Campo de texto
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -75,20 +93,30 @@ fun Tareas() {
         ) {
             OutlinedTextField(
                 value = filmNameInput,
-                onValueChange = { filmNameInput = it })
+                onValueChange = { filmNameInput = it },
+                label = { Text(text = context.getString(R.string.fav_title))}
+            )
             Button(onClick = {
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.insertarPelicula(filmNameInput)
                 }
             }) {
-                Text(text = "SAVE")
+                Text(
+                    text = context.getString(R.string.save),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge
+                )
             }
             Button(onClick = {
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.borrarTodasMisPeliculas(filmList)
                 }
             }) {
-                Text(text = "ALL DELETE")
+                Text(
+                    text = context.getString(R.string.delete_all),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge
+                )
             }
         }
     }
