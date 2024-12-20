@@ -115,24 +115,7 @@ authViewModel: AuthViewModel
                 onClick = { navController.navigate(Navigation.Peliculas.route) },
                 text = context.getString(R.string.go_to_films)
             )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.Tareas.route) },
-                text = context.getString(R.string.fav_title)
-            )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.AcercaDe.route) },
-                text = context.getString(R.string.go_to_overview)
-            )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.SobreNosotros.route) },
-                text = context.getString(R.string.go_to_about_us)
-            )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.Configuracion.route) },
-                text = context.getString(R.string.go_to_config)
-            )
 
-            // Creo que se podría usar el authState directamente
             if(isLogged.value)
             {
                 CustomCard(

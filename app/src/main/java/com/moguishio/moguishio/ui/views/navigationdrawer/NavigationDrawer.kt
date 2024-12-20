@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -96,12 +95,6 @@ fun NavigationDrawer(
             selectedIcon = Icons.Filled.Edit,
             unselectedIcon = Icons.Outlined.Edit,
             route = "SobreNosotros"
-        ),
-        NavigationItems(
-            title = context.getString(R.string.overview),
-            selectedIcon = Icons.Filled.Info,
-            unselectedIcon = Icons.Outlined.Info,
-            route = "AcercaDe"
         ),
         NavigationItems(
             title = context.getString(R.string.overview),
