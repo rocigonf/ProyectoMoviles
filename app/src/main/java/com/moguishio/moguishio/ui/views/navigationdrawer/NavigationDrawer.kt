@@ -111,6 +111,7 @@ fun NavigationDrawer(
     val scope = rememberCoroutineScope()
 
     ModalNavigationDrawer(
+
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
@@ -192,7 +193,6 @@ fun NavigationDrawer(
                 }
             }
         )
-
     }
 
 }

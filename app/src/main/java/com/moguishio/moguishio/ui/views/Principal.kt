@@ -78,12 +78,14 @@ authViewModel: AuthViewModel
             .background(MaterialTheme.colorScheme.inversePrimary)
             .padding(30.dp)
     ) {
+        Spacer(modifier = Modifier.height(1000.dp))
         Column(
             modifier = Modifier
                 //.fillMaxSize()
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(75.dp))
             EstablecerTexto(
                 text = context.getString(R.string.app_name),
                 textAlign = TextAlign.Center,

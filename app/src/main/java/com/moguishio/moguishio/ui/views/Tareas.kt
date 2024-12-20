@@ -3,6 +3,7 @@ package com.moguishio.moguishio.ui.views
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -40,12 +41,13 @@ fun Tareas() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(75.dp))
         // Muestra la lista de películas
         LazyColumn(
             modifier = Modifier.weight(.7F),
             verticalArrangement = Arrangement.Center
         ) {
-            itemsIndexed(items = filmList) { index, film ->
+            itemsIndexed(items = filmList) { _, film ->
                 Card(
                     modifier = Modifier
                         .width(200.dp)

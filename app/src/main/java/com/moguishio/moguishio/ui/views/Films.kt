@@ -37,7 +37,7 @@ fun Films(navController: NavHostController, context: Context, viewModel: ViewMod
     }
 
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(75.dp))
         EstablecerTexto(
             text = context.getString(R.string.films),
             textAlign = TextAlign.Center,

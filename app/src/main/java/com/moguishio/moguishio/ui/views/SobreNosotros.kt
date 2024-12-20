@@ -52,8 +52,7 @@ fun SobreNosotros(navController: NavHostController, context: Context) {
             modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(75.dp))
 
             EstablecerTexto(
                 text = context.getString(R.string.aboutUs),

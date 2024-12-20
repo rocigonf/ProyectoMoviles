@@ -7,24 +7,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import com.moguishio.moguishio.model.tareas.ContenedorMisPeliculas
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
 import com.moguishio.moguishio.viewmodel.AuthViewModel
-import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 
 class MainActivity : ComponentActivity() {
-    lateinit var container: ContenedorMisPeliculas
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        container = ContenedorMisPeliculas(this)
         enableEdgeToEdge()
         setContent {
             AppTheme {
@@ -43,7 +42,6 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
-                    //Spacer(modifier = Modifier.height(10.dp))
                     NavigationDrawer(navController, context, filmsViewModel, authViewModel)
                 }
             }
