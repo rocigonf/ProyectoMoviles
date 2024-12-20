@@ -49,7 +49,6 @@ import com.moguishio.moguishio.ui.views.Tareas
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
 import com.moguishio.moguishio.viewmodel.AuthViewModel
-import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 import kotlinx.coroutines.launch
 
@@ -158,7 +157,7 @@ fun NavigationDrawer(
             composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
             composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
             composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-            composable(Navigation.Tareas.route) { Tareas(navController) }
+            composable(Navigation.Tareas.route) { Tareas() }
             composable(Navigation.InicioSesion.route) {
                 InicioSesion(
                     navController,

@@ -30,65 +30,64 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun Tareas()
-           {
-               val viewModel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
-               val filmList by viewModel.getAll().collectAsState(initial = emptyList())
-               var filmNameInput by remember { mutableStateOf("") }
+fun Tareas() {
+    val viewModel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
+    val filmList by viewModel.getAll().collectAsState(initial = emptyList())
+    var filmNameInput by remember { mutableStateOf("") }
 
-               Column(
-                   modifier = Modifier.fillMaxSize(),
-                   verticalArrangement = Arrangement.Center,
-                   horizontalAlignment = Alignment.CenterHorizontally
-               ) {
-                   // Muestra la lista de películas
-                   LazyColumn(
-                       modifier = Modifier.weight(.7F),
-                       verticalArrangement = Arrangement.Center
-                   ) {
-                       itemsIndexed(items = filmList) { index, film ->
-                           Card(
-                               modifier = Modifier
-                                   .width(200.dp)
-                                   .height(80.dp)
-                                   .padding(vertical = 8.dp)
-                           ) {
-                               Box(
-                                   modifier = Modifier.fillMaxSize(),
-                                   contentAlignment = Alignment.Center
-                               ) {
-                                   Text(
-                                       text = film.nombre,
-                                       style = MaterialTheme.typography.displaySmall
-                                   )
-                               }
-                           }
-                       }
-                   }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Muestra la lista de películas
+        LazyColumn(
+            modifier = Modifier.weight(.7F),
+            verticalArrangement = Arrangement.Center
+        ) {
+            itemsIndexed(items = filmList) { index, film ->
+                Card(
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(80.dp)
+                        .padding(vertical = 8.dp)
+                ) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = film.nombre,
+                            style = MaterialTheme.typography.displaySmall
+                        )
+                    }
+                }
+            }
+        }
 
-                   // Input field and buttons
-                   Column(
-                       verticalArrangement = Arrangement.spacedBy(16.dp),
-                       horizontalAlignment = Alignment.CenterHorizontally,
-                       modifier = Modifier.weight(.3F)
-                   ) {
-                       OutlinedTextField(
-                           value = filmNameInput,
-                           onValueChange = { filmNameInput = it })
-                       Button(onClick = {
-                           CoroutineScope(Dispatchers.Main).launch {
-                               viewModel.insertarPelicula(filmNameInput)
-                           }
-                       }) {
-                           Text(text = "SAVE")
-                       }
-                       Button(onClick = {
-                           CoroutineScope(Dispatchers.Main).launch {
-                               viewModel.borrarTodasMisPeliculas(filmList)
-                           }
-                       }) {
-                           Text(text = "ALL DELETE")
-                       }
-                   }
-               }
-           }
+        // Input field and buttons
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.weight(.3F)
+        ) {
+            OutlinedTextField(
+                value = filmNameInput,
+                onValueChange = { filmNameInput = it })
+            Button(onClick = {
+                CoroutineScope(Dispatchers.Main).launch {
+                    viewModel.insertarPelicula(filmNameInput)
+                }
+            }) {
+                Text(text = "SAVE")
+            }
+            Button(onClick = {
+                CoroutineScope(Dispatchers.Main).launch {
+                    viewModel.borrarTodasMisPeliculas(filmList)
+                }
+            }) {
+                Text(text = "ALL DELETE")
+            }
+        }
+    }
+}
