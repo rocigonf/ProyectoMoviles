@@ -8,13 +8,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -62,7 +67,6 @@ fun NavigationDrawer(
     authViewModel: AuthViewModel
 ) {
     val items = listOf(
-        // TODO: Cambiar iconos
         NavigationItems(
             title = context.getString(R.string.main),
             selectedIcon = Icons.Filled.Home,
@@ -70,22 +74,16 @@ fun NavigationDrawer(
             route = "Principal"
         ),
         NavigationItems(
-            title = "Tareas",
-            selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home,
+            title = context.getString(R.string.films),
+            selectedIcon = Icons.Filled.PlayArrow,
+            unselectedIcon = Icons.Outlined.PlayArrow,
+            route = "Films"
+        ),
+        NavigationItems(
+            title = context.getString(R.string.fav_title),
+            selectedIcon = Icons.Filled.Favorite,
+            unselectedIcon = Icons.Outlined.FavoriteBorder,
             route = "Tareas"
-        ),
-        NavigationItems(
-            title = context.getString(R.string.overview),
-            selectedIcon = Icons.Filled.Info,
-            unselectedIcon = Icons.Outlined.Info,
-            route = "AcercaDe"
-        ),
-        NavigationItems(
-            title = context.getString(R.string.aboutUs),
-            selectedIcon = Icons.Filled.Edit,
-            unselectedIcon = Icons.Outlined.Edit,
-            route = "SobreNosotros"
         ),
         NavigationItems(
             title = context.getString(R.string.configuration),
@@ -94,12 +92,23 @@ fun NavigationDrawer(
             route = "Configuration"
         ),
         NavigationItems(
-            title = context.getString(R.string.films),
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings,
-            route = "Films"
+            title = context.getString(R.string.aboutUs),
+            selectedIcon = Icons.Filled.Edit,
+            unselectedIcon = Icons.Outlined.Edit,
+            route = "SobreNosotros"
         ),
-        // Falta chequear si el usuario tiene sesión
+        NavigationItems(
+            title = context.getString(R.string.overview),
+            selectedIcon = Icons.Filled.Info,
+            unselectedIcon = Icons.Outlined.Info,
+            route = "AcercaDe"
+        ),
+        NavigationItems(
+            title = context.getString(R.string.overview),
+            selectedIcon = Icons.Filled.Info,
+            unselectedIcon = Icons.Outlined.Info,
+            route = "AcercaDe"
+        )
     )
 
     // La opción seleccionada
