@@ -9,5 +9,6 @@ class AplicacionTareas : Application(){
     override fun onCreate() {
         super.onCreate()
         container = ContenedorMisPeliculas(this)
+
     }
 }

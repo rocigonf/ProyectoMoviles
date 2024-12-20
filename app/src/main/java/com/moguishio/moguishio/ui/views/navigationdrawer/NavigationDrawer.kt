@@ -1,5 +1,6 @@
 package com.moguishio.moguishio.ui.views.navigationdrawer
 
+//import com.moguishio.moguishio.model.tareas.RepositorioMisPeliculas
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.layout.Spacer
@@ -39,7 +40,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.moguishio.moguishio.R
 import com.moguishio.moguishio.model.Navigation
-import com.moguishio.moguishio.model.tareas.RepositorioMisPeliculas
 import com.moguishio.moguishio.ui.views.ConfigPage
 import com.moguishio.moguishio.ui.views.Films
 import com.moguishio.moguishio.ui.views.MainPage
@@ -49,6 +49,7 @@ import com.moguishio.moguishio.ui.views.Tareas
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
 import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 import kotlinx.coroutines.launch
 
@@ -59,8 +60,7 @@ fun NavigationDrawer(
     navController: NavHostController,
     context: Context,
     filmsViewModel: ViewModelPelicula,
-    authViewModel: AuthViewModel,
-    filmRepository: RepositorioMisPeliculas
+    authViewModel: AuthViewModel
 ) {
     val items = listOf(
         // TODO: Cambiar iconos
@@ -158,7 +158,7 @@ fun NavigationDrawer(
             composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
             composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
             composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-            composable(Navigation.Tareas.route) { Tareas(navController, filmRepository) }
+            composable(Navigation.Tareas.route) { Tareas(navController) }
             composable(Navigation.InicioSesion.route) {
                 InicioSesion(
                     navController,
