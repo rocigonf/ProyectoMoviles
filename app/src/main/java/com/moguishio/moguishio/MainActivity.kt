@@ -7,11 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
@@ -28,7 +31,9 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val context = LocalContext.current
                 val filmsViewModel: ViewModelPelicula by viewModels()
-                val authViewModel : AuthViewModel by viewModels()
+                val authViewModel: AuthViewModel by viewModels()
+                //val daoMisPeliculas: DaoMisPeliculas
+                //val filmRepository: RepositorioMisPeliculas = RepositorioMisPeliculas(daoMisPeliculas = DaoMisPeliculas) //MAL MAL TODO MAL HORRIBLE HORROROSO
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -37,7 +42,6 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
-                    //Spacer(modifier = Modifier.height(10.dp))
                     NavigationDrawer(navController, context, filmsViewModel, authViewModel)
                 }
             }

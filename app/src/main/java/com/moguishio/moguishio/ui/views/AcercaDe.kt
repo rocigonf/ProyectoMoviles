@@ -28,7 +28,6 @@ import com.moguishio.moguishio.ui.theme.AppTypography
 @Composable
 fun MainPage(navController: NavHostController, context: Context) {
     val image = painterResource(R.drawable.foto)
-
     Box(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.inversePrimary)
@@ -38,6 +37,7 @@ fun MainPage(navController: NavHostController, context: Context) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Spacer(modifier = Modifier.height(75.dp))
             EstablecerTexto(
                 text = context.getString(R.string.overview),
                 textAlign = TextAlign.Center,

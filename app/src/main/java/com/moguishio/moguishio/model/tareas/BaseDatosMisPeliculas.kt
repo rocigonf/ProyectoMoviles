@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 // Como es un acceso a la base de datos, dejo los nombres de variables, métodos, etc. en inglés (no tengo huevos a cambiar algo y que se joda xD)
 
-@Database(entities = [MiPelicula::class], version = 1)
+@Database(entities = [MiPelicula::class], version = 1, exportSchema = false)
 abstract class BaseDatosMisPeliculas: RoomDatabase() {
     abstract fun daoMisPeliculas(): DaoMisPeliculas
 

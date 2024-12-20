@@ -78,12 +78,14 @@ authViewModel: AuthViewModel
             .background(MaterialTheme.colorScheme.inversePrimary)
             .padding(30.dp)
     ) {
+        Spacer(modifier = Modifier.height(1000.dp))
         Column(
             modifier = Modifier
                 //.fillMaxSize()
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(75.dp))
             EstablecerTexto(
                 text = context.getString(R.string.app_name),
                 textAlign = TextAlign.Center,
@@ -113,20 +115,7 @@ authViewModel: AuthViewModel
                 onClick = { navController.navigate(Navigation.Peliculas.route) },
                 text = context.getString(R.string.go_to_films)
             )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.AcercaDe.route) },
-                text = context.getString(R.string.go_to_overview)
-            )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.SobreNosotros.route) },
-                text = context.getString(R.string.go_to_about_us)
-            )
-            CustomCard(
-                onClick = { navController.navigate(Navigation.Configuracion.route) },
-                text = context.getString(R.string.go_to_config)
-            )
 
-            // Creo que se podría usar el authState directamente
             if(isLogged.value)
             {
                 CustomCard(

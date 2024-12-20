@@ -98,6 +98,7 @@ fun ConfigPage(navController: NavHostController, context: Context) {
             modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
+            Spacer(modifier = Modifier.height(75.dp))
             EstablecerTexto(
                 text = context.getString(R.string.configuration),
                 textAlign = TextAlign.Center,

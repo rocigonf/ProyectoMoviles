@@ -2,20 +2,22 @@ package com.moguishio.moguishio.ui.views.navigationdrawer
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,6 +48,7 @@ import com.moguishio.moguishio.ui.views.Films
 import com.moguishio.moguishio.ui.views.MainPage
 import com.moguishio.moguishio.ui.views.Principal
 import com.moguishio.moguishio.ui.views.SobreNosotros
+import com.moguishio.moguishio.ui.views.Tareas
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
 import com.moguishio.moguishio.viewmodel.AuthViewModel
@@ -55,9 +58,13 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter") // Necesario porque da un error (ni idea de por qué)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationDrawer(navController : NavHostController, context : Context, filmsViewModel : ViewModelPelicula, authViewModel: AuthViewModel) {
+fun NavigationDrawer(
+    navController: NavHostController,
+    context: Context,
+    filmsViewModel: ViewModelPelicula,
+    authViewModel: AuthViewModel
+) {
     val items = listOf(
-        // TODO: Cambiar iconos
         NavigationItems(
             title = context.getString(R.string.main),
             selectedIcon = Icons.Filled.Home,
@@ -65,16 +72,16 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
             route = "Principal"
         ),
         NavigationItems(
-            title = context.getString(R.string.overview),
-            selectedIcon = Icons.Filled.Info,
-            unselectedIcon = Icons.Outlined.Info,
-            route = "AcercaDe"
+            title = context.getString(R.string.films),
+            selectedIcon = Icons.Filled.PlayArrow,
+            unselectedIcon = Icons.Outlined.PlayArrow,
+            route = "Films"
         ),
         NavigationItems(
-            title = context.getString(R.string.aboutUs),
-            selectedIcon = Icons.Filled.Edit,
-            unselectedIcon = Icons.Outlined.Edit,
-            route = "SobreNosotros"
+            title = context.getString(R.string.fav_title),
+            selectedIcon = Icons.Filled.Favorite,
+            unselectedIcon = Icons.Outlined.FavoriteBorder,
+            route = "Tareas"
         ),
         NavigationItems(
             title = context.getString(R.string.configuration),
@@ -83,12 +90,17 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
             route = "Configuration"
         ),
         NavigationItems(
-            title = context.getString(R.string.films),
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings,
-            route = "Films"
+            title = context.getString(R.string.aboutUs),
+            selectedIcon = Icons.Filled.Edit,
+            unselectedIcon = Icons.Outlined.Edit,
+            route = "SobreNosotros"
         ),
-        // Falta chequear si el usuario tiene sesión
+        NavigationItems(
+            title = context.getString(R.string.overview),
+            selectedIcon = Icons.Filled.Info,
+            unselectedIcon = Icons.Outlined.Info,
+            route = "AcercaDe"
+        )
     )
 
     // La opción seleccionada
@@ -100,6 +112,7 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
     val scope = rememberCoroutineScope()
 
     ModalNavigationDrawer(
+
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
@@ -110,7 +123,6 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
                         selected = index == selectedItemIndex,
                         onClick = {
                             navController.navigate(item.route)
-
                             selectedItemIndex = index
                             scope.launch {
                                 drawerState.close()
@@ -135,34 +147,70 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
         gesturesEnabled = true
     ) {
         NavHost(navController = navController, startDestination = Navigation.Principal.route) {
-            composable(Navigation.Principal.route) { Principal(navController, context, authViewModel) }
-            composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
-            composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
-            composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
-            composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-            composable(Navigation.InicioSesion.route) { InicioSesion(navController, context, authViewModel) }
-            composable(Navigation.Registro.route) { Registro(navController, context, authViewModel) }
+            composable(Navigation.Principal.route) {
+                Principal(
+                    navController,
+                    context,
+                    authViewModel
+                )
+                selectedItemIndex = 0
+            }
+            composable(Navigation.AcercaDe.route) {
+                MainPage(navController, context)
+                selectedItemIndex = 5
+            }
+            composable(Navigation.SobreNosotros.route) {
+                SobreNosotros(navController, context)
+                selectedItemIndex = 4
+            }
+            composable(Navigation.Configuracion.route) {
+                ConfigPage(navController, context)
+                selectedItemIndex = 3
+            }
+            composable(Navigation.Peliculas.route) {
+                Films(navController, context, filmsViewModel)
+                selectedItemIndex = 1
+            }
+            composable(Navigation.Tareas.route) {
+                Tareas(context)
+                selectedItemIndex = 2
+            }
+            composable(Navigation.InicioSesion.route) {
+                InicioSesion(
+                    navController,
+                    context,
+                    authViewModel
+                )
+                selectedItemIndex = -1
+            }
+            composable(Navigation.Registro.route) {
+                Registro(
+                    navController,
+                    context,
+                    authViewModel
+                )
+                selectedItemIndex = -1
+            }
         }
-            TopAppBar(
-                title = {
-                    Text(text = context.getString(R.string.app_name))
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        scope.launch {
-                            drawerState.apply {
-                                if (isClosed) open() else close()
-                            }
+        TopAppBar(
+            title = {
+                Text(text = context.getString(R.string.app_name))
+            },
+            navigationIcon = {
+                IconButton(onClick = {
+                    scope.launch {
+                        drawerState.apply {
+                            if (isClosed) open() else close()
                         }
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Menu,
-                            contentDescription = "Menu"
-                        )
                     }
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Menu"
+                    )
                 }
-            )
-
+            }
+        )
     }
 
 }

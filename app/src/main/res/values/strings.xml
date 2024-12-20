@@ -71,4 +71,9 @@
     <string name="invalid_email">Formato de email inválido :(</string>
     <string name="log_out">Cerrar sesión</string>
     <string name="hello">Hola, </string>
+
+    <!-- Películas favoritas -->
+    <string name="fav_title">Películas favoritas</string>
+    <string name="save">Guardar</string>
+    <string name="delete_all">Borrar todos</string>
 </resources>
