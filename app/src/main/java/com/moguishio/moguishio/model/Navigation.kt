@@ -9,4 +9,5 @@ sealed class Navigation(val route: String)
     data object Peliculas : Navigation("Films")
     data object InicioSesion : Navigation("InicioSesion")
     data object Registro : Navigation("Registro")
+    data object Tareas : Navigation("Tareas")
 }

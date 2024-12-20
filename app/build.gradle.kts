@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.androidx.ui.test.android)
     implementation(libs.androidx.datastore.core.android)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.monitor)
+    implementation(libs.androidx.runner)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
