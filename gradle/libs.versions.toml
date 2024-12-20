@@ -3,7 +3,7 @@ agp = "8.6.0"
 coilCompose = "3.0.2"
 converterGson = "2.11.0"
 datastorePreferences = "1.1.1"
-kotlin = "1.9.10"
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -67,3 +67,5 @@ androidx-runner = { group = "androidx.test", name = "runner", version.ref = "run
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
