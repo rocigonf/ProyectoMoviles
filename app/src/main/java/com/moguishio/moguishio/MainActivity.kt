@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
+import com.moguishio.moguishio.model.tareas.DaoMisPeliculas
+import com.moguishio.moguishio.model.tareas.RepositorioMisPeliculas
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
 import com.moguishio.moguishio.viewmodel.AuthViewModel
@@ -28,7 +30,9 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val context = LocalContext.current
                 val filmsViewModel: ViewModelPelicula by viewModels()
-                val authViewModel : AuthViewModel by viewModels()
+                val authViewModel: AuthViewModel by viewModels()
+                val daoMisPeliculas: DaoMisPeliculas
+                val filmRepository: RepositorioMisPeliculas = RepositorioMisPeliculas(daoMisPeliculas = DaoMisPeliculas) //MAL MAL TODO MAL HORRIBLE HORROROSO
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -38,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 )
                 {
                     //Spacer(modifier = Modifier.height(10.dp))
-                    NavigationDrawer(navController, context, filmsViewModel, authViewModel)
+                    NavigationDrawer(navController, context, filmsViewModel, authViewModel, filmRepository)
                 }
             }
         }

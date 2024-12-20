@@ -1,5 +1,6 @@
 package com.moguishio.moguishio.ui.views
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.moguishio.moguishio.model.tareas.MiPelicula
 import com.moguishio.moguishio.model.tareas.RepositorioMisPeliculas
 import kotlinx.coroutines.CoroutineScope
@@ -30,16 +32,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun TareasView(
-    modifier: Modifier = Modifier,
-    repository: RepositorioMisPeliculas)
+fun Tareas(navController: NavHostController,
+           repository: RepositorioMisPeliculas)
 {
 
     val filmList by repository.getAll().collectAsState(initial = emptyList())
     var filmNameInput by remember { mutableStateOf("") }
 
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

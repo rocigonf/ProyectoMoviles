@@ -2,8 +2,6 @@ package com.moguishio.moguishio.ui.views.navigationdrawer
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,11 +39,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.moguishio.moguishio.R
 import com.moguishio.moguishio.model.Navigation
+import com.moguishio.moguishio.model.tareas.RepositorioMisPeliculas
 import com.moguishio.moguishio.ui.views.ConfigPage
 import com.moguishio.moguishio.ui.views.Films
 import com.moguishio.moguishio.ui.views.MainPage
 import com.moguishio.moguishio.ui.views.Principal
 import com.moguishio.moguishio.ui.views.SobreNosotros
+import com.moguishio.moguishio.ui.views.Tareas
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
 import com.moguishio.moguishio.viewmodel.AuthViewModel
@@ -55,7 +55,13 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter") // Necesario porque da un error (ni idea de por qué)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationDrawer(navController : NavHostController, context : Context, filmsViewModel : ViewModelPelicula, authViewModel: AuthViewModel) {
+fun NavigationDrawer(
+    navController: NavHostController,
+    context: Context,
+    filmsViewModel: ViewModelPelicula,
+    authViewModel: AuthViewModel,
+    filmRepository: RepositorioMisPeliculas
+) {
     val items = listOf(
         // TODO: Cambiar iconos
         NavigationItems(
@@ -63,6 +69,12 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             route = "Principal"
+        ),
+        NavigationItems(
+            title = "Tareas",
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home,
+            route = "Tareas"
         ),
         NavigationItems(
             title = context.getString(R.string.overview),
@@ -135,33 +147,52 @@ fun NavigationDrawer(navController : NavHostController, context : Context, films
         gesturesEnabled = true
     ) {
         NavHost(navController = navController, startDestination = Navigation.Principal.route) {
-            composable(Navigation.Principal.route) { Principal(navController, context, authViewModel) }
+            composable(Navigation.Principal.route) {
+                Principal(
+                    navController,
+                    context,
+                    authViewModel
+                )
+            }
             composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
             composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
             composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
             composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-            composable(Navigation.InicioSesion.route) { InicioSesion(navController, context, authViewModel) }
-            composable(Navigation.Registro.route) { Registro(navController, context, authViewModel) }
+            composable(Navigation.Tareas.route) { Tareas(navController, filmRepository) }
+            composable(Navigation.InicioSesion.route) {
+                InicioSesion(
+                    navController,
+                    context,
+                    authViewModel
+                )
+            }
+            composable(Navigation.Registro.route) {
+                Registro(
+                    navController,
+                    context,
+                    authViewModel
+                )
+            }
         }
-            TopAppBar(
-                title = {
-                    Text(text = context.getString(R.string.app_name))
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        scope.launch {
-                            drawerState.apply {
-                                if (isClosed) open() else close()
-                            }
+        TopAppBar(
+            title = {
+                Text(text = context.getString(R.string.app_name))
+            },
+            navigationIcon = {
+                IconButton(onClick = {
+                    scope.launch {
+                        drawerState.apply {
+                            if (isClosed) open() else close()
                         }
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Menu,
-                            contentDescription = "Menu"
-                        )
                     }
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Menu"
+                    )
                 }
-            )
+            }
+        )
 
     }
 

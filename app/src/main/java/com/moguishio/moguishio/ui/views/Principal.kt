@@ -115,7 +115,7 @@ authViewModel: AuthViewModel
             )
             CustomCard(
                 onClick = { navController.navigate(Navigation.Tareas.route) },
-                text = context.getString(R.string.go_to_films)
+                text = "Tareas"
             )
             CustomCard(
                 onClick = { navController.navigate(Navigation.AcercaDe.route) },
