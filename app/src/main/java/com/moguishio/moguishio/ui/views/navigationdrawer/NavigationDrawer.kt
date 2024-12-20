@@ -1,6 +1,5 @@
 package com.moguishio.moguishio.ui.views.navigationdrawer
 
-//import com.moguishio.moguishio.model.tareas.RepositorioMisPeliculas
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.layout.Spacer
@@ -124,7 +123,6 @@ fun NavigationDrawer(
                         selected = index == selectedItemIndex,
                         onClick = {
                             navController.navigate(item.route)
-
                             selectedItemIndex = index
                             scope.launch {
                                 drawerState.close()
@@ -155,18 +153,35 @@ fun NavigationDrawer(
                     context,
                     authViewModel
                 )
+                selectedItemIndex = 0
             }
-            composable(Navigation.AcercaDe.route) { MainPage(navController, context) }
-            composable(Navigation.SobreNosotros.route) { SobreNosotros(navController, context) }
-            composable(Navigation.Configuracion.route) { ConfigPage(navController, context) }
-            composable(Navigation.Peliculas.route) { Films(navController, context, filmsViewModel) }
-            composable(Navigation.Tareas.route) { Tareas(context) }
+            composable(Navigation.AcercaDe.route) {
+                MainPage(navController, context)
+                selectedItemIndex = 5
+            }
+            composable(Navigation.SobreNosotros.route) {
+                SobreNosotros(navController, context)
+                selectedItemIndex = 4
+            }
+            composable(Navigation.Configuracion.route) {
+                ConfigPage(navController, context)
+                selectedItemIndex = 3
+            }
+            composable(Navigation.Peliculas.route) {
+                Films(navController, context, filmsViewModel)
+                selectedItemIndex = 1
+            }
+            composable(Navigation.Tareas.route) {
+                Tareas(context)
+                selectedItemIndex = 2
+            }
             composable(Navigation.InicioSesion.route) {
                 InicioSesion(
                     navController,
                     context,
                     authViewModel
                 )
+                selectedItemIndex = -1
             }
             composable(Navigation.Registro.route) {
                 Registro(
@@ -174,6 +189,7 @@ fun NavigationDrawer(
                     context,
                     authViewModel
                 )
+                selectedItemIndex = -1
             }
         }
         TopAppBar(
