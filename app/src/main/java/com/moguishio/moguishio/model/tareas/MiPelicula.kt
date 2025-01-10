@@ -10,5 +10,5 @@ data class MiPelicula(
     @ColumnInfo(name = "nombre")
     val nombre: String,
     @ColumnInfo(name = "vista")
-    val vista: Boolean
+    var vista: Boolean
 )

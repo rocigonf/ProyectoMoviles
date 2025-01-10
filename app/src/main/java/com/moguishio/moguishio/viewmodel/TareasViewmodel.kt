@@ -27,6 +27,10 @@ class TareasViewmodel(private val repositorioMisPeliculas: RepositorioMisPelicul
     }
 
     fun borrarPelicula(pelicula: MiPelicula) = viewModelScope.launch {
+        repositorioMisPeliculas.borrarPelicula(pelicula)
+    }
+
+    fun modificarPelicula(pelicula: MiPelicula) = viewModelScope.launch {
         repositorioMisPeliculas.modificarPelicula(pelicula)
     }
 

@@ -76,4 +76,8 @@
     <string name="fav_title">Películas favoritas</string>
     <string name="save">Guardar</string>
     <string name="delete_all">Borrar todos</string>
+
+    <!-- Modificar / Borrar -->
+    <string name="modify">Modificar</string>
+    <string name="delete">Borrar</string>
 </resources>

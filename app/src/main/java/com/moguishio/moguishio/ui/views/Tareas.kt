@@ -16,6 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.moguishio.moguishio.R
@@ -73,12 +75,34 @@ fun Tareas(context: Context) {
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        EstablecerTexto(
-                            text = film.nombre,
-                            textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.displaySmall
-                        )
+                        TextButton (onClick = {
+                            film.vista = !film.vista
+                            viewModel.modificarPelicula(film)
+                        }){
+                            var textDecoration : TextDecoration = TextDecoration.None
+                            if(film.vista)
+                            {
+                                textDecoration = TextDecoration.LineThrough
+                            }
+                            EstablecerTexto(
+                                text = film.nombre,
+                                textAlign = TextAlign.Center,
+                                style = MaterialTheme.typography.displaySmall,
+                                textDecoration = textDecoration
+                            )
+                        }
                     }
+                }
+                Button(onClick = {
+                    film.vista = !film.vista
+                    viewModel.modificarPelicula(film)
+                }) {
+                    Text(context.getString(R.string.modify))
+                }
+                Button(onClick = {
+                    viewModel.borrarPelicula(film)
+                }) {
+                    Text(context.getString(R.string.delete))
                 }
             }
         }

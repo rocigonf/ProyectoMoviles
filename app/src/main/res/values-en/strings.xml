@@ -50,4 +50,6 @@
     <string name="save">Save</string>
     <string name="delete_all">Delete all</string>
     <string name="fav_title">Favourite films</string>
+    <string name="modify">Modify</string>
+    <string name="delete">Delete</string>
 </resources>
