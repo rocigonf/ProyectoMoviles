@@ -3,10 +3,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "films")
+@Entity(tableName = "peliculas")
 data class MiPelicula(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @ColumnInfo(name = "nombre")
-    val nombre: String
+    val nombre: String,
+    @ColumnInfo(name = "vista")
+    val vista: Boolean
 )

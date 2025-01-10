@@ -16,12 +16,18 @@ class TareasViewmodel(private val repositorioMisPeliculas: RepositorioMisPelicul
     fun getAll(): Flow<List<MiPelicula>>
             = repositorioMisPeliculas.getAll()
 
+    fun getTotalNoVistas(): Flow<Int> = repositorioMisPeliculas.getTotalNoVistas()
+
     fun insertarPelicula(nombre: String) = viewModelScope.launch {
-        repositorioMisPeliculas.insertarPelicula(MiPelicula(nombre = nombre))
+        repositorioMisPeliculas.insertarPelicula(MiPelicula(nombre = nombre, vista = false))
     }
 
     fun borrarTodasMisPeliculas(peliculas: List<MiPelicula>) = viewModelScope.launch {
         repositorioMisPeliculas.borrarMisPeliculas(peliculas)
+    }
+
+    fun borrarPelicula(pelicula: MiPelicula) = viewModelScope.launch {
+        repositorioMisPeliculas.modificarPelicula(pelicula)
     }
 
     companion object {

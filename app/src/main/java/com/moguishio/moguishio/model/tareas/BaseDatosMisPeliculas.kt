@@ -20,7 +20,7 @@ abstract class BaseDatosMisPeliculas: RoomDatabase() {
                 Room.databaseBuilder(
                     context = context,
                     klass = BaseDatosMisPeliculas::class.java,
-                    name = "films" // Cambio "sample" por "films" porque patata
+                    name = "peliculas" // Cambio "sample" por "films" porque patata
                 )
                     .build()
                     .also { Instance = it }
