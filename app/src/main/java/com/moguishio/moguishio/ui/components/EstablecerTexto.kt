@@ -1,6 +1,5 @@
 package com.moguishio.moguishio.ui.components
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +21,6 @@ fun EstablecerTexto(modifier: Modifier = Modifier, text: String, textAlign: Text
         color = color,
         style = style,
         textDecoration = textDecoration,
-        modifier = modifier.fillMaxWidth() // El "fillMaxWidth" está porque es bobolón y si no lo tiene, no centra el texto
+        modifier = modifier // El "fillMaxWidth" deberíamos ponerlo porque es bobolón y si no lo tiene, no centra el texto, pero por ahora lo quito porque da demasiado por saco
     )
 }

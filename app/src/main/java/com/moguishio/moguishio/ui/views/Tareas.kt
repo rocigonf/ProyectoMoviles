@@ -4,15 +4,19 @@ import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -32,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.moguishio.moguishio.R
 import com.moguishio.moguishio.ui.components.EstablecerTexto
+import com.moguishio.moguishio.ui.components.MakeCheckBox
 import com.moguishio.moguishio.ui.theme.AppTypography
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import kotlinx.coroutines.CoroutineScope
@@ -43,6 +48,11 @@ fun Tareas(context: Context) {
     val viewModel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
     val filmList by viewModel.getAll().collectAsState(initial = emptyList())
     var filmNameInput by remember { mutableStateOf("") }
+    var change by remember { mutableStateOf(false) }
+
+    // PARA QUE COMPOSE FUERZE LA REGARGA DE LA PÁGINA, LA VARIABLE TIENE QUE USARSE EN ALGÚN SITIO
+    // PONIENDOLO AQUÍ LO USA PERO NO LO MUESTRA >:)
+    Text(text = change.toString())
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -50,7 +60,6 @@ fun Tareas(context: Context) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(95.dp))
-
         EstablecerTexto(
             text = context.getString(R.string.fav_title),
             textAlign = TextAlign.Center,
@@ -67,42 +76,48 @@ fun Tareas(context: Context) {
             itemsIndexed(items = filmList) { _, film ->
                 Card(
                     modifier = Modifier
-                        .width(200.dp)
-                        .height(80.dp)
                         .padding(vertical = 8.dp)
                 ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        TextButton (onClick = {
-                            film.vista = !film.vista
-                            viewModel.modificarPelicula(film)
-                        }){
-                            var textDecoration : TextDecoration = TextDecoration.None
-                            if(film.vista)
-                            {
-                                textDecoration = TextDecoration.LineThrough
+                    Row()
+                    {
+                        Box(
+                            contentAlignment = Alignment.Center
+                        ) {
+                            TextButton(onClick = {
+                                film.vista = !film.vista
+                                viewModel.modificarPelicula(film)
+                                change = !change
+                            }) {
+                                var textDecoration: TextDecoration = TextDecoration.None
+                                if (film.vista) {
+                                    textDecoration = TextDecoration.LineThrough
+                                }
+                                EstablecerTexto(
+                                    text = film.nombre,
+                                    textAlign = TextAlign.Left,
+                                    style = MaterialTheme.typography.displaySmall,
+                                    textDecoration = textDecoration
+                                )
                             }
-                            EstablecerTexto(
-                                text = film.nombre,
-                                textAlign = TextAlign.Center,
-                                style = MaterialTheme.typography.displaySmall,
-                                textDecoration = textDecoration
+                        }
+                        MakeCheckBox(
+                            text = "",
+                            isChecked = film.vista,
+                            onCheckedChange = {
+                                film.vista = !film.vista
+                                viewModel.modificarPelicula(film)
+                                change = !change
+                            }
+                        )
+                        IconButton(onClick = {
+                            viewModel.borrarPelicula(film)
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.Delete,
+                                contentDescription = context.getString(R.string.delete)
                             )
                         }
                     }
-                }
-                Button(onClick = {
-                    film.vista = !film.vista
-                    viewModel.modificarPelicula(film)
-                }) {
-                    Text(context.getString(R.string.modify))
-                }
-                Button(onClick = {
-                    viewModel.borrarPelicula(film)
-                }) {
-                    Text(context.getString(R.string.delete))
                 }
             }
         }
@@ -118,7 +133,7 @@ fun Tareas(context: Context) {
             OutlinedTextField(
                 value = filmNameInput,
                 onValueChange = { filmNameInput = it },
-                label = { Text(text = context.getString(R.string.fav_title))}
+                label = { Text(text = context.getString(R.string.fav_title)) }
             )
             Button(onClick = {
                 CoroutineScope(Dispatchers.Main).launch {
