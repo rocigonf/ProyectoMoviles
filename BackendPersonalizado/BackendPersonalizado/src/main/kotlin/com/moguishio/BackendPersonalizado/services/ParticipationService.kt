@@ -1,0 +1,7 @@
+package com.moguishio.BackendPersonalizado.services
+
+import com.moguishio.BackendPersonalizado.repositories.ActivityRepository
+import com.moguishio.BackendPersonalizado.repositories.ParticipationRepository
+
+class ParticipationService(private val participationRepository: ParticipationRepository) {
+}
