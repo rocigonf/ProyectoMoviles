@@ -1,14 +1,17 @@
 package com.moguishio.BackendPersonalizado.model
 
-import java.util.*
+import org.springframework.data.relational.core.mapping.Table
 
+@Table("users")
 data class User(
-    val id: UUID,
+    val id: Int,
     val email: String,
     val password: String,
     val role: Role
 )
 
-enum class Role {
-    USER, ADMIN
-}
+@Table("roles")
+data class Role (
+    val id: Int,
+    val name : String
+)

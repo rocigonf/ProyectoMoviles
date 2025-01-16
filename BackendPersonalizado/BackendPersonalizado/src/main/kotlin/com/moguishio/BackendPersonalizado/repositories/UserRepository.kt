@@ -2,60 +2,47 @@ package com.moguishio.BackendPersonalizado.repositories
 
 import com.moguishio.BackendPersonalizado.model.Role
 import com.moguishio.BackendPersonalizado.model.User
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.query
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Repository
-import java.util.*
 
 @Repository
 class UserRepository(
-    private val encoder: PasswordEncoder
+    private val encoder: PasswordEncoder,
+    private val db: JdbcTemplate
 ) {
-    // HAY QUE USAR BASE DE DATOS
-    private val users = mutableSetOf(
-        User(
-            id = UUID.randomUUID(),
-            email = "email-1@gmail.com",
-            password = encoder.encode("pass1"),
-            role = Role.USER,
-        ),
-        User(
-            id = UUID.randomUUID(),
-            email = "email-2@gmail.com",
-            password = encoder.encode("pass2"),
-            role = Role.ADMIN,
-        ),
-        User(
-            id = UUID.randomUUID(),
-            email = "email-3@gmail.com",
-            password = encoder.encode("pass3"),
-            role = Role.USER,
-        ),
-    )
-
-    fun save(user: User): Boolean {
+    fun save(user: User): Int {
         val updated = user.copy(password = encoder.encode(user.password))
-
-        return users.add(updated)
+        return db.update(
+            "insert into users values (?, ?, ?)",
+            user.email, updated.password, user.role.id
+        )
     }
 
     fun findByEmail(email: String): User? =
-        users
-            .firstOrNull { it.email == email }
+        db.query("select * from users INNER JOIN roles ON users.roles_id = roles.id where users.email = ?", email) {
+                response, _ ->
+            val role = Role(response.getInt("response.roles.id"), response.getString("response.roles.name"))
+            User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
+        }.singleOrNull()
 
-    fun findAll(): Set<User> =
-        users
 
-    fun findByUUID(uuid: UUID): User? =
-        users
-            .firstOrNull { it.id == uuid }
+    fun findAll(): List<User> =
+        db.query("select * from users") { response, _ ->
+            val role = Role(response.getInt("response.roles.id"), response.getString("response.roles.name"))
+            User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
+        }
 
-    fun deleteByUUID(uuid: UUID): Boolean {
-        val foundUser = findByUUID(uuid)
+    fun findById(id: Int): User? =
+        db.query("select * from users INNER JOIN roles ON users.roles_id = roles.id where users.id = ?", id) {
+                response, _ ->
+            val role = Role(response.getInt("response.roles.id"), response.getString("response.roles.name"))
+            User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
+        }.singleOrNull()
 
-        return foundUser?.let {
-            users.removeIf {
-                it.id == uuid
-            }
-        } ?: false
+    fun deleteByID(id: Int): Int {
+        val foundUser = findById(id)
+        return db.update("delete from users where id = ?", foundUser?.id)
     }
 }

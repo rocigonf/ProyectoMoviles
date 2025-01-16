@@ -6,12 +6,12 @@ import java.util.*
 
 class ActivityService(private val activityRepository: ActivityRepository)
 {
-    fun findByUUID(uuid: UUID): Optional<Activity> = activityRepository.findById(uuid)
+    fun findById(id: Int): Optional<Activity> = activityRepository.findById(id)
 
     fun findAll(): List<Activity> =
         activityRepository.findAll()
             .toList()
 
-    fun deleteByUUID(uuid: UUID): Unit =
-        activityRepository.deleteById(uuid)
+    fun deleteById(id: Int): Unit =
+        activityRepository.deleteById(id)
 }
