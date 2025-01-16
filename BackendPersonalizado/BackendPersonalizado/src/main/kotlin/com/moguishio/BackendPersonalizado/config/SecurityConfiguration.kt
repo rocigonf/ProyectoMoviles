@@ -1,4 +1,4 @@
-package com.codersee.jwtauth.config
+package com.moguishio.BackendPersonalizado.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -25,14 +25,15 @@ class SecurityConfiguration(
       .csrf { it.disable() }
       .authorizeHttpRequests {
         it
-          .requestMatchers("/api/auth", "api/auth/refresh", "/error")
+          .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
           .permitAll()
           .requestMatchers(HttpMethod.POST, "/api/user")
           .permitAll()
           .requestMatchers("/api/user**")
-          .hasRole("ADMIN")
-          .anyRequest()
-          .fullyAuthenticated()
+          //.hasRole("ADMIN")
+          .permitAll()
+          //.anyRequest()
+          //.fullyAuthenticated()
       }
       .sessionManagement {
         it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

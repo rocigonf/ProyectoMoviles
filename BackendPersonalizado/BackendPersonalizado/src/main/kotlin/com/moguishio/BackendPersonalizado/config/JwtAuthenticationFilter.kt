@@ -1,6 +1,6 @@
-package com.codersee.jwtauth.config
+package com.moguishio.BackendPersonalizado.config
 
-import com.codersee.jwtauth.service.CustomUserDetailsService
+import com.moguishio.BackendPersonalizado.services.CustomUserDetailsService
 import com.moguishio.BackendPersonalizado.services.TokenService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest

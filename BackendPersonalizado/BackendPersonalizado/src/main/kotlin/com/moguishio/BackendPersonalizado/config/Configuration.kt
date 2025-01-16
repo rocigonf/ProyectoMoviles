@@ -1,8 +1,7 @@
 package com.moguishio.BackendPersonalizado.config
 
-import com.codersee.jwtauth.config.JwtProperties
 import com.moguishio.BackendPersonalizado.repositories.UserRepository
-import com.codersee.jwtauth.service.CustomUserDetailsService
+import com.moguishio.BackendPersonalizado.services.CustomUserDetailsService
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

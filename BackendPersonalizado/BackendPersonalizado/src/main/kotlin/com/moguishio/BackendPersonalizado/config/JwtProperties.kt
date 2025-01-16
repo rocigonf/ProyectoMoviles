@@ -1,4 +1,4 @@
-package com.codersee.jwtauth.config
+package com.moguishio.BackendPersonalizado.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

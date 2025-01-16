@@ -1,4 +1,4 @@
-package com.codersee.jwtauth.service
+package com.moguishio.BackendPersonalizado.services
 
 import com.moguishio.BackendPersonalizado.repositories.UserRepository
 import org.springframework.security.core.userdetails.User

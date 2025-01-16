@@ -15,29 +15,29 @@ class UserRepository(
     fun save(user: User): Int {
         val updated = user.copy(password = encoder.encode(user.password))
         return db.update(
-            "insert into users values (?, ?, ?)",
+            "insert into users(email, password, role_id) values (?, ?, ?)",
             user.email, updated.password, user.role.id
         )
     }
 
     fun findByEmail(email: String): User? =
-        db.query("select * from users INNER JOIN roles ON users.roles_id = roles.id where users.email = ?", email) {
+        db.query("select users.id as id, roles.id as role_id, roles.name as name, users.password as password, users.email as email from users INNER JOIN roles ON users.role_id = roles.id where users.email = ?", email) {
                 response, _ ->
-            val role = Role(response.getInt("response.roles.id"), response.getString("response.roles.name"))
+            val role = Role(response.getInt("role_id"), response.getString("name"))
             User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
         }.singleOrNull()
 
 
     fun findAll(): List<User> =
-        db.query("select * from users") { response, _ ->
-            val role = Role(response.getInt("response.roles.id"), response.getString("response.roles.name"))
+        db.query("select users.id as id, roles.id as role_id, roles.name as name, users.password as password, users.email as email from users INNER JOIN roles ON users.role_id = roles.id") { response, _ ->
+            val role = Role(response.getInt("role_id"), response.getString("name"))
             User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
         }
 
     fun findById(id: Int): User? =
-        db.query("select * from users INNER JOIN roles ON users.roles_id = roles.id where users.id = ?", id) {
+        db.query("select users.id as id, roles.id as role_id, roles.name as name, users.password as password, users.email as email from users INNER JOIN roles ON users.role_id = roles.id where users.id = ?", id) {
                 response, _ ->
-            val role = Role(response.getInt("response.roles.id"), response.getString("response.roles.name"))
+            val role = Role(response.getInt("role_id"), response.getString("name"))
             User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
         }.singleOrNull()
 
