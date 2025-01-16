@@ -16,29 +16,26 @@ class UserRepository(
         val updated = user.copy(password = encoder.encode(user.password))
         return db.update(
             "insert into users(email, password, role_id) values (?, ?, ?)",
-            user.email, updated.password, user.role.id
+            user.email, updated.password, user.roleId
         )
     }
 
     fun findByEmail(email: String): User? =
-        db.query("select users.id as id, roles.id as role_id, roles.name as name, users.password as password, users.email as email from users INNER JOIN roles ON users.role_id = roles.id where users.email = ?", email) {
+        db.query("select * from users where email = ?", email) {
                 response, _ ->
-            val role = Role(response.getInt("role_id"), response.getString("name"))
-            User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
+            User(response.getInt("id"), response.getString("email"), response.getString("password"), response.getInt("role_id"))
         }.singleOrNull()
 
 
     fun findAll(): List<User> =
-        db.query("select users.id as id, roles.id as role_id, roles.name as name, users.password as password, users.email as email from users INNER JOIN roles ON users.role_id = roles.id") { response, _ ->
-            val role = Role(response.getInt("role_id"), response.getString("name"))
-            User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
+        db.query("select * from users") { response, _ ->
+            User(response.getInt("id"), response.getString("email"), response.getString("password"), response.getInt("role_id"))
         }
 
     fun findById(id: Int): User? =
-        db.query("select users.id as id, roles.id as role_id, roles.name as name, users.password as password, users.email as email from users INNER JOIN roles ON users.role_id = roles.id where users.id = ?", id) {
+        db.query("select * from users where id = ?", id) {
                 response, _ ->
-            val role = Role(response.getInt("role_id"), response.getString("name"))
-            User(response.getInt("id"), response.getString("email"), response.getString("password"), role)
+            User(response.getInt("id"), response.getString("email"), response.getString("password"), response.getInt("role_id"))
         }.singleOrNull()
 
     fun deleteByID(id: Int): Int {

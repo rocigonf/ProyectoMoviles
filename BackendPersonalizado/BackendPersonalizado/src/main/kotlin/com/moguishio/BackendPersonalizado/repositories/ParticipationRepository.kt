@@ -7,58 +7,40 @@ import org.springframework.jdbc.core.query
 import org.springframework.stereotype.Repository
 
 @Repository
-class ParticipationRepository(private val db: JdbcTemplate, private val userRepository: UserRepository, private val activityRepository: ActivityRepository) {
+class ParticipationRepository(private val db: JdbcTemplate) {
     fun save(participation: Participation): Int {
         return db.update(
             "insert into participations values (?, ?)",
-            participation.user?.id, participation.activity?.id
+            participation.userId, participation.activityId
         )
     }
 
     fun findByActivityId(activityId: Int): List<Participation>? =
-        db.query("select * from participations INNER JOIN activites ON participations.activity_id = activities.id where activities.id = ?", activityId) {
+        db.query("select * from participations where id = ?", activityId) {
                 response, _ ->
-
-            val user = userRepository.findById(response.getInt("user_id"))
-            if (user != null) {
-                Participation(response.getInt("id"), user, Activity(response.getInt("response.activities.id"), response.getString("response.activities.name")))
-            }
-            Participation(0, null, null)
+            Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
         }
 
     fun findByUserId(userId: Int): List<Participation>? =
-        db.query("select * from participations INNER JOIN activites ON participations.activity_id = activities.id where participations.user_id = ?", userId) {
+        db.query("select * from participations where user_id = ?", userId) {
                 response, _ ->
-
-            val user = userRepository.findById(response.getInt("user_id"))
-            if (user != null) {
-                Participation(response.getInt("id"), user, Activity(response.getInt("response.activities.id"), response.getString("response.activities.name")))
-            }
-            Participation(0, null, null)
+            Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
         }
 
 
     fun findAll(): List<Participation> =
-        db.query("select * from participations INNER JOIN activites ON participations.activity_id = activities.id") {
+        db.query("select * from participations") {
                 response, _ ->
 
-            val user = userRepository.findById(response.getInt("user_id"))
-            if (user != null) {
-                Participation(response.getInt("id"), user, Activity(response.getInt("response.activities.id"), response.getString("response.activities.name")))
-            }
-            Participation(0, null, null)
+            Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
         }
 
 
     fun findById(id: Int): Participation? =
-        db.query("select * from participations INNER JOIN activites ON participations.activity_id = activities.id where participations.id = ?", id) {
+        db.query("select * from participations where id = ?", id) {
                 response, _ ->
 
-            val user = userRepository.findById(response.getInt("user_id"))
-            if (user != null) {
-                Participation(response.getInt("id"), user, Activity(response.getInt("response.activities.id"), response.getString("response.activities.name")))
-            }
-            Participation(0, null, null)
+            Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
 
         }.singleOrNull()
 

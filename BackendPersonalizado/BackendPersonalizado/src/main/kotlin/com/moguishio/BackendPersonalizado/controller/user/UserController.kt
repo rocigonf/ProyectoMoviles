@@ -53,6 +53,6 @@ class UserController(
       id = 0,
       email = this.email,
       password = this.password,
-      role = this.role
+      roleId = this.roleId
     )
 }
