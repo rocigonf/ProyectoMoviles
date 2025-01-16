@@ -30,10 +30,9 @@ class SecurityConfiguration(
           .requestMatchers(HttpMethod.POST, "/api/user")
           .permitAll()
           .requestMatchers("/api/user**")
-          //.hasRole("ADMIN")
-          .permitAll()
-          //.anyRequest()
-          //.fullyAuthenticated()
+          .hasRole("ADMIN")
+          .anyRequest()
+          .fullyAuthenticated()
       }
       .sessionManagement {
         it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

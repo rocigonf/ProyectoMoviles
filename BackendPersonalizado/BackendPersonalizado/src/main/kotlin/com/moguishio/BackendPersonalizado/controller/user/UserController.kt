@@ -14,10 +14,12 @@ class UserController(
 ) {
 
   @PostMapping
-  fun create(@RequestBody userRequest: UserRequest): UserResponse =
+  fun create(@RequestBody userRequest: UserRequest): UserResponse? {
     userService.createUser(userRequest.toModel())
-      ?.toResponse()
-      ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot create user.")
+    val createdUser = userService.findByEmail(userRequest.email)
+    return createdUser?.toResponse()
+  }
+
 
   @GetMapping
   fun listAll(): List<UserResponse> =
