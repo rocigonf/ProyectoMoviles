@@ -1,6 +1,13 @@
 package com.moguishio.moguishio.ui.views
 
 import android.content.Context
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,11 +36,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.moguishio.moguishio.R
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.components.MakeCheckBox
@@ -41,11 +48,11 @@ import com.moguishio.moguishio.ui.theme.AppTypography
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun Tareas(context: Context) {
-    val viewModel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
+fun Tareas(context: Context, viewModel: TareasViewmodel) {
     val filmList by viewModel.getAll().collectAsState(initial = emptyList())
     var filmNameInput by remember { mutableStateOf("") }
     var change by remember { mutableStateOf(false) }
@@ -69,53 +76,79 @@ fun Tareas(context: Context) {
         Spacer(modifier = Modifier.height(20.dp))
 
         // Muestra la lista de películas favoritas
+        // DOCS: https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=es-419#animatedvisibility
         LazyColumn(
             modifier = Modifier.weight(.7F),
             verticalArrangement = Arrangement.Center
         ) {
-            itemsIndexed(items = filmList) { _, film ->
-                Card(
-                    modifier = Modifier
-                        .padding(vertical = 8.dp)
+            itemsIndexed(items = filmList, key = { _, film -> film.id }) { _, film ->
+                // Al decirle que es visible, significa que puede mostrar el contenido...
+                // PERO
+                // Si pasa a ser no visible, signifca que debe ocultarlo y por tanto se dispara la animación de salida
+                var visible by remember { mutableStateOf(true) }
+                val density = LocalDensity.current
+
+                AnimatedVisibility(
+                    visible = visible,
+                    enter = slideInVertically {
+                        // Slide in from 40 dp from the top.
+                        with(density) { -40.dp.roundToPx() }
+                    } + expandVertically(
+                        // Expand from the top.
+                        expandFrom = Alignment.Top
+                    ) + fadeIn(
+                        // Fade in with the initial alpha of 0.3f.
+                        initialAlpha = 0.3f
+                    ),
+                    exit = slideOutVertically() + shrinkVertically() + fadeOut()
                 ) {
-                    Row()
-                    {
-                        Box(
-                            contentAlignment = Alignment.Center
-                        ) {
-                            TextButton(onClick = {
-                                film.vista = !film.vista
-                                viewModel.modificarPelicula(film)
-                                change = !change
-                            }) {
-                                var textDecoration: TextDecoration = TextDecoration.None
-                                if (film.vista) {
-                                    textDecoration = TextDecoration.LineThrough
+                    Card(
+                        modifier = Modifier
+                            .padding(vertical = 8.dp)
+                    ) {
+                        Row()
+                        {
+                            Box(
+                                contentAlignment = Alignment.Center
+                            ) {
+                                TextButton(onClick = {
+                                    film.vista = !film.vista
+                                    viewModel.modificarPelicula(film)
+                                    change = !change
+                                }) {
+                                    var textDecoration: TextDecoration = TextDecoration.None
+                                    if (film.vista) {
+                                        textDecoration = TextDecoration.LineThrough
+                                    }
+                                    EstablecerTexto(
+                                        text = film.nombre,
+                                        textAlign = TextAlign.Left,
+                                        style = MaterialTheme.typography.displaySmall,
+                                        textDecoration = textDecoration
+                                    )
                                 }
-                                EstablecerTexto(
-                                    text = film.nombre,
-                                    textAlign = TextAlign.Left,
-                                    style = MaterialTheme.typography.displaySmall,
-                                    textDecoration = textDecoration
+                            }
+                            MakeCheckBox(
+                                text = "",
+                                isChecked = film.vista,
+                                onCheckedChange = {
+                                    film.vista = !film.vista
+                                    viewModel.modificarPelicula(film)
+                                    change = !change
+                                }
+                            )
+                            IconButton(onClick = {
+                                visible = false
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    delay(1000) // 1 segundo
+                                    viewModel.borrarPelicula(film)
+                                }
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Filled.Delete,
+                                    contentDescription = context.getString(R.string.delete)
                                 )
                             }
-                        }
-                        MakeCheckBox(
-                            text = "",
-                            isChecked = film.vista,
-                            onCheckedChange = {
-                                film.vista = !film.vista
-                                viewModel.modificarPelicula(film)
-                                change = !change
-                            }
-                        )
-                        IconButton(onClick = {
-                            viewModel.borrarPelicula(film)
-                        }) {
-                            Icon(
-                                imageVector = Icons.Filled.Delete,
-                                contentDescription = context.getString(R.string.delete)
-                            )
                         }
                     }
                 }

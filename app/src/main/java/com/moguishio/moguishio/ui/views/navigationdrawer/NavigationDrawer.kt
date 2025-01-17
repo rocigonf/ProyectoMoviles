@@ -19,6 +19,7 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Badge
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -31,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -52,6 +54,7 @@ import com.moguishio.moguishio.ui.views.Tareas
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
 import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 import kotlinx.coroutines.launch
 
@@ -62,7 +65,8 @@ fun NavigationDrawer(
     navController: NavHostController,
     context: Context,
     filmsViewModel: ViewModelPelicula,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    tareasViewmodel: TareasViewmodel
 ) {
     val items = listOf(
         NavigationItems(
@@ -111,6 +115,9 @@ fun NavigationDrawer(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
+    // Para pillar el total que no se han marcado (en nuestro caso visto) y se vaya actualizando
+    val totalNoVistas by tareasViewmodel.getTotalNoVistas().collectAsState(0)
+
     ModalNavigationDrawer(
 
         drawerState = drawerState,
@@ -135,6 +142,14 @@ fun NavigationDrawer(
                                 } else item.unselectedIcon,
                                 contentDescription = item.title
                             )
+                        },
+                        badge = {
+                            if (item.route == "Tareas" && totalNoVistas > 0) {
+                                Badge(
+                                    modifier = Modifier.padding(4.dp),
+                                    content = { Text(text = totalNoVistas.toString()) }
+                                )
+                            }
                         },
                         // Padding entre los elementos
                         modifier = Modifier
@@ -172,7 +187,7 @@ fun NavigationDrawer(
                 selectedItemIndex = 1
             }
             composable(Navigation.Tareas.route) {
-                Tareas(context)
+                Tareas(context, tareasViewmodel)
                 selectedItemIndex = 2
             }
             composable(Navigation.InicioSesion.route) {

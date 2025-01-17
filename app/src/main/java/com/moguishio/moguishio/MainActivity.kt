@@ -15,10 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
 import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
 
 class MainActivity : ComponentActivity() {
@@ -32,6 +34,7 @@ class MainActivity : ComponentActivity() {
                 val context = LocalContext.current
                 val filmsViewModel: ViewModelPelicula by viewModels()
                 val authViewModel: AuthViewModel by viewModels()
+                val tareasViewmodel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
                 //val daoMisPeliculas: DaoMisPeliculas
                 //val filmRepository: RepositorioMisPeliculas = RepositorioMisPeliculas(daoMisPeliculas = DaoMisPeliculas) //MAL MAL TODO MAL HORRIBLE HORROROSO
 
@@ -42,7 +45,7 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
-                    NavigationDrawer(navController, context, filmsViewModel, authViewModel)
+                    NavigationDrawer(navController, context, filmsViewModel, authViewModel, tareasViewmodel)
                 }
             }
         }
