@@ -23,6 +23,6 @@ class CustomUserDetailsService(
     User.builder()
       .username(this.email)
       .password(this.password)
-      .roles("ADMIN") // TODO: Cambiar esto
+      .roles(if (this.roleId == 1) "USER" else if (this.roleId == 2) "ADMIN" else "")
       .build()
 }
