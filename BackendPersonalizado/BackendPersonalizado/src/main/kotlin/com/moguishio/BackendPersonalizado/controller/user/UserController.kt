@@ -55,6 +55,6 @@ class UserController(
       id = 0,
       email = this.email,
       password = this.password,
-      roleId = this.roleId
+      roleId = 1
     )
 }
