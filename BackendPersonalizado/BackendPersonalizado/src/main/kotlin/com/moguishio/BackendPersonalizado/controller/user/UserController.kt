@@ -20,7 +20,6 @@ class UserController(
     return createdUser?.toResponse()
   }
 
-
   @GetMapping
   fun listAll(): List<UserResponse> =
     userService.findAll()
