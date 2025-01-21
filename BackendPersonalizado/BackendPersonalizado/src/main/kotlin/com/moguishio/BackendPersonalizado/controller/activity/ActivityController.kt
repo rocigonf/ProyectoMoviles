@@ -49,6 +49,8 @@ class ActivityController(
     private fun ActivityRequest.toModel(): Activity =
         Activity(
             id = 0,
-            name = this.name
+            name = this.name,
+            place = this.place,
+            description = this.description
         )
 }

@@ -7,5 +7,7 @@ import java.util.*
 @Table("ACTIVITIES")
 data class Activity(
     @Id val id: Int,
-    val name : String
+    val name : String,
+    val description : String,
+    val place : String
 )

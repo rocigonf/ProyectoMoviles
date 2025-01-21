@@ -1,6 +1,7 @@
 package com.moguishio.BackendPersonalizado.controller.participation
 
 import com.moguishio.BackendPersonalizado.model.Participation
+import com.moguishio.BackendPersonalizado.services.ActivityService
 import com.moguishio.BackendPersonalizado.services.ParticipationService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -10,7 +11,8 @@ import org.springframework.web.server.ResponseStatusException
 @RestController
 @RequestMapping("/api/participation")
 class ParticipationController(
-    private val participationService: ParticipationService
+    private val participationService: ParticipationService,
+    private val activityService: ActivityService
 ) {
 
     @PostMapping
@@ -48,7 +50,8 @@ class ParticipationController(
         ParticipationResponse(
             id = this.id,
             userId = this.userId,
-            activityId = this.activityId
+            activityId = this.activityId,
+            activity = activityService.findById(this.activityId)
         )
 
     private fun ParticipationRequest.toModel(): Participation =

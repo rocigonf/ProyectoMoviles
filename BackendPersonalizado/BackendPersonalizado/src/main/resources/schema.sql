@@ -16,7 +16,9 @@ INSERT INTO roles(name) VALUES ('USER'), ('ADMIN');
 
 CREATE TABLE IF NOT EXISTS activities (
 id       integer primary key auto_increment not null,
-name     VARCHAR      NOT NULL
+name     VARCHAR      NOT NULL,
+description VARCHAR NOT NULL,
+place VARCHAR NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS participations(
