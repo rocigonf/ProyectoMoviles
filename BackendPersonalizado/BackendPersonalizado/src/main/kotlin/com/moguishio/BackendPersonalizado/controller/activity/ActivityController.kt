@@ -1,6 +1,7 @@
 package com.moguishio.BackendPersonalizado.controller.activity
 
 import com.moguishio.BackendPersonalizado.model.Activity
+import com.moguishio.BackendPersonalizado.model.Participation
 import com.moguishio.BackendPersonalizado.services.ActivityService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,9 +21,9 @@ class ActivityController(
         return newActivity.toResponse()
     }
 
-    @GetMapping("/{id}")
-    fun findById(@PathVariable id: Int): Optional<Activity> =
-        activityService.findById(id)
+    @GetMapping("/{activityId}")
+    fun findByActivityId(@PathVariable activityId: Int): Optional<Activity> =
+        activityService.findById(activityId)
 
     @GetMapping
     fun findAll(): List<ActivityResponse> =

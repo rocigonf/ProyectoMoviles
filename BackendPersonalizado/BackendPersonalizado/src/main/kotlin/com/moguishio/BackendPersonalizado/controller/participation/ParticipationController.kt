@@ -1,5 +1,6 @@
 package com.moguishio.BackendPersonalizado.controller.participation
 
+import com.moguishio.BackendPersonalizado.model.Activity
 import com.moguishio.BackendPersonalizado.model.Participation
 import com.moguishio.BackendPersonalizado.services.ActivityService
 import com.moguishio.BackendPersonalizado.services.ParticipationService
@@ -22,12 +23,13 @@ class ParticipationController(
         return newParticipation?.toResponse()
     }
 
-    @GetMapping("/activity/{activityId}")
+    /*@GetMapping("/activity/{activityId}")
     fun findByActivityId(@PathVariable activityId: Int): List<Participation>? =
         participationService.findByActivityId(activityId)
+    */
 
     @GetMapping("/user/{userId}")
-    fun findByUserId(@PathVariable userId: Int): List<Participation>? =
+    fun findByUserId(@PathVariable userId: Int): List<Activity>? =
         participationService.findByUserId(userId)
 
     @GetMapping
