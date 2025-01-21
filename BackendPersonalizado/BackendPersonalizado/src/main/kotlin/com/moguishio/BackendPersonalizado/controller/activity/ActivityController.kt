@@ -17,7 +17,7 @@ class ActivityController(
     @PostMapping
     fun create(@RequestBody activityRequest: ActivityRequest): ActivityResponse? {
         val newActivity = activityService.create(activityRequest.toModel())
-        return newActivity?.toResponse()
+        return newActivity.toResponse()
     }
 
     @GetMapping("/{id}")

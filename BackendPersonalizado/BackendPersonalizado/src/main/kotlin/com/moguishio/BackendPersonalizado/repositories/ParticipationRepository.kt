@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository
 class ParticipationRepository(private val db: JdbcTemplate) {
     fun save(participation: Participation): Int {
         return db.update(
-            "insert into participations values (?, ?)",
-            participation.userId, participation.activityId
+            "insert into participations(activity_id, user_id) values (?, ?)",
+            participation.activityId, participation.userId
         )
     }
 

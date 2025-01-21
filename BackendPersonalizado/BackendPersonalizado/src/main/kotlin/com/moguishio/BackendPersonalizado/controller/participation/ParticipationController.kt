@@ -20,11 +20,11 @@ class ParticipationController(
         return newParticipation?.toResponse()
     }
 
-    @GetMapping("/{activityId}")
+    @GetMapping("/activity/{activityId}")
     fun findByActivityId(@PathVariable activityId: Int): List<Participation>? =
         participationService.findByActivityId(activityId)
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     fun findByUserId(@PathVariable userId: Int): List<Participation>? =
         participationService.findByUserId(userId)
 
