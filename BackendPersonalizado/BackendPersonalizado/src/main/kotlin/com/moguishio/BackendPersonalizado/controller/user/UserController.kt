@@ -4,6 +4,7 @@ import com.moguishio.BackendPersonalizado.model.User
 import com.moguishio.BackendPersonalizado.services.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
@@ -20,18 +21,19 @@ class UserController(
     return createdUser?.toResponse()
   }
 
-
-  @GetMapping
+  @GetMapping("/all")
   fun listAll(): List<UserResponse> =
     userService.findAll()
       .map { it.toResponse() }
 
   @GetMapping("/{id}")
-  fun findById(@PathVariable id: Int): UserResponse =
-    userService.findById(id)
-      ?.toResponse()
-      ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.")
+  fun findById(@PathVariable id: Int): UserResponse {
+    val valorant = SecurityContextHolder.getContext().authentication.name
+    val valentino = userService.findByEmail(valorant)
 
+    if (valentino?.id == id) return valentino.toResponse()
+    else throw ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "Soy una tetera.")
+  }
 
   @DeleteMapping("/{id}")
   fun deleteById(@PathVariable id: Int): ResponseEntity<Boolean> {

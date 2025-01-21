@@ -1,10 +1,11 @@
 package com.moguishio.BackendPersonalizado.model
 
+import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.util.*
 
-@Table("activity")
+@Table("ACTIVITIES")
 data class Activity(
-    val id: Int,
+    @Id val id: Int,
     val name : String
 )

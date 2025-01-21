@@ -1,1 +1,3 @@
 - Hay que poner el "refreshToken" en la cabecera de "Authorization"
+- Para establecer administrador, irse al archivo CustomUserDetailsService.kt y en la línea 26 poner
+    .roles("ADMIN")
