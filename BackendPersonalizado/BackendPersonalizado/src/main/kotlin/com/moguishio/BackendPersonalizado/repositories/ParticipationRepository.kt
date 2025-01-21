@@ -16,10 +16,16 @@ class ParticipationRepository(private val db: JdbcTemplate) {
     }
 
     fun findByActivityId(activityId: Int): List<Participation>? =
-        db.query("select * from participations where id = ?", activityId) {
+        db.query("select * from participations where activity_id = ?", activityId) {
                 response, _ ->
             Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
         }
+
+    fun findByActivityAndUser(activityId: Int, userId: Int): Participation? =
+        db.query("select * from participations where activity_id = ? and user_id = ?", activityId, userId) {
+                response, _ ->
+            Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
+        }.singleOrNull()
 
     fun findByUserId(userId: Int): List<Participation>? =
         db.query("select * from participations where user_id = ?", userId) {

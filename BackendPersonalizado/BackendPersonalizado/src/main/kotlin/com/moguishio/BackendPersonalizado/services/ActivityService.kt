@@ -10,13 +10,8 @@ class ActivityService(
     private val activityRepository: ActivityRepository
 ) {
 
-    fun create(activity: Activity): Activity? {
-        val found = activityRepository.findById(activity.id)
-
-        return if (found.equals(false)) {
-            activityRepository.save(activity)
-            activity
-        } else null
+    fun create(activity: Activity): Activity {
+        return activityRepository.save(activity)
     }
 
     fun findById(id: Int): Optional<Activity> =

@@ -1,10 +1,5 @@
 package com.moguishio.BackendPersonalizado.controller.participation
 
-import com.moguishio.BackendPersonalizado.controller.activity.ActivityRequest
-import com.moguishio.BackendPersonalizado.controller.activity.ActivityResponse
-import com.moguishio.BackendPersonalizado.controller.user.UserRequest
-import com.moguishio.BackendPersonalizado.controller.user.UserResponse
-import com.moguishio.BackendPersonalizado.model.Activity
 import com.moguishio.BackendPersonalizado.model.Participation
 import com.moguishio.BackendPersonalizado.services.ParticipationService
 import org.springframework.http.HttpStatus
@@ -21,7 +16,7 @@ class ParticipationController(
     @PostMapping
     fun create(@RequestBody participationRequest: ParticipationRequest): ParticipationResponse? {
         participationService.createParticipation(participationRequest.toModel())
-        val newParticipation = participationService.findById(participationRequest.id)
+        val newParticipation = participationService.findByActivityAndUser(participationRequest.activityId, participationRequest.userId)
         return newParticipation?.toResponse()
     }
 
@@ -51,6 +46,7 @@ class ParticipationController(
 
     private fun Participation.toResponse(): ParticipationResponse =
         ParticipationResponse(
+            id = this.id,
             userId = this.userId,
             activityId = this.activityId
         )

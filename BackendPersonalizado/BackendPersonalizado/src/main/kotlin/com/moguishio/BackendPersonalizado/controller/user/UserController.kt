@@ -20,7 +20,7 @@ class UserController(
     return createdUser?.toResponse()
   }
 
-  @GetMapping
+  @GetMapping("/all")
   fun listAll(): List<UserResponse> =
     userService.findAll()
       .map { it.toResponse() }

@@ -15,8 +15,8 @@ class ParticipationService(
         return if (saved > 0) participation else null
     }
 
-    fun findById(id: Int): Participation? =
-        participationRepository.findById(id)
+    fun findByActivityAndUser(activityId: Int, userId: Int): Participation? =
+        participationRepository.findByActivityAndUser(activityId, userId)
 
     fun findByActivityId(activityId: Int): List<Participation>? =
         participationRepository.findByActivityId(activityId)?.toList()
