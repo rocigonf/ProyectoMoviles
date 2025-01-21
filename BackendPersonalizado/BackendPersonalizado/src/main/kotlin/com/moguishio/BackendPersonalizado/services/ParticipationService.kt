@@ -1,5 +1,6 @@
 package com.moguishio.BackendPersonalizado.services
 
+import com.moguishio.BackendPersonalizado.model.Activity
 import com.moguishio.BackendPersonalizado.model.Participation
 import com.moguishio.BackendPersonalizado.repositories.ActivityRepository
 import com.moguishio.BackendPersonalizado.repositories.ParticipationRepository
@@ -21,7 +22,7 @@ class ParticipationService(
     fun findByActivityId(activityId: Int): List<Participation>? =
         participationRepository.findByActivityId(activityId)?.toList()
 
-    fun findByUserId(userId: Int): List<Participation>? =
+        fun findByUserId(userId: Int): List<Activity>? =
         participationRepository.findByUserId(userId)?.toList()
 
     fun findAll(): List<Participation> =

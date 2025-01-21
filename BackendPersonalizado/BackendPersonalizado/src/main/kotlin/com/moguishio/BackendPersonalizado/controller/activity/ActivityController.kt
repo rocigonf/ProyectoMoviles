@@ -43,7 +43,9 @@ class ActivityController(
     private fun Activity.toResponse(): ActivityResponse =
         ActivityResponse(
             id = this.id,
-            name = this.name
+            name = this.name,
+            place = this.place,
+            description = this.description
         )
 
     private fun ActivityRequest.toModel(): Activity =

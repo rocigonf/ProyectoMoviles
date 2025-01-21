@@ -27,10 +27,10 @@ class ParticipationRepository(private val db: JdbcTemplate) {
             Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
         }.singleOrNull()
 
-    fun findByUserId(userId: Int): List<Participation>? =
-        db.query("select * from participations where user_id = ?", userId) {
+    fun findByUserId(userId: Int): List<Activity>? =
+        db.query("select * from activities INNER JOIN participations ON activities.id = participations.activity_id where participations.user_id = ?", userId) {
                 response, _ ->
-            Participation(response.getInt("id"), response.getInt("user_id"), response.getInt("activity_id"))
+            Activity(response.getInt("activities.id"), response.getString("name"), response.getString("description"), response.getString("place"))
         }
 
 
