@@ -53,7 +53,6 @@ class ParticipationController(
             id = this.id,
             userId = this.userId,
             activityId = this.activityId,
-            activity = activityService.findById(this.activityId)
         )
 
     private fun ParticipationRequest.toModel(): Participation =

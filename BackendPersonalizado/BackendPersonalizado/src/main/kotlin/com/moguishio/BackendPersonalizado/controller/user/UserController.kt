@@ -28,10 +28,10 @@ class UserController(
 
   @GetMapping("/{id}")
   fun findById(@PathVariable id: Int): UserResponse {
-    val valorant = SecurityContextHolder.getContext().authentication.name
-    val valentino = userService.findByEmail(valorant)
+    val email = SecurityContextHolder.getContext().authentication.name
+    val user = userService.findByEmail(email)
 
-    if (valentino?.id == id) return valentino.toResponse()
+    if (user?.id == id) return user.toResponse()
     else throw ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "Soy una tetera.")
   }
 
