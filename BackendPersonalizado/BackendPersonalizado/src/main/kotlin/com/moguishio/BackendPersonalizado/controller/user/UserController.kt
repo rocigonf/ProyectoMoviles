@@ -46,6 +46,26 @@ class UserController(
       throw ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.")
   }
 
+  @PostMapping("/{id}")
+  fun updateById(@RequestBody userRequest: UserRequest, @PathVariable id : Int): ResponseEntity<Boolean> {
+    val email = SecurityContextHolder.getContext().authentication.name
+    val user = userService.findByEmail(email)
+
+    if (user?.id == id) {
+      val success = userService.updateUser(userRequest.toModel())
+
+      return if (success == 1)
+        ResponseEntity.noContent()
+          .build()
+      else
+        throw ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.")
+    }
+    else
+    {
+      throw ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.")
+    }
+  }
+
   private fun User.toResponse(): UserResponse =
     UserResponse(
       id = this.id,

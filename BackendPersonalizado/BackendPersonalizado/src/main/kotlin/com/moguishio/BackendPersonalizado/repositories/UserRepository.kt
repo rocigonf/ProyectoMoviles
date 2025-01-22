@@ -32,6 +32,14 @@ class UserRepository(
             User(response.getInt("id"), response.getString("email"), response.getString("password"), response.getInt("role_id"))
         }
 
+    fun updateUser(user: User): Int {
+        if (user.password != "")
+        {
+            return db.update("UPDATE users SET email = ? AND password = ? AND role_id = ? WHERE id = ?", user.email, user.password, user.roleId, user.id)
+        }
+        return db.update("UPDATE users SET email = ? AND role_id = ? WHERE id = ?", user.email, user.roleId, user.id)
+    }
+
     fun findById(id: Int): User? =
         db.query("select * from users where id = ?", id) {
                 response, _ ->

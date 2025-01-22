@@ -31,4 +31,6 @@ class UserService(
 
     fun deleteById(id: Int): Int =
         userRepository.deleteByID(id)
+
+    fun updateUser(user : User) : Int = userRepository.updateUser(user)
 }
