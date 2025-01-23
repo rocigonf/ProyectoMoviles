@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.util.Dictionary
 
 @RestController
 @RequestMapping("/api/user")
@@ -26,12 +27,20 @@ class UserController(
     userService.findAll()
       .map { it.toResponse() }
 
-  @GetMapping("/{id}")
+  @GetMapping("/id/{id}")
   fun findById(@PathVariable id: Int): UserResponse {
     val email = SecurityContextHolder.getContext().authentication.name
     val user = userService.findByEmail(email)
 
     if (user?.id == id) return user.toResponse()
+    else throw ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "Soy una tetera.")
+  }
+
+  @GetMapping("/email/{emailInput}")
+  fun findByEmail(@PathVariable emailInput : String): UserResponse {
+    val email = SecurityContextHolder.getContext().authentication.name
+    val user = userService.findByEmail(email)
+    if (user != null && user.email == emailInput) return user.toResponse()
     else throw ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "Soy una tetera.")
   }
 
