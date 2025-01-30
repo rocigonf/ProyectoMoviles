@@ -16,7 +16,7 @@ class ConfigurationDataStore(private val context: Context) {
     companion object {
         // Básicamente como el localStorage de JS o un diccionario...
         // ... El diccionario es "userPreferences", y cada variable es un par clave valor (y "userPreferences" se guarda como en el localStorage)
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("userPreferences")
+        val Context.dataStore: DataStore<Preferences> by preferencesDataStore("userPreferences")
 
         // Checkboxes
         val SHOW_SUBTITLES = booleanPreferencesKey("show_subtitles")
