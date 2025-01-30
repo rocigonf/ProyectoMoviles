@@ -1,6 +1,5 @@
 package com.moguishio.moguishio.model.authentication
 
-import com.moguishio.moguishio.model.films.ClientePelicula
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,7 +13,7 @@ object RetrofitAuthInstance {
             .build()
     }
 
-    val clientePelicula: ClientePelicula by lazy {
-        retrofit.create(ClientePelicula::class.java)
+    val client: AuthClient by lazy {
+        retrofit.create(AuthClient::class.java)
     }
 }
