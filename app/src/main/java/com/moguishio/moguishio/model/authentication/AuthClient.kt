@@ -3,8 +3,9 @@ package com.moguishio.moguishio.model.authentication
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface AuthClient {
     @POST("auth")
@@ -16,6 +17,6 @@ interface AuthClient {
     @POST("auth/refresh")
     suspend fun refreshToken(@Body refreshToken: TokenRequest): Response<TokenResponse>
 
-    @GET("user/email/")
-    suspend fun getUserData(@Query("emailInput") emailInput: String): Response<SignUpResponse>
+    @GET("user/email/{emailInput}")
+    suspend fun getUserData(@Header("Authorization") authorization: String, @Path("emailInput") emailInput: String): Response<SignUpResponse>
 }

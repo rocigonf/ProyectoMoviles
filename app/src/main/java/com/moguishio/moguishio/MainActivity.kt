@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 val context = LocalContext.current
                 val filmsViewModel: ViewModelPelicula by viewModels()
                 //val authViewModel: AuthViewModel by viewModels()
-                val viewmodelAuthDefinitivo : ViewModelAuth by viewModels()
+                val viewmodelAuthDefinitivo : ViewModelAuth = viewModel(factory = ViewModelAuth.Factory)
                 val tareasViewmodel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
                 //val daoMisPeliculas: DaoMisPeliculas
                 //val filmRepository: RepositorioMisPeliculas = RepositorioMisPeliculas(daoMisPeliculas = DaoMisPeliculas) //MAL MAL TODO MAL HORRIBLE HORROROSO

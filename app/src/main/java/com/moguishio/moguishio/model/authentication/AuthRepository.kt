@@ -15,7 +15,7 @@ class AuthRepository {
         return authClient.refreshToken(refreshToken).body()
     }
 
-    suspend fun getUserData(emailInput: String): SignUpResponse? {
-        return authClient.getUserData(emailInput).body()
+    suspend fun getUserData(token: String, emailInput: String): SignUpResponse? {
+        return authClient.getUserData(token, emailInput).body()
     }
 }

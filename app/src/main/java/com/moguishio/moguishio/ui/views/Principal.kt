@@ -1,6 +1,7 @@
 package com.moguishio.moguishio.ui.views
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -33,7 +34,9 @@ import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.theme.AppTypography
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 import com.moguishio.moguishio.viewmodel.authentication.AuthState
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
 @Composable
@@ -45,12 +48,22 @@ authViewModel: ViewModelAuth
     val meme = painterResource(R.drawable.foto)
 
     val authState = authViewModel.authState.observeAsState()
-    val email = remember { mutableStateOf(authViewModel.email) }
+    val email = authViewModel.email.observeAsState()
+    val token = authViewModel.refreshToken.observeAsState()
     val isLogged = remember { mutableStateOf(false) }
 
+    LaunchedEffect(token.value) {
+        if(token.value != null && token.value != "") {
+            Log.e("E1", "refrescando")
+            authViewModel.refreshAndSaveToken()
+        }
+    }
+
     var emailValorant = email.value
+
     // De nuevo, en el vídeo no es así, pero meh
     LaunchedEffect(authState.value) {
+        //authViewModel.refreshAndSaveToken()
         when (authState.value) {
             is AuthState.Authenticated -> isLogged.value = true
             is AuthState.Unauthenticated -> isLogged.value = false
@@ -60,10 +73,6 @@ authViewModel: ViewModelAuth
 
     LaunchedEffect(email.value) {
         emailValorant = email.value
-    }
-
-    LaunchedEffect(Unit) {
-        authViewModel.refreshAndSaveToken()
     }
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
@@ -123,7 +132,7 @@ authViewModel: ViewModelAuth
             if(isLogged.value)
             {
                 CustomCard(
-                    onClick = { authViewModel.signout() },
+                    onClick = { CoroutineScope(Dispatchers.Main).launch { authViewModel.signout() } },
                     text = context.getString(R.string.log_out)
                 )
             }
