@@ -12,13 +12,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moguishio.moguishio.R.string.invalid_email
 import com.moguishio.moguishio.R.string.no_empty_fields
-import com.moguishio.moguishio.model.authentication.AuthClient
+import com.moguishio.moguishio.model.authentication.AuthRepository
+import com.moguishio.moguishio.model.authentication.AuthRequest
+import com.moguishio.moguishio.model.authentication.TokenRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 // ESTA CLASE ES UNA MEZCLA ENTRE "AuthViewModel" Y "ConfigurationDataStore"
 // Da una advertencia rara 🐌🐌
-class ViewModelAuth(private val context: Context, private val auth : AuthClient) : ViewModel() {
+class ViewModelAuth(private val context: Context, private val auth : AuthRepository) : ViewModel() {
     private val _authState = MutableLiveData<AuthState>()
     val authState : LiveData<AuthState> = _authState
 
@@ -59,33 +61,26 @@ class ViewModelAuth(private val context: Context, private val auth : AuthClient)
     }
 
     // A PARTIR DE AQUÍ FALTA LLAMAR A LOS REPOSITORIOS Y LOS SERVICIOS PARA HACER LA PETICIÓN Y PROCESAR LA RESPUESTA
-    suspend fun getUserDataAndSave(email: String)
+    suspend fun getUserDataAndSave(emailInput: String)
     {
-        saveInfo(EMAIL, email)
+        val userData = auth.getUserData(emailInput)
+        if(userData != null) {
+            email = userData.email
+            saveInfo(EMAIL, email)
+        }
     }
 
     suspend fun refreshAndSaveToken()
     {
-    }
-
-    fun login(email: String, password: String)
-    {
-
-        if(email.isEmpty() || password.isEmpty())
+        val tokenResponse = auth.refreshToken(TokenRequest(refreshToken))
+        if(tokenResponse != null)
         {
-            _authState.value = AuthState.Error(no_empty_fields.toString())
-            return
+            accessToken = tokenResponse.accessToken
+            saveInfo(ACCESS_TOKEN, accessToken)
         }
-
-        if (!isValidEmail(email)) {
-            _authState.value = AuthState.Error(invalid_email.toString())
-            return
-        }
-
-        _authState.value = AuthState.Loading
     }
 
-    fun signup(email: String, password: String)
+    suspend fun login(email: String, password: String)
     {
         if(email.isEmpty() || password.isEmpty())
         {
@@ -99,6 +94,48 @@ class ViewModelAuth(private val context: Context, private val auth : AuthClient)
         }
 
         _authState.value = AuthState.Loading
+
+        val loginResponse = auth.login(AuthRequest(email, password))
+        if(loginResponse == null)
+        {
+            _authState.value = AuthState.Error("error")
+        }
+        else
+        {
+            accessToken = loginResponse.accessToken
+            refreshToken = loginResponse.refreshToken
+            saveInfo(ACCESS_TOKEN, accessToken)
+            saveInfo(ACCESS_TOKEN, refreshToken)
+            _authState.value = AuthState.Authenticated
+        }
+    }
+
+    suspend fun signup(emailInput: String, password: String)
+    {
+        if(emailInput.isEmpty() || password.isEmpty())
+        {
+            _authState.value = AuthState.Error(no_empty_fields.toString())
+            return
+        }
+
+        if (!isValidEmail(emailInput)) {
+            _authState.value = AuthState.Error(invalid_email.toString())
+            return
+        }
+
+        _authState.value = AuthState.Loading
+
+        val signUpResponse = auth.signup(AuthRequest(emailInput, password))
+        if(signUpResponse == null)
+        {
+            _authState.value = AuthState.Error("error")
+        }
+        else
+        {
+            email = signUpResponse.email
+            saveInfo(ACCESS_TOKEN, email)
+            _authState.value = AuthState.Authenticated
+        }
     }
 
     fun signout()

@@ -31,27 +31,27 @@ import com.moguishio.moguishio.ui.components.AlertDialogMenu
 import com.moguishio.moguishio.ui.components.CustomCard
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.theme.AppTypography
-import com.moguishio.moguishio.viewmodel.AuthState
-import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
+import com.moguishio.moguishio.viewmodel.authentication.AuthState
+
 import kotlin.system.exitProcess
 
 @Composable
 fun Principal(navController: NavHostController, context: Context,
-authViewModel: AuthViewModel
+authViewModel: ViewModelAuth
 ) {
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val meme = painterResource(R.drawable.foto)
 
     val authState = authViewModel.authState.observeAsState()
-    val email = remember { mutableStateOf(authViewModel.username) }
+    val email = remember { mutableStateOf(authViewModel.email) }
     val isLogged = remember { mutableStateOf(false) }
 
     var emailValorant = email.value
     // De nuevo, en el vídeo no es así, pero meh
     LaunchedEffect(authState.value) {
-        when(authState.value)
-        {
+        when (authState.value) {
             is AuthState.Authenticated -> isLogged.value = true
             is AuthState.Unauthenticated -> isLogged.value = false
             else -> Unit
@@ -60,6 +60,10 @@ authViewModel: AuthViewModel
 
     LaunchedEffect(email.value) {
         emailValorant = email.value
+    }
+
+    LaunchedEffect(Unit) {
+        authViewModel.refreshAndSaveToken()
     }
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
@@ -119,7 +123,7 @@ authViewModel: AuthViewModel
             if(isLogged.value)
             {
                 CustomCard(
-                    onClick = { authViewModel.signOut() },
+                    onClick = { authViewModel.signout() },
                     text = context.getString(R.string.log_out)
                 )
             }

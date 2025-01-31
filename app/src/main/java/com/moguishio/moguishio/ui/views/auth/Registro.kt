@@ -29,11 +29,14 @@ import com.moguishio.moguishio.ui.components.BotonVolver
 import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.components.PasswordInput
-import com.moguishio.moguishio.viewmodel.AuthState
-import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
+import com.moguishio.moguishio.viewmodel.authentication.AuthState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
-fun Registro(navController: NavHostController, context: Context, authViewModel: AuthViewModel)
+    fun Registro(navController: NavHostController, context: Context, authViewModel: ViewModelAuth)
 {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -73,7 +76,9 @@ fun Registro(navController: NavHostController, context: Context, authViewModel: 
         Spacer(modifier = Modifier.height(32.dp))
 
         CustomButton(onClick = {
-            authViewModel.loginOrSignUp(email, password, false)
+            CoroutineScope(Dispatchers.Main).launch {
+                authViewModel.signup(email, password)
+            }
         }, text = context.getString(R.string.signup_page))
         //CustomButton({}, text = context.getString(R.string.new_account))
 

@@ -53,9 +53,9 @@ import com.moguishio.moguishio.ui.views.SobreNosotros
 import com.moguishio.moguishio.ui.views.Tareas
 import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
-import com.moguishio.moguishio.viewmodel.AuthViewModel
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter") // Necesario porque da un error (ni idea de por qué)
@@ -65,8 +65,8 @@ fun NavigationDrawer(
     navController: NavHostController,
     context: Context,
     filmsViewModel: ViewModelPelicula,
-    authViewModel: AuthViewModel,
-    tareasViewmodel: TareasViewmodel
+    tareasViewmodel: TareasViewmodel,
+    viewModelAuth: ViewModelAuth
 ) {
     val items = listOf(
         NavigationItems(
@@ -166,7 +166,7 @@ fun NavigationDrawer(
                 Principal(
                     navController,
                     context,
-                    authViewModel
+                    viewModelAuth
                 )
                 selectedItemIndex = 0
             }
@@ -194,7 +194,7 @@ fun NavigationDrawer(
                 InicioSesion(
                     navController,
                     context,
-                    authViewModel
+                    viewModelAuth
                 )
                 selectedItemIndex = -1
             }
@@ -202,7 +202,7 @@ fun NavigationDrawer(
                 Registro(
                     navController,
                     context,
-                    authViewModel
+                    viewModelAuth
                 )
                 selectedItemIndex = -1
             }
