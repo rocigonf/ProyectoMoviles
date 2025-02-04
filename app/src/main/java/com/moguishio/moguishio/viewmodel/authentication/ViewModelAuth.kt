@@ -17,8 +17,6 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.moguishio.moguishio.AplicacionTareas
-import com.moguishio.moguishio.R.string.invalid_email
-import com.moguishio.moguishio.R.string.no_empty_fields
 import com.moguishio.moguishio.model.authentication.AuthRepository
 import com.moguishio.moguishio.model.authentication.AuthRequest
 import com.moguishio.moguishio.model.authentication.TokenRequest
@@ -132,24 +130,29 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
             saveInfo(REFRESH_TOKEN, refreshToken.value.toString())
             _authState.value = AuthState.Authenticated
         }
+        else
+        {
+            _authState.value = AuthState.Unauthenticated
+            signout()
+        }
     }
 
     suspend fun login(email: String, password: String)
     {
         if(email.isEmpty() || password.isEmpty())
         {
-            _authState.value = AuthState.Error(no_empty_fields.toString())
+            _authState.value = AuthState.Error("Sin campos nulos")
             return
         }
 
         if(password.length < 6)
         {
-            _authState.value = AuthState.Error(no_empty_fields.toString())
+            _authState.value = AuthState.Error("Password")
             return
         }
 
         if (!isValidEmail(email)) {
-            _authState.value = AuthState.Error(invalid_email.toString())
+            _authState.value = AuthState.Error("Mail incorrecto")
             return
         }
 
@@ -158,7 +161,7 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
         val loginResponse = auth.login(AuthRequest(email, password))
         if(loginResponse == null)
         {
-            _authState.value = AuthState.Error("error")
+            _authState.value = AuthState.Error("Datos incorrectos")
         }
         else
         {
@@ -178,18 +181,18 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
     {
         if(emailInput.isEmpty() || password.isEmpty())
         {
-            _authState.value = AuthState.Error(no_empty_fields.toString())
+            _authState.value = AuthState.Error("Sin campos nulos")
             return
         }
 
         if(password.length < 6)
         {
-            _authState.value = AuthState.Error(no_empty_fields.toString())
+            _authState.value = AuthState.Error("Password")
             return
         }
 
         if (!isValidEmail(emailInput)) {
-            _authState.value = AuthState.Error(invalid_email.toString())
+            _authState.value = AuthState.Error("Mail incorrecto")
             return
         }
 
@@ -198,7 +201,7 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
         val signUpResponse = auth.signup(AuthRequest(emailInput, password))
         if(signUpResponse == null)
         {
-            _authState.value = AuthState.Error("error")
+            _authState.value = AuthState.Error("No se ha podido registrar")
         }
         else
         {

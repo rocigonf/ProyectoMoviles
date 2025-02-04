@@ -52,4 +52,8 @@
     <string name="fav_title">Favourite films</string>
     <string name="modify">Modify</string>
     <string name="delete">Delete</string>
+    <string name="login_error">Incorrect data</string>
+    <string name="signup_error">We could not register you</string>
+    <string name="incorrect_password">Invalid password</string>
+
 </resources>

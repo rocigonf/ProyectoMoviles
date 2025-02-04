@@ -1,18 +1,33 @@
 package com.moguishio.BackendPersonalizado.services
 
-//import io.jsonwebtoken.Claims
-//import io.jsonwebtoken.Jwts
-//import io.jsonwebtoken.security.Keys
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.security.Keys
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
+import java.security.Key
 import java.util.*
+import javax.crypto.SecretKey
 
 @Service
 class TokenService {
+    private val secretKey = createKey()
 
-    private val secretKey = Jwts.SIG.HS512.key().build()
+    final fun createKey(): SecretKey? {
+        val key = System.getenv("JwtKey")
+
+        // Si no existe, general una aleatoria
+        if(key == null)
+        {
+            return Jwts.SIG.HS512.key().build()
+        }
+        else
+        {
+            return Keys.hmacShaKeyFor(
+                key.toByteArray()
+            )
+        }
+    }
 
     fun generate(
         userDetails: UserDetails,
@@ -26,7 +41,7 @@ class TokenService {
             .expiration(expirationDate)
             .add(additionalClaims)
             .and()
-            .signWith(secretKey)
+            .signWith(secretKey as Key)
             .compact()
 
     fun isValid(token: String, userDetails: UserDetails): Boolean {

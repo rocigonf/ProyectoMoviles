@@ -29,6 +29,7 @@ import com.moguishio.moguishio.ui.components.BotonVolver
 import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.components.PasswordInput
+import com.moguishio.moguishio.ui.views.dialogs.ToastMessage
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 import com.moguishio.moguishio.viewmodel.authentication.AuthState
 import kotlinx.coroutines.CoroutineScope
@@ -41,13 +42,14 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val authState = authViewModel.authState.observeAsState()
+    val toastMessage : ToastMessage = ToastMessage(context)
 
     // En función de lo que pase, te manda a un sitio u a otro
     LaunchedEffect(authState.value) {
         when(authState.value)
         {
             is AuthState.Authenticated -> navController.navigate("Principal")
-            is AuthState.Error -> Toast.makeText(context, (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT).show()
+            is AuthState.Error -> Toast.makeText(context, toastMessage.getStringResourceId((authState.value as AuthState.Error).message), Toast.LENGTH_SHORT).show()
             else -> Unit
         }
     }
