@@ -38,7 +38,7 @@
     <string name="go_to_login">Go to Login</string>
     <string name="new_account">Register if you don\'t have an account</string>
     <string name="error">Something went wrong :(</string>
-    <string name="no_empty_fields">There must not be empty fields</string>
+    <string name="no_empty_fields">There must not be empty or invalid fields</string>
     <string name="log_out">Log out</string>
     <string name="films">Films</string>
     <string name="score">"Score: "</string>

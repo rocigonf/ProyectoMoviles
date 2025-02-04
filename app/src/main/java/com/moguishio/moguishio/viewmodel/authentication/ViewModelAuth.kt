@@ -1,6 +1,8 @@
 package com.moguishio.moguishio.viewmodel.authentication
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.util.Patterns
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -10,48 +12,92 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.moguishio.moguishio.AplicacionTareas
 import com.moguishio.moguishio.R.string.invalid_email
 import com.moguishio.moguishio.R.string.no_empty_fields
-import com.moguishio.moguishio.model.authentication.AuthClient
+import com.moguishio.moguishio.model.authentication.AuthRepository
+import com.moguishio.moguishio.model.authentication.AuthRequest
+import com.moguishio.moguishio.model.authentication.TokenRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 // ESTA CLASE ES UNA MEZCLA ENTRE "AuthViewModel" Y "ConfigurationDataStore"
 // Da una advertencia rara 🐌🐌
-class ViewModelAuth(private val context: Context, private val auth : AuthClient) : ViewModel() {
+@Suppress("SameParameterValue")
+class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Context) : ViewModel() {
+    private val auth : AuthRepository = AuthRepository()
+
     private val _authState = MutableLiveData<AuthState>()
     val authState : LiveData<AuthState> = _authState
 
-    var email = ""
-    var accessToken = ""
-    var refreshToken = ""
+    private val _accessToken = MutableLiveData<String>()
+    private var accessToken : LiveData<String> = _accessToken
+
+    // HABRÁ QUE CASTEAR EL ID A INT (guardarlo en DataStore como Int falla a veces)
+    private val _id = MutableLiveData<String>()
+    var id : LiveData<String> = _id
+
+    private val _refreshToken = MutableLiveData<String>()
+    var refreshToken : LiveData<String> = _refreshToken
+
+    private val _email = MutableLiveData<String>()
+    var email : LiveData<String> = _email
 
     companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[APPLICATION_KEY] as AplicacionTareas)
+                ViewModelAuth(application.container.context)
+            }
+        }
+
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("dataStoreAuth")
 
         val EMAIL = stringPreferencesKey("email")
         val ACCESS_TOKEN = stringPreferencesKey("access_token")
         val REFRESH_TOKEN = stringPreferencesKey("refresh_token")
+        val ID = stringPreferencesKey("ID_USER")
     }
 
-    fun <T> getInfo(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
+    private fun<T> getInfo(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
         return context.dataStore.data
             .map { preferences ->
                 preferences[key] ?: defaultValue
             }
     }
 
-    suspend fun <T> saveInfo(key: Preferences.Key<T>, value: T) {
+    private suspend fun <T> saveInfo(key: Preferences.Key<T>, value: T) {
         context.dataStore.edit { preferences ->
             preferences[key] = value
         }
     }
 
-    // Quizás haya que cambiar la forma en la que se obtienen los datos
     init {
-        email = getInfo(EMAIL, "").toString()
-        accessToken = getInfo(ACCESS_TOKEN, "").toString()
-        refreshToken = getInfo(REFRESH_TOKEN, "").toString()
+        getData()
+    }
+
+    // Hago 3 corrutinas porque falla con una sola (solo se ejecuta la primera cosa)
+    private fun getData()
+    {
+        CoroutineScope(Dispatchers.Main).launch {
+            _refreshToken.value = getInfo(REFRESH_TOKEN, "").collect { _refreshToken.value = it }.toString()
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            _accessToken.value = getInfo(ACCESS_TOKEN, "").collect { _accessToken.value = it }.toString()
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            _email.value = getInfo(EMAIL, "").collect { _email.value = it }.toString()
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            _id.value = getInfo(ID, "").collect { _id.value = it }.toString()
+        }
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -59,19 +105,44 @@ class ViewModelAuth(private val context: Context, private val auth : AuthClient)
     }
 
     // A PARTIR DE AQUÍ FALTA LLAMAR A LOS REPOSITORIOS Y LOS SERVICIOS PARA HACER LA PETICIÓN Y PROCESAR LA RESPUESTA
-    suspend fun getUserDataAndSave(email: String)
+    private suspend fun getUserDataAndSave(emailInput: String)
     {
-        saveInfo(EMAIL, email)
+        val token = "Bearer ${accessToken.value}"
+        val userData = auth.getUserData(token, emailInput)
+        if(userData != null) {
+            Log.e("EMAIL", userData.email)
+            _id.value = userData.id.toString()
+            _email.value = userData.email
+            saveInfo(EMAIL, userData.email)
+            saveInfo(ID, userData.id.toString())
+        }
     }
 
     suspend fun refreshAndSaveToken()
     {
+        Log.e("ACCESS", accessToken.value.toString())
+        //val token = "Bearer ${accessToken.value.toString()}"
+        Log.e("REFRESH", refreshToken.value.toString())
+        val tokenResponse = auth.refreshToken(TokenRequest(refreshToken.value.toString()))
+        if(tokenResponse != null)
+        {
+            Log.e("RESULT", "Se ha refrescado")
+            _accessToken.value = tokenResponse.accessToken
+            saveInfo(ACCESS_TOKEN, tokenResponse.accessToken)
+            saveInfo(REFRESH_TOKEN, refreshToken.value.toString())
+            _authState.value = AuthState.Authenticated
+        }
     }
 
-    fun login(email: String, password: String)
+    suspend fun login(email: String, password: String)
     {
-
         if(email.isEmpty() || password.isEmpty())
+        {
+            _authState.value = AuthState.Error(no_empty_fields.toString())
+            return
+        }
+
+        if(password.length < 6)
         {
             _authState.value = AuthState.Error(no_empty_fields.toString())
             return
@@ -83,31 +154,73 @@ class ViewModelAuth(private val context: Context, private val auth : AuthClient)
         }
 
         _authState.value = AuthState.Loading
+
+        val loginResponse = auth.login(AuthRequest(email, password))
+        if(loginResponse == null)
+        {
+            _authState.value = AuthState.Error("error")
+        }
+        else
+        {
+            _accessToken.value = loginResponse.accessToken
+            _refreshToken.value = loginResponse.refreshToken
+
+            saveInfo(REFRESH_TOKEN, loginResponse.refreshToken)
+            saveInfo(ACCESS_TOKEN, loginResponse.accessToken)
+
+            getUserDataAndSave(email) // Después de autenticarme pidos los datos
+
+            _authState.value = AuthState.Authenticated
+        }
     }
 
-    fun signup(email: String, password: String)
+    suspend fun signup(emailInput: String, password: String)
     {
-        if(email.isEmpty() || password.isEmpty())
+        if(emailInput.isEmpty() || password.isEmpty())
         {
             _authState.value = AuthState.Error(no_empty_fields.toString())
             return
         }
 
-        if (!isValidEmail(email)) {
+        if(password.length < 6)
+        {
+            _authState.value = AuthState.Error(no_empty_fields.toString())
+            return
+        }
+
+        if (!isValidEmail(emailInput)) {
             _authState.value = AuthState.Error(invalid_email.toString())
             return
         }
 
         _authState.value = AuthState.Loading
+
+        val signUpResponse = auth.signup(AuthRequest(emailInput, password))
+        if(signUpResponse == null)
+        {
+            _authState.value = AuthState.Error("error")
+        }
+        else
+        {
+            _email.value = signUpResponse.email
+            saveInfo(EMAIL, signUpResponse.email)
+            _authState.value = AuthState.Authenticated
+        }
     }
 
-    fun signout()
+    suspend fun signout()
     {
         _authState.value = AuthState.Unauthenticated
 
-        email = ""
-        accessToken = ""
-        refreshToken = ""
+        _email.value = ""
+        _accessToken.value = ""
+        _refreshToken.value = ""
+        _id.value = "0"
+
+        saveInfo(EMAIL, "")
+        saveInfo(ACCESS_TOKEN, "")
+        saveInfo(REFRESH_TOKEN, "")
+        saveInfo(ID, "0")
     }
 }
 

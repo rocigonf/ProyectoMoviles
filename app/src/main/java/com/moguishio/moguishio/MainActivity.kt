@@ -16,9 +16,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.moguishio.moguishio.ui.theme.AppTheme
 import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
-import com.moguishio.moguishio.viewmodel.AuthViewModel
+//import com.moguishio.moguishio.viewmodel.AuthViewModel
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val context = LocalContext.current
                 val filmsViewModel: ViewModelPelicula by viewModels()
-                val authViewModel: AuthViewModel by viewModels()
+                //val authViewModel: AuthViewModel by viewModels()
+                val viewmodelAuthDefinitivo : ViewModelAuth = viewModel(factory = ViewModelAuth.Factory)
                 val tareasViewmodel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
                 //val daoMisPeliculas: DaoMisPeliculas
                 //val filmRepository: RepositorioMisPeliculas = RepositorioMisPeliculas(daoMisPeliculas = DaoMisPeliculas) //MAL MAL TODO MAL HORRIBLE HORROROSO
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
-                    NavigationDrawer(navController, context, filmsViewModel, authViewModel, tareasViewmodel)
+                    NavigationDrawer(navController, context, filmsViewModel, tareasViewmodel, viewmodelAuthDefinitivo)
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.moguishio.moguishio.ui.views
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -31,27 +32,39 @@ import com.moguishio.moguishio.ui.components.AlertDialogMenu
 import com.moguishio.moguishio.ui.components.CustomCard
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.theme.AppTypography
-import com.moguishio.moguishio.viewmodel.AuthState
-import com.moguishio.moguishio.viewmodel.AuthViewModel
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
+import com.moguishio.moguishio.viewmodel.authentication.AuthState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
 @Composable
 fun Principal(navController: NavHostController, context: Context,
-authViewModel: AuthViewModel
+authViewModel: ViewModelAuth
 ) {
     val openAlertDialog = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val meme = painterResource(R.drawable.foto)
 
     val authState = authViewModel.authState.observeAsState()
-    val email = remember { mutableStateOf(authViewModel.username) }
+    val email = authViewModel.email.observeAsState()
+    val token = authViewModel.refreshToken.observeAsState()
     val isLogged = remember { mutableStateOf(false) }
 
+    LaunchedEffect(token.value) {
+        if(token.value != null && token.value != "") {
+            Log.e("E1", "refrescando")
+            authViewModel.refreshAndSaveToken()
+        }
+    }
+
     var emailValorant = email.value
+
     // De nuevo, en el vídeo no es así, pero meh
     LaunchedEffect(authState.value) {
-        when(authState.value)
-        {
+        //authViewModel.refreshAndSaveToken()
+        when (authState.value) {
             is AuthState.Authenticated -> isLogged.value = true
             is AuthState.Unauthenticated -> isLogged.value = false
             else -> Unit
@@ -119,7 +132,7 @@ authViewModel: AuthViewModel
             if(isLogged.value)
             {
                 CustomCard(
-                    onClick = { authViewModel.signOut() },
+                    onClick = { CoroutineScope(Dispatchers.Main).launch { authViewModel.signout() } },
                     text = context.getString(R.string.log_out)
                 )
             }
