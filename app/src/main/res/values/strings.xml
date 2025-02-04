@@ -70,7 +70,7 @@
     <string name="no_empty_fields">No puede haber campos vacíos o inválidos</string>
     <string name="invalid_email">Formato de email inválido :(</string>
     <string name="log_out">Cerrar sesión</string>
-    <string name="hello">Hola, </string>
+    <string name="hello">Hola </string>
     <string name="login_error">Datos incorrectos</string>
     <string name="signup_error">No pudimos registrarte</string>
     <string name="incorrect_password">Contraseña no válida</string>

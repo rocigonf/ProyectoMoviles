@@ -88,10 +88,10 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
             _refreshToken.value = getInfo(REFRESH_TOKEN, "").collect { _refreshToken.value = it }.toString()
         }
         CoroutineScope(Dispatchers.Main).launch {
-            _accessToken.value = getInfo(ACCESS_TOKEN, "").collect { _accessToken.value = it }.toString()
+            _email.value = getInfo(EMAIL, "").collect { _email.value = it }.toString()
         }
         CoroutineScope(Dispatchers.Main).launch {
-            _email.value = getInfo(EMAIL, "").collect { _email.value = it }.toString()
+            _accessToken.value = getInfo(ACCESS_TOKEN, "").collect { _accessToken.value = it }.toString()
         }
         CoroutineScope(Dispatchers.Main).launch {
             _id.value = getInfo(ID, "").collect { _id.value = it }.toString()
@@ -107,6 +107,7 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
     {
         val token = "Bearer ${accessToken.value}"
         val userData = auth.getUserData(token, emailInput)
+        //Log.e("EEEE", "MORTADELA")
         if(userData != null) {
             Log.e("EMAIL", userData.email)
             _id.value = userData.id.toString()
@@ -139,6 +140,8 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
 
     suspend fun login(email: String, password: String)
     {
+        //_email.value = email
+
         if(email.isEmpty() || password.isEmpty())
         {
             _authState.value = AuthState.Error("Sin campos nulos")
@@ -162,6 +165,7 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
         if(loginResponse == null)
         {
             _authState.value = AuthState.Error("Datos incorrectos")
+            _email.value = ""
         }
         else
         {
@@ -171,7 +175,10 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
             saveInfo(REFRESH_TOKEN, loginResponse.refreshToken)
             saveInfo(ACCESS_TOKEN, loginResponse.accessToken)
 
-            getUserDataAndSave(email) // Después de autenticarme pidos los datos
+            _email.value = email
+            saveInfo(EMAIL, email)
+
+            getUserDataAndSave(email)
 
             _authState.value = AuthState.Authenticated
         }
@@ -206,7 +213,9 @@ class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Contex
         else
         {
             _email.value = signUpResponse.email
+            _id.value = signUpResponse.id.toString()
             saveInfo(EMAIL, signUpResponse.email)
+            saveInfo(ID, signUpResponse.id.toString())
             _authState.value = AuthState.Authenticated
         }
     }

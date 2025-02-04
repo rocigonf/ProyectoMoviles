@@ -113,15 +113,15 @@ authViewModel: ViewModelAuth
             )
             Spacer(modifier = Modifier.height(20.dp))
 
-            if(emailValorant != "")
-            {
+            //if(emailValorant != "")
+            //{
                 EstablecerTexto(
-                    text = context.getString(R.string.hello) + " " + email.value,
+                    text = context.getString(R.string.hello) + " " + emailValorant,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-            }
+            //}
 
             // Esto es una función custom porque no soy el dev de Yandere :( (la de copiar y pegar código repetido no va conmigo)
             CustomCard(
