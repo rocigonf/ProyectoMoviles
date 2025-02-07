@@ -29,7 +29,8 @@ import kotlinx.coroutines.launch
 // ESTA CLASE ES UNA MEZCLA ENTRE "AuthViewModel" Y "ConfigurationDataStore"
 // Da una advertencia rara 🐌🐌
 @Suppress("SameParameterValue")
-class ViewModelAuth(@SuppressLint("StaticFieldLeak") private val context: Context) : ViewModel() {
+@SuppressLint("StaticFieldLeak")
+class ViewModelAuth(private val context: Context) : ViewModel() {
     private val auth : AuthRepository = AuthRepository()
 
     private val _authState = MutableLiveData<AuthState>()
