@@ -37,7 +37,7 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
     val authState : LiveData<AuthState> = _authState
 
     private val _accessToken = MutableLiveData<String>()
-    private var accessToken : LiveData<String> = _accessToken
+    var accessToken : LiveData<String> = _accessToken
 
     // HABRÁ QUE CASTEAR EL ID A INT (guardarlo en DataStore como Int falla a veces)
     private val _id = MutableLiveData<String>()
@@ -65,14 +65,14 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
         val ID = stringPreferencesKey("ID_USER")
     }
 
-    private fun<T> getInfo(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
+    fun<T> getInfo(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
         return context.dataStore.data
             .map { preferences ->
                 preferences[key] ?: defaultValue
             }
     }
 
-    private suspend fun <T> saveInfo(key: Preferences.Key<T>, value: T) {
+    suspend fun <T> saveInfo(key: Preferences.Key<T>, value: T) {
         context.dataStore.edit { preferences ->
             preferences[key] = value
         }

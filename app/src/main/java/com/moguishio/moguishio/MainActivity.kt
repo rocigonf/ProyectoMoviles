@@ -19,6 +19,7 @@ import com.moguishio.moguishio.ui.views.navigationdrawer.NavigationDrawer
 //import com.moguishio.moguishio.viewmodel.AuthViewModel
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
+import com.moguishio.moguishio.viewmodel.activities.ViewModelActivities
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 
 class MainActivity : ComponentActivity() {
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
                 val filmsViewModel: ViewModelPelicula by viewModels()
                 //val authViewModel: AuthViewModel by viewModels()
                 val viewmodelAuthDefinitivo : ViewModelAuth = viewModel(factory = ViewModelAuth.Factory)
+                val viewmodelActivities : ViewModelActivities = viewModel(factory = ViewModelActivities.Factory)
                 val tareasViewmodel: TareasViewmodel = viewModel(factory = TareasViewmodel.Factory)
                 //val daoMisPeliculas: DaoMisPeliculas
                 //val filmRepository: RepositorioMisPeliculas = RepositorioMisPeliculas(daoMisPeliculas = DaoMisPeliculas) //MAL MAL TODO MAL HORRIBLE HORROROSO
