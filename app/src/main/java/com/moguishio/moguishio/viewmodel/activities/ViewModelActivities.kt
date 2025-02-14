@@ -16,6 +16,9 @@ import com.moguishio.moguishio.model.activities.ActivityResponse
 import com.moguishio.moguishio.model.activities.ParticipationRequest
 import com.moguishio.moguishio.model.activities.ParticipationResponse
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @SuppressLint("StaticFieldLeak")
 class ViewModelActivities(private val context: Context) : ViewModel() {
@@ -60,5 +63,9 @@ class ViewModelActivities(private val context: Context) : ViewModel() {
                 ViewModelActivities(application.container.context)
             }
         }
+    }
+
+    init {
+        ViewModelAuth(context).getData()
     }
 }

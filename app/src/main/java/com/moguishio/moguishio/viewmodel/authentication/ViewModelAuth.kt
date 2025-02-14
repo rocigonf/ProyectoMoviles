@@ -83,7 +83,7 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
     }
 
     // Hago 3 corrutinas porque falla con una sola (solo se ejecuta la primera cosa)
-    private fun getData()
+    fun getData()
     {
         CoroutineScope(Dispatchers.Main).launch {
             _refreshToken.value = getInfo(REFRESH_TOKEN, "").collect { _refreshToken.value = it }.toString()
