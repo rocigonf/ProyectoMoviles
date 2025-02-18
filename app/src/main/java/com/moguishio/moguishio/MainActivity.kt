@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                 )
                 {
-                    NavigationDrawer(navController, context, filmsViewModel, tareasViewmodel, viewmodelAuthDefinitivo)
+                    NavigationDrawer(navController, context, filmsViewModel, tareasViewmodel, viewmodelAuthDefinitivo, viewmodelActivities)
                 }
             }
         }

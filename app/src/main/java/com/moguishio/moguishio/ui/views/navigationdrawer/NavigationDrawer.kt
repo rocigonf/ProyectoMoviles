@@ -11,12 +11,14 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Badge
@@ -45,6 +47,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.moguishio.moguishio.R
 import com.moguishio.moguishio.model.Navigation
+import com.moguishio.moguishio.ui.views.Actividades
 import com.moguishio.moguishio.ui.views.ConfigPage
 import com.moguishio.moguishio.ui.views.Films
 import com.moguishio.moguishio.ui.views.MainPage
@@ -55,6 +58,7 @@ import com.moguishio.moguishio.ui.views.auth.InicioSesion
 import com.moguishio.moguishio.ui.views.auth.Registro
 import com.moguishio.moguishio.viewmodel.TareasViewmodel
 import com.moguishio.moguishio.viewmodel.ViewModelPelicula
+import com.moguishio.moguishio.viewmodel.activities.ViewModelActivities
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 import kotlinx.coroutines.launch
 
@@ -66,7 +70,8 @@ fun NavigationDrawer(
     context: Context,
     filmsViewModel: ViewModelPelicula,
     tareasViewmodel: TareasViewmodel,
-    viewModelAuth: ViewModelAuth
+    viewModelAuth: ViewModelAuth,
+    viewModelActivities: ViewModelActivities
 ) {
     val items = listOf(
         NavigationItems(
@@ -104,6 +109,12 @@ fun NavigationDrawer(
             selectedIcon = Icons.Filled.Info,
             unselectedIcon = Icons.Outlined.Info,
             route = "AcercaDe"
+        ),
+        NavigationItems(
+            title = context.getString(R.string.activities),
+            selectedIcon = Icons.Filled.Place,
+            unselectedIcon = Icons.Outlined.Place,
+            route = "Actividades"
         )
     )
 
@@ -189,6 +200,10 @@ fun NavigationDrawer(
             composable(Navigation.Tareas.route) {
                 Tareas(context, tareasViewmodel)
                 selectedItemIndex = 2
+            }
+            composable(Navigation.Actividades.route) {
+                Actividades(navController, context, viewModelActivities, viewModelAuth)
+                selectedItemIndex = 6
             }
             composable(Navigation.InicioSesion.route) {
                 InicioSesion(

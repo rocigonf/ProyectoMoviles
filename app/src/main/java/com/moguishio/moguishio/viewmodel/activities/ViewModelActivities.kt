@@ -3,6 +3,8 @@ package com.moguishio.moguishio.viewmodel.activities
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.util.Log
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,15 +18,12 @@ import com.moguishio.moguishio.model.activities.ActivityResponse
 import com.moguishio.moguishio.model.activities.ParticipationRequest
 import com.moguishio.moguishio.model.activities.ParticipationResponse
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @SuppressLint("StaticFieldLeak")
 class ViewModelActivities(private val context: Context) : ViewModel() {
     private val activity : ActivitiesRepository = ActivitiesRepository()
 
-    private val token = "Bearer ${ViewModelAuth(context).accessToken}"
+    private var token = ""
     private val id = "Bearer ${ViewModelAuth(context).id}"
 
     private val _activities = MutableLiveData<List<ActivityResponse>>()
@@ -37,8 +36,12 @@ class ViewModelActivities(private val context: Context) : ViewModel() {
     val participations : LiveData<List<ParticipationResponse>> = _participations
 
     suspend fun getAllActivities() {
+        ViewModelAuth(context).getData()
+        token = "Bearer ${ViewModelAuth(context).accessToken.value}"
+        Log.e("TOKEN", token)
         val allActivities = activity.findAll(token)
         _activities.value = allActivities!!
+        Log.e("ACTIVIDADES", activities.value.toString())
     }
 
     suspend fun getUserActivities(userId: Int){
@@ -67,5 +70,6 @@ class ViewModelActivities(private val context: Context) : ViewModel() {
 
     init {
         ViewModelAuth(context).getData()
+        token = "Bearer ${ViewModelAuth(context).accessToken.value}"
     }
 }

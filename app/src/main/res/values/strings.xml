@@ -83,4 +83,6 @@
     <!-- Modificar / Borrar -->
     <string name="modify">Modificar</string>
     <string name="delete">Borrar</string>
+
+    <string name="activities">Actividades</string>
 </resources>
