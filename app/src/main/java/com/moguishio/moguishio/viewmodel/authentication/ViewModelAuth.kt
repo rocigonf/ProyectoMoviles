@@ -57,7 +57,7 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
             }
         }
 
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("dataStoreAuth")
+        val Context.dataStoreAuth: DataStore<Preferences> by preferencesDataStore("dataStoreAuth")
 
         val EMAIL = stringPreferencesKey("email")
         val ACCESS_TOKEN = stringPreferencesKey("access_token")
@@ -66,14 +66,14 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
     }
 
     fun<T> getInfo(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
-        return context.dataStore.data
+        return context.dataStoreAuth.data
             .map { preferences ->
                 preferences[key] ?: defaultValue
             }
     }
 
     suspend fun <T> saveInfo(key: Preferences.Key<T>, value: T) {
-        context.dataStore.edit { preferences ->
+        context.dataStoreAuth.edit { preferences ->
             preferences[key] = value
         }
     }

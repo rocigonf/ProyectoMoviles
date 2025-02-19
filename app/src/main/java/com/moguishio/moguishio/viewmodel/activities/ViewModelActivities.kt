@@ -4,23 +4,29 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.moguishio.moguishio.AplicacionTareas
 import com.moguishio.moguishio.model.activities.ActivitiesRepository
 import com.moguishio.moguishio.model.activities.ActivityResponse
-import com.moguishio.moguishio.model.activities.ParticipationRequest
 import com.moguishio.moguishio.model.activities.ParticipationResponse
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
-import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth.Companion
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth.Companion.dataStoreAuth
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth.Companion.ACCESS_TOKEN
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth.Companion.REFRESH_TOKEN
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @SuppressLint("StaticFieldLeak")
@@ -39,13 +45,7 @@ class ViewModelActivities(private val context: Context, private val authViewMode
     private val _participations = MutableLiveData<List<ParticipationResponse>>()
     val participations: LiveData<List<ParticipationResponse>> = _participations
 
-    //val ACCESS_TOKEN = stringPreferencesKey("access_token")
-
     suspend fun getAllActivities() {
-        CoroutineScope(Dispatchers.Main).launch {
-            _token.value = ViewModelAuth(context).getInfo(ViewModelAuth.ACCESS_TOKEN, "")
-                .collect { _token.value = it }.toString()
-        }
 
         val currentToken = _token.value
         Log.e("TOKEN1", currentToken.toString())
@@ -82,9 +82,25 @@ class ViewModelActivities(private val context: Context, private val authViewMode
     }
 
     init {
-        authViewModel.getData()
-        /*authViewModel.accessToken.observeForever { accessToken ->
-            _token.value = accessToken
-        }*/
+        loadCredentials()
+    }
+
+    fun<T> getInfo(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
+        return context.dataStoreAuth.data
+            .map { preferences ->
+                preferences[key] ?: defaultValue
+            }
+    }
+
+    fun loadCredentials(){
+        viewModelScope.launch {
+            /*_token.value = context.dataStoreAuth.data
+                .map { preferences ->
+                    preferences[REFRESH_TOKEN] ?: ""
+                }.first()*/
+
+            _token.value = getInfo(ACCESS_TOKEN, "").collect { _token.value = it }.toString()
+            Log.e("token", token.value.toString())
+        }
     }
 }

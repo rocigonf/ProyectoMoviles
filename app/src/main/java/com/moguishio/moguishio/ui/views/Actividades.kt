@@ -1,6 +1,7 @@
 package com.moguishio.moguishio.ui.views
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,30 +59,29 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Actividades(navController: NavHostController, context: Context, viewModelActivities: ViewModelActivities, authViewModel: ViewModelAuth){
-    val authState = authViewModel.authState.observeAsState()
+fun Actividades(navController: NavHostController, context: Context, viewModelActivities: ViewModelActivities){
+    //val authState = authViewModel.authState.observeAsState()
 
-    LaunchedEffect(authState.value) {
-        when(authState.value)
-        {
-            is AuthState.Authenticated -> viewModelActivities.getAllActivities()
-            is AuthState.Error -> navController.navigate("Principal")
-            is AuthState.Unauthenticated -> navController.navigate("Principal")
-            else -> {}
-        }
-    }
+    //LaunchedEffect(authState.value) {
+    //    when(authState.value)
+    //    {
+    //        is AuthState.Error -> navController.navigate("Principal")
+    //        is AuthState.Unauthenticated -> navController.navigate("Principal")
+    //        else -> {}
+    //    }
+    //}
 
     val token = viewModelActivities.token.observeAsState("")
     LaunchedEffect(token.value) {
         if (token.value.isNotEmpty()) {
-            viewModelActivities.getAllActivities()
-        }
-        else if(authState.value == AuthState.Authenticated)
-        {
+            Log.e("rosiogamba", "S")
             viewModelActivities.getAllActivities()
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModelActivities.loadCredentials()
+    }
 
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { TabItem.entries.size })
