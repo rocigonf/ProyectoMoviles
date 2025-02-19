@@ -60,18 +60,28 @@ import kotlinx.coroutines.launch
 @Composable
 fun Actividades(navController: NavHostController, context: Context, viewModelActivities: ViewModelActivities, authViewModel: ViewModelAuth){
     val authState = authViewModel.authState.observeAsState()
-    val accessToken =
 
     LaunchedEffect(authState.value) {
         when(authState.value)
         {
-            is AuthState.Authenticated -> {
-                viewModelActivities.getAllActivities()
-            }
+            is AuthState.Authenticated -> viewModelActivities.getAllActivities()
             is AuthState.Error -> navController.navigate("Principal")
-            else -> navController.navigate("Principal")
+            is AuthState.Unauthenticated -> navController.navigate("Principal")
+            else -> {}
         }
     }
+
+    val token = viewModelActivities.token.observeAsState("")
+    LaunchedEffect(token.value) {
+        if (token.value.isNotEmpty()) {
+            viewModelActivities.getAllActivities()
+        }
+        else if(authState.value == AuthState.Authenticated)
+        {
+            viewModelActivities.getAllActivities()
+        }
+    }
+
 
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { TabItem.entries.size })
