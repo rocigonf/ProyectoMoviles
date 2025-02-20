@@ -55,6 +55,8 @@ class ViewModelActivities(private val context: Context, private val authViewMode
 
         val allActivities = activity.findAll("Bearer $currentToken")
         _activities.value = allActivities ?: emptyList()
+
+        Log.e("ACTIVIDADES", "Obtenidas todas las actividades")
     }
 
     /*suspend fun getUserActivities(userId: Int) {
@@ -94,12 +96,12 @@ class ViewModelActivities(private val context: Context, private val authViewMode
 
     fun loadCredentials(){
         viewModelScope.launch {
-            /*_token.value = context.dataStoreAuth.data
+            _token.value = context.dataStoreAuth.data
                 .map { preferences ->
-                    preferences[REFRESH_TOKEN] ?: ""
-                }.first()*/
+                    preferences[ACCESS_TOKEN] ?: ""
+                }.first()
 
-            _token.value = getInfo(ACCESS_TOKEN, "").collect { _token.value = it }.toString()
+            //_token.value = getInfo(ACCESS_TOKEN, "").collect { _token.value = it }.toString()
             Log.e("token", token.value.toString())
         }
     }

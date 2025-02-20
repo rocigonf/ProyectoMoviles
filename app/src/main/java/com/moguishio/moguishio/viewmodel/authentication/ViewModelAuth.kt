@@ -118,19 +118,18 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
         }
     }
 
-    suspend fun refreshAndSaveToken()
-    {
-        Log.e("ACCESS", accessToken.value.toString())
+    suspend fun refreshAndSaveToken() {
         //val token = "Bearer ${accessToken.value.toString()}"
         Log.e("REFRESH", refreshToken.value.toString())
         val tokenResponse = auth.refreshToken(TokenRequest(refreshToken.value.toString()))
         if(tokenResponse != null)
         {
             Log.e("RESULT", "Se ha refrescado")
-            _accessToken.value = tokenResponse.accessToken
-            saveInfo(ACCESS_TOKEN, tokenResponse.accessToken)
+            _accessToken.value = tokenResponse.token
+            saveInfo(ACCESS_TOKEN, tokenResponse.token)
             saveInfo(REFRESH_TOKEN, refreshToken.value.toString())
             _authState.value = AuthState.Authenticated
+            Log.e("ACCESS", tokenResponse.token)
         }
         else
         {
