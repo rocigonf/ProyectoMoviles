@@ -60,4 +60,7 @@
     <string name="activity_joined">You joined an activity</string>
     <string name="activity_deleted">You unrolled from an activity</string>
     <string name="activities_null">You do not have any participation</string>
+    <string name="activity_name">Name: </string>
+    <string name="activity_description">Description: </string>
+    <string name="activity_place">Place: </string>
 </resources>

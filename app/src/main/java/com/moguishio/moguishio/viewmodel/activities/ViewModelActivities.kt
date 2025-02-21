@@ -80,7 +80,7 @@ class ViewModelActivities(private val context: Context) : ViewModel() {
         val currentToken = _token.value!!
         val currentId = _id.value!!.toInt()
         activity.deleteById(currentToken, currentId, activityId)
-        getUserActivities()
+        //getUserActivities()
     }
 
     companion object {

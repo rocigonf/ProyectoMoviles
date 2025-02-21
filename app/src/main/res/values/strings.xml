@@ -89,4 +89,9 @@
     <string name="activity_joined">Te has apuntado a una actividad</string>
     <string name="activity_deleted">Te has desapuntado de una actividad</string>
     <string name="activities_null">No tienes ninguna participación</string>
+
+    <string name="activity_name">Nombre: </string>
+    <string name="activity_description">Descripción: </string>
+    <string name="activity_place">Lugar: </string>
+
 </resources>

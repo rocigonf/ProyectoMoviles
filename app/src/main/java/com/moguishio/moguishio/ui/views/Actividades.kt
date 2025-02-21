@@ -3,12 +3,9 @@ package com.moguishio.moguishio.ui.views
 import android.content.Context
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -58,7 +55,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -70,7 +66,9 @@ import com.moguishio.moguishio.ui.theme.AppTypography
 import com.moguishio.moguishio.viewmodel.activities.ViewModelActivities
 import com.moguishio.moguishio.viewmodel.authentication.AuthState
 import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+//import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @ExperimentalMaterial3Api
@@ -226,7 +224,7 @@ fun ShowUserActivities(userActivities: List<ActivityResponse>, snackbarHostState
 @Composable
 fun UserActivitiesList(userActivities: List<ActivityResponse>, snackbarHostState: SnackbarHostState, viewModelActivities: ViewModelActivities, context: Context) {
     LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
-        itemsIndexed(items = userActivities) { _, activity ->
+        itemsIndexed(items = userActivities, key = { index, _ -> index } ) { _, activity ->
             UserActivityItem(activity = activity, snackbarHostState = snackbarHostState, viewModelActivities, context)
         }
     }
@@ -235,7 +233,7 @@ fun UserActivitiesList(userActivities: List<ActivityResponse>, snackbarHostState
 @Composable
 fun ActivitiesList(activities: List<ActivityResponse>, snackbarHostState: SnackbarHostState, viewModelActivities: ViewModelActivities, context: Context) {
     LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
-        itemsIndexed(items = activities) { _, activity ->
+        itemsIndexed(items = activities, key = { index, _ -> index }) { _, activity ->
             ActivityItem(activity = activity, snackbarHostState = snackbarHostState, viewModelActivities, context)
         }
     }
@@ -249,12 +247,15 @@ fun ActivityItem(activity: ActivityResponse, snackbarHostState: SnackbarHostStat
         modifier = Modifier
             .padding(8.dp, 4.dp)
             .fillMaxWidth()
-            .height(110.dp), shape = RoundedCornerShape(8.dp)
+            .height(150.dp),
+        shape = RoundedCornerShape(16.dp),
     ) {
-        Surface {
+        Surface(
+            color = colorScheme.surface.copy(alpha = 0.8f)
+        ) {
             Row(
                 Modifier
-                    .padding(4.dp)
+                    .padding(12.dp)
                     .fillMaxSize()
             ) {
                 Column(
@@ -262,40 +263,47 @@ fun ActivityItem(activity: ActivityResponse, snackbarHostState: SnackbarHostStat
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxHeight()
-                        .weight(0.7f)
+                        .weight(4f)
                 ) {
                     EstablecerTexto(
-                        text = activity.id.toString(),
-                        style = MaterialTheme.typography.titleLarge,
+                        text = context.getString(R.string.activity_name) + " " + activity.name,
+                        textAlign = TextAlign.Start,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
-                    EstablecerTexto(
-                        text = activity.name,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
-                    EstablecerTexto(
-                        text = activity.description,
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
+                        color = colorScheme.onSurface,
+                        modifier = Modifier.fillMaxWidth()
                     )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
                     EstablecerTexto(
-                        text = activity.place,
-                        style = MaterialTheme.typography.titleMedium,
-                        textAlign = TextAlign.Center
+                        text = context.getString(R.string.activity_description) + " " + activity.description,
+                        textAlign = TextAlign.Start,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colorScheme.onSurface.copy(alpha = 0.7f),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    EstablecerTexto(
+                        text = context.getString(R.string.activity_place) + " " + activity.place,
+                        textAlign = TextAlign.Start,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = colorScheme.onSurface.copy(alpha = 0.6f),
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
-
                 IconButton(
                     onClick = {
                         scope.launch {
                             viewModelActivities.createParticipation(activity.id)
                             snackbarHostState.showSnackbar(
                                 context.getString(R.string.activity_joined),
-                                duration = SnackbarDuration.Long
+                                duration = SnackbarDuration.Long,
+                                withDismissAction = true
                             )
                             //viewModelActivities.getUserActivities()
                         }
@@ -310,34 +318,27 @@ fun ActivityItem(activity: ActivityResponse, snackbarHostState: SnackbarHostStat
 
 @Composable
 fun UserActivityItem(activity: ActivityResponse, snackbarHostState: SnackbarHostState, viewModelActivities: ViewModelActivities, context: Context) {
-    val scope = rememberCoroutineScope()
+    //val scope = rememberCoroutineScope()
     var visible by remember { mutableStateOf(true) }
-    val density = LocalDensity.current
 
-    /*AnimatedVisibility(
+    AnimatedVisibility(
         visible = visible,
-        enter = slideInVertically {
-            // Slide in from 40 dp from the top.
-            with(density) { -40.dp.roundToPx() }
-        } + expandVertically(
-            // Expand from the top.
-            expandFrom = Alignment.Top
-        ) + fadeIn(
-            // Fade in with the initial alpha of 0.3f.
-            initialAlpha = 0.3f
-        ),
-        exit = slideOutVertically() + shrinkVertically() + fadeOut(),
-    ) {*/
+        enter = slideInHorizontally(),
+        exit = slideOutHorizontally() + shrinkHorizontally(),
+    ) {
         Card(
             modifier = Modifier
                 .padding(8.dp, 4.dp)
                 .fillMaxWidth()
-                .height(110.dp), shape = RoundedCornerShape(8.dp)
+                .height(150.dp),
+            shape = RoundedCornerShape(16.dp),
         ) {
-            Surface {
+            Surface(
+                color = colorScheme.surface.copy(alpha = 0.8f)
+            ) {
                 Row(
                     Modifier
-                        .padding(4.dp)
+                        .padding(12.dp)
                         .fillMaxSize()
                 ) {
                     Column(
@@ -345,32 +346,53 @@ fun UserActivityItem(activity: ActivityResponse, snackbarHostState: SnackbarHost
                         modifier = Modifier
                             .padding(4.dp)
                             .fillMaxHeight()
-                            .weight(0.7f)
+                            .weight(4f)
                     ) {
                         EstablecerTexto(
-                            text = activity.id.toString(),
-                            style = MaterialTheme.typography.titleLarge,
+                            text = context.getString(R.string.activity_name) + " " + activity.name,
+                            textAlign = TextAlign.Start,
                             fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center
+                            style = MaterialTheme.typography.titleMedium,
+                            color = colorScheme.onSurface,
+                            modifier = Modifier.fillMaxWidth()
                         )
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
                         EstablecerTexto(
-                            text = activity.name,
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center
+                            text = context.getString(R.string.activity_description) + " " + activity.description,
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Normal,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = colorScheme.onSurface.copy(alpha = 0.7f),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        EstablecerTexto(
+                            text = context.getString(R.string.activity_place) + " " + activity.place,
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Normal,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = colorScheme.onSurface.copy(alpha = 0.6f),
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
-
                     IconButton(
                         onClick = {
-                            scope.launch {
+                            // Por si el usuario cambia de vista muy rápido
+                            visible = false
+                            CoroutineScope(Dispatchers.Main).launch {
                                 viewModelActivities.deleteParticipation(activity.id)
+                                viewModelActivities.getUserActivities()
                                 snackbarHostState.showSnackbar(
                                     context.getString(R.string.activity_deleted),
-                                    duration = SnackbarDuration.Long
+                                    duration = SnackbarDuration.Short,
+                                    withDismissAction = true
                                 )
-                                visible = false
                                 //delay(1000)
+
                             }
                         }
                     ) {
@@ -378,6 +400,48 @@ fun UserActivityItem(activity: ActivityResponse, snackbarHostState: SnackbarHost
                     }
                 }
             }
-        //}
+        }
     }
 }
+
+/*@Composable
+fun CustomActivityColumn(context: Context, activity: ActivityResponse)
+{
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxHeight()
+    ) {
+        EstablecerTexto(
+            text = context.getString(R.string.activity_name) + activity.name,
+            textAlign = TextAlign.Start,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
+            color = colorScheme.onSurface,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        EstablecerTexto(
+            text = context.getString(R.string.activity_description) + activity.name,
+            textAlign = TextAlign.Start,
+            fontWeight = FontWeight.Normal,
+            style = MaterialTheme.typography.bodyMedium,
+            color = colorScheme.onSurface.copy(alpha = 0.7f),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        EstablecerTexto(
+            text = context.getString(R.string.activity_place) + activity.name,
+            textAlign = TextAlign.Start,
+            fontWeight = FontWeight.Normal,
+            style = MaterialTheme.typography.bodySmall,
+            color = colorScheme.onSurface.copy(alpha = 0.6f),
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}*/
