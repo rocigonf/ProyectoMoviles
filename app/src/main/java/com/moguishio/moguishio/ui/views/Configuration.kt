@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ConfigPage(navController: NavHostController, context: Context) {
-    //val meme = painterResource(R.drawable.meme)
+
     val scrollState = rememberScrollState()
 
     // Para cargar y guardar los valores, respectivamente
@@ -181,7 +181,7 @@ fun ConfigPage(navController: NavHostController, context: Context) {
                     configDataStore.savePreference(ConfigurationDataStore.SHOW_REVIEWS, isReviewSeen.value)
                     configDataStore.savePreference(ConfigurationDataStore.DROPDOWN_OPTIONS, selectedDropdownIndex.intValue)
                 }
-                // no se q poner de comprobación :c
+
                 if (isAvailableFilms.value){
                     Toast.makeText(context, context.getString(R.string.long_toast), Toast.LENGTH_LONG).show()
                 } else{

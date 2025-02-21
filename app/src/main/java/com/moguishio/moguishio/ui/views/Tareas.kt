@@ -57,7 +57,7 @@ fun Tareas(context: Context, viewModel: TareasViewmodel) {
     var filmNameInput by remember { mutableStateOf("") }
     var change by remember { mutableStateOf(false) }
 
-    // PARA QUE COMPOSE FUERZE LA REGARGA DE LA PÁGINA, LA VARIABLE TIENE QUE USARSE EN ALGÚN SITIO
+    // PARA QUE COMPOSE FUERCE LA REGARGA DE LA PÁGINA, LA VARIABLE TIENE QUE USARSE EN ALGÚN SITIO
     // PONIENDOLO AQUÍ LO USA PERO NO LO MUESTRA >:)
     Text(text = change.toString())
 
@@ -91,13 +91,13 @@ fun Tareas(context: Context, viewModel: TareasViewmodel) {
                 AnimatedVisibility(
                     visible = visible,
                     enter = slideInVertically {
-                        // Slide in from 40 dp from the top.
+
                         with(density) { -40.dp.roundToPx() }
                     } + expandVertically(
-                        // Expand from the top.
+
                         expandFrom = Alignment.Top
                     ) + fadeIn(
-                        // Fade in with the initial alpha of 0.3f.
+
                         initialAlpha = 0.3f
                     ),
                     exit = slideOutVertically() + shrinkVertically() + fadeOut()

@@ -105,6 +105,3 @@ fun DropDownMenu(
         }
     }
 }
-
-//dios santo que asco de dropdown feo
-// ya no 😎 BUM

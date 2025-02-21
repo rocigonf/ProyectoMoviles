@@ -59,7 +59,7 @@ authViewModel: ViewModelAuth
         }
     }
 
-    var emailValorant = email.value
+    var _email = email.value
 
     // De nuevo, en el vídeo no es así, pero meh
     LaunchedEffect(authState.value) {
@@ -72,7 +72,7 @@ authViewModel: ViewModelAuth
     }
 
     LaunchedEffect(email.value) {
-        emailValorant = email.value
+        _email = email.value
     }
 
     // Al pulsar el botón de salir, aparece el dialog preguntando si desea salir o no
@@ -113,17 +113,14 @@ authViewModel: ViewModelAuth
             )
             Spacer(modifier = Modifier.height(20.dp))
 
-            //if(emailValorant != "")
-            //{
                 EstablecerTexto(
-                    text = context.getString(R.string.hello) + " " + emailValorant,
+                    text = context.getString(R.string.hello) + " " + _email,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-            //}
 
-            // Esto es una función custom porque no soy el dev de Yandere :( (la de copiar y pegar código repetido no va conmigo)
+            // Función custom
             CustomCard(
                 onClick = { navController.navigate(Navigation.Peliculas.route) },
                 text = context.getString(R.string.go_to_films)

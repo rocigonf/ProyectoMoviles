@@ -108,7 +108,7 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
     {
         val token = "Bearer ${accessToken.value}"
         val userData = auth.getUserData(token, emailInput)
-        //Log.e("EEEE", "MORTADELA")
+
         if(userData != null) {
             Log.e("EMAIL", userData.email)
             _id.value = userData.id.toString()

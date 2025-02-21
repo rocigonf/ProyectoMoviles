@@ -30,8 +30,8 @@ import com.moguishio.moguishio.ui.components.CustomButton
 import com.moguishio.moguishio.ui.components.EstablecerTexto
 import com.moguishio.moguishio.ui.components.PasswordInput
 import com.moguishio.moguishio.ui.views.dialogs.ToastMessage
-import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 import com.moguishio.moguishio.viewmodel.authentication.AuthState
+import com.moguishio.moguishio.viewmodel.authentication.ViewModelAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,7 +42,7 @@ fun InicioSesion(navController: NavHostController, context: Context, authViewMod
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val authState = authViewModel.authState.observeAsState()
-    val toastMessage : ToastMessage = ToastMessage(context)
+    val toastMessage = ToastMessage(context)
 
     // En función de lo que pase, te manda a un sitio u a otro
     LaunchedEffect(authState.value) {

@@ -53,8 +53,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// COMENTO LOS PREVIEW POR AHORA PORQUE JUANMA NO LOS PIDE (y pueden ser un grano en el culo)
-// joe macho :(
 
 /*
 // Preview Acerca De
@@ -77,5 +75,3 @@ fun SobreNosotrosPreview(){
     }
 }
 */
-
-//hey sorry about you just got in my way i promise honey i can feel your pain maybe i enjoy it just a little bit does that make me INSANE PAPA PA PAPA PA PAPA PA PAPA

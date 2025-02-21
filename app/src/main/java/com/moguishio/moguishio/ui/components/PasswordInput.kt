@@ -7,8 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 
-// TODO: Si hacemos un Outlined personalizado, tendremos que ponerlo aquí
-
 @Composable
 fun PasswordInput(value: String, onValueChange : (String) -> Unit, text: String)
 {
