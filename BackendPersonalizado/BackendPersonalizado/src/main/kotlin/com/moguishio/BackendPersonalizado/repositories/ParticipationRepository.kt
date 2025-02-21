@@ -51,7 +51,7 @@ class ParticipationRepository(private val db: JdbcTemplate) {
         }.singleOrNull()
 
 
-    fun deleteByID(id: Int): Int {
-        return db.update("delete from participations where id = ?", id)
+    fun deleteByID(userId: Int, activityId: Int): Int {
+        return db.update("delete from participations where user_id = ? and activity_id = ? LIMIT 1", userId, activityId)
     }
 }

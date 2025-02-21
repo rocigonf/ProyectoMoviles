@@ -28,6 +28,6 @@ class ParticipationService(
     fun findAll(): List<Participation> =
         participationRepository.findAll().toList()
 
-    fun deleteById(id: Int): Int =
-        participationRepository.deleteByID(id)
+    fun deleteById(userId: Int, activityId: Int): Int =
+        participationRepository.deleteByID(userId, activityId)
 }

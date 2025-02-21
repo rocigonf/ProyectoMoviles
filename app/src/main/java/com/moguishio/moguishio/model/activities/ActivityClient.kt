@@ -1,7 +1,6 @@
 package com.moguishio.moguishio.model.activities
 
 
-import android.app.Activity
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -14,12 +13,12 @@ interface ActivityClient {
     @GET("activity")
     suspend fun findAll(@Header("Authorization") authorization: String): Response<List<ActivityResponse>>
 
-    @GET("user/{userId}")
-    suspend fun findByUserId(@Header("Authorization") authorization: String, @Path("userId") userId: Int): Response<List<Activity>>
+    @GET("participation/user/{userId}")
+    suspend fun findByUserId(@Header("Authorization") authorization: String, @Path("userId") userId: Int): Response<List<ActivityResponse>>
 
     @POST("participation")
-    suspend fun create(@Header("Authorization") authorization: String, @Body participationRequest: ParticipationRequest): Response<ParticipationResponse>
+    suspend fun create(@Header("Authorization") authorization: String, @Body participationRequest: ParticipationRequest): Response<Unit>
 
-    @DELETE("participation/{id}")
-    suspend fun deleteById(@Header("Authorization") authorization: String, @Path("id") id: Int): Response<Boolean>
+    @DELETE("participation/{userId}/{activityId}")
+    suspend fun deleteById(@Header("Authorization") authorization: String, @Path("userId") userId: Int, @Path("activityId") activityId: Int): Response<Boolean>
 }

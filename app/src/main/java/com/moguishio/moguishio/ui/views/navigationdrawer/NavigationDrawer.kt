@@ -202,7 +202,7 @@ fun NavigationDrawer(
                 selectedItemIndex = 2
             }
             composable(Navigation.Actividades.route) {
-                Actividades(navController, context, viewModelActivities)
+                Actividades(navController, context, viewModelActivities, viewModelAuth)
                 selectedItemIndex = 6
             }
             composable(Navigation.InicioSesion.route) {

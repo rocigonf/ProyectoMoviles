@@ -85,4 +85,8 @@
     <string name="delete">Borrar</string>
 
     <string name="activities">Actividades</string>
+    <string name="participations">Participaciones</string>
+    <string name="activity_joined">Te has apuntado a una actividad</string>
+    <string name="activity_deleted">Te has desapuntado de una actividad</string>
+    <string name="activities_null">No tienes ninguna participación</string>
 </resources>

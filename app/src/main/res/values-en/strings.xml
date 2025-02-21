@@ -56,4 +56,8 @@
     <string name="signup_error">We could not register you</string>
     <string name="incorrect_password">Invalid password</string>
     <string name="activities">Activities</string>
+    <string name="participations">Participations</string>
+    <string name="activity_joined">You joined an activity</string>
+    <string name="activity_deleted">You unrolled from an activity</string>
+    <string name="activities_null">You do not have any participation</string>
 </resources>

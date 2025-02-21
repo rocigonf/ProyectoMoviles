@@ -2,7 +2,6 @@ package com.moguishio.BackendPersonalizado.controller.participation
 
 import com.moguishio.BackendPersonalizado.model.Activity
 import com.moguishio.BackendPersonalizado.model.Participation
-import com.moguishio.BackendPersonalizado.services.ActivityService
 import com.moguishio.BackendPersonalizado.services.ParticipationService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException
 @RequestMapping("/api/participation")
 class ParticipationController(
     private val participationService: ParticipationService,
-    private val activityService: ActivityService
 ) {
 
     @PostMapping
@@ -29,17 +27,18 @@ class ParticipationController(
     */
 
     @GetMapping("/user/{userId}")
-    fun findByUserId(@PathVariable userId: Int): List<Activity>? =
-        participationService.findByUserId(userId)
+    fun findByUserId(@PathVariable userId: Int): List<Activity>? {
+        return participationService.findByUserId(userId)
+    }
 
     @GetMapping
     fun findAll(): List<ParticipationResponse> =
         participationService.findAll()
             .map { it.toResponse() }
 
-    @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Int): ResponseEntity<Boolean> {
-        val success = participationService.deleteById(id)
+    @DeleteMapping("/{userId}/{activityId}")
+    fun deleteById(@PathVariable userId: Int, @PathVariable activityId: Int): ResponseEntity<Boolean> {
+        val success = participationService.deleteById(userId, activityId)
 
         return if (success == 1)
             ResponseEntity.noContent()

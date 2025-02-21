@@ -127,7 +127,6 @@ class ViewModelAuth(private val context: Context) : ViewModel() {
             Log.e("RESULT", "Se ha refrescado")
             _accessToken.value = tokenResponse.token
             saveInfo(ACCESS_TOKEN, tokenResponse.token)
-            saveInfo(REFRESH_TOKEN, refreshToken.value.toString())
             _authState.value = AuthState.Authenticated
             Log.e("ACCESS", tokenResponse.token)
         }
